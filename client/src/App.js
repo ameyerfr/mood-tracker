@@ -16,7 +16,7 @@ import Contacts from "./views/Contacts";
 function App() {
   return (
     <div className="App">
-      <section className="section">
+      {/* <section className="section"> */}
         <div className="container">
           <Switch>
             <Route exact path="/" component={Splash} />
@@ -28,7 +28,7 @@ function App() {
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
-      </section>
+      {/* </section> */}
     </div>
   );
 }
