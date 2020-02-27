@@ -3,6 +3,16 @@ const router = new express.Router();
 const dayMoodModel = require("../models/DayMood.model");
 const checkUserAuth = require("../middlewares/checkUserAuth");
 
+// Create a new entry
+router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
+
+  // TODO new daymood object
+  // day : new Date()
+  // dayMoodModel.create({})
+  res.status(200).json({ msg: "@todo" })
+
+});
+
 // Get all the data for a Date range (for the logged in user)
 // range exemple : /daymood/01-20-2020/02-27-2020 (from 01 Jan 2020 to 27 Feb 2020, all inclusive)
 // specific day exemple : /daymood/02-27-2020 (for 27 Feb 2020)
