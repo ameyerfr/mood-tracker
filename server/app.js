@@ -77,5 +77,8 @@ app.get("/", (req, res) => {
 // -----------------------------------------
 app.use(require("./routes/auth.js"));
 app.use(require("./routes/users.js"));
+app.use(require("./routes/contacts.js"));
+app.use(require("./routes/pet.js"));
+app.use(require("./routes/dayMood.js"));
 
 module.exports = app;

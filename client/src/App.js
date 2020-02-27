@@ -23,6 +23,8 @@ function App() {
 
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/track" component={TrackMood} />
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
