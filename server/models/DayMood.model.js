@@ -7,8 +7,8 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-  day: { type: DateOnly, required: true, default: Date.now() },
-  mood: { type: Number, required: true, min: 0, max: 10 },
+  day: { type: DateOnly, default: Date.now() },
+  mood: { type: Number, min: 0, max: 10, default : 5},
   k_good: { type: [String] },
   k_bad: { type: [String] }
 });
