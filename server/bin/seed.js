@@ -15,7 +15,7 @@ async function seedTheMFDB() {
       firstname : "John",
       lastname : "Doe",
       email : "john.doe@domain.com",
-      password : "totototo"
+      password : "$2a$10$gobeonJwL5k36rwZGaG46e953vf9meaxeYex9ULz3lojOgp3HHyWa" // toto
     })
 
     const contact = await contactModel.create({

@@ -18,31 +18,34 @@ router.post("/auth/signup", (req, res, next) => {
   }
 
   if (password.length < minPasswordLength) {
-    return res
-      .status(403)
-      .json({
-        msg: `Please make your password at least ${minPasswordLength} characters.`
-      });
+    return res.status(403).json({
+      msg: `Please make your password at least ${minPasswordLength} characters.`
+    });
   }
-
-  if (userModel.find({ email: email }).count() > 0) {
-    return res.status(403).json({ msg: "This email adress is already taken." });
-  }
-
-  const salt = bcrypt.genSaltSync(10);
-  const hashPass = bcrypt.hashSync(password, salt);
-
-  const newUser = { lastname, firstname, email, password: hashPass };
 
   userModel
-    .create(newUser)
-    .then(newUserFromDB => {
-      res.status(200).json({ msg: "signup ok" });
+    .find({ email: email })
+    .then(results => {
+      if (results.length > 0) {
+        return res
+          .status(403)
+          .json({ msg: "This email adress is already taken." });
+      }
+
+      const salt = bcrypt.genSaltSync(10);
+      const hashPass = bcrypt.hashSync(password, salt);
+      const newUser = { lastname, firstname, email, password: hashPass };
+      userModel
+        .create(newUser)
+        .then(newUserFromDB => {
+          res.status(200).json({ msg: "signup ok" });
+        })
+        .catch(err => {
+          console.log("signup error", err);
+          next(err);
+        });
     })
-    .catch(err => {
-      console.log("signup error", err);
-      next(err);
-    });
+    .catch(next);
 });
 
 router.post("/auth/signin", (req, res, next) => {
