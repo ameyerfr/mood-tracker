@@ -1,7 +1,7 @@
 import React from "react";
 
 const TrackMood = () => {
-  return <div></div>;
+  return <div>TrackMood Page</div>;
 };
 
 export default TrackMood;
