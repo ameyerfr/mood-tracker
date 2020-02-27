@@ -4,7 +4,7 @@ const Keywords = ({title}) => {
     return (
         <div>
             {title}
-            <input class="input is-rounded" type="text" placeholder="example: family, friends..."></input>
+            <input className="input is-rounded" type="text" placeholder="Enter keywords..."></input>
         </div>
     )
 }
