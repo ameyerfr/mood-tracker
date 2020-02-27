@@ -19,6 +19,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Splash} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/track" component={TrackMood} />
           </Switch>
         </div>
       </section>
