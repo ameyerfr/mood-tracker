@@ -43,6 +43,7 @@ function App() {
                 <Route path="/profile" component={Profile} />
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/track" component={TrackMood} />
+                <Route path="/pet" component={Pet} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>

@@ -4,11 +4,10 @@ const petModel = require("../models/Pet.model");
 const checkUserAuth = require("../middlewares/checkUserAuth");
 
 router.get("/pet", checkUserAuth, async (req, res, next) => {
-  try {
-    res.json(await petModel.find({owner : req.user._id}));
-  } catch (dbErr) {
-    next(dbErr);
-  }
+  petModel.findOne({owner : req.user._id})
+  .then(result => {
+      res.status(200).json(result);
+  }).catch(next)
 });
 
 // Current user is able to update his pet only
