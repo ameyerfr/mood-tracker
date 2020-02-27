@@ -9,7 +9,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const minPasswordLength = 4;
 
-router.post("/signup", (req, res, next) => {
+router.post("/auth/signup", (req, res, next) => {
 
   let errorMsg = "";
 
@@ -40,7 +40,7 @@ router.post("/signup", (req, res, next) => {
     });
 });
 
-router.post("/signin", (req, res, next) => {
+router.post("/auth/signin", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
     if (err || !user) return res.status(403).json("invalid user infos"); // 403 : Forbidden
 
@@ -71,12 +71,12 @@ router.post("/signin", (req, res, next) => {
   })(req, res, next); // IIFE (module) pattern here (see passport documentation)
 });
 
-router.post("/signout", (req, res, next) => {
+router.post("/auth/signout", (req, res, next) => {
   req.logout(); // utility function provided by passport
   res.json({ message: "Success" });
 });
 
-router.use("/is-loggedin", (req, res, next) => {
+router.use("/auth/is-loggedin", (req, res, next) => {
   if (req.isAuthenticated()) {
     // method provided by passport
     const { _id, lastname, firstname, email } = req.user;
