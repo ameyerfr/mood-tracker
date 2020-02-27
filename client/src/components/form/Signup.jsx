@@ -24,11 +24,8 @@ export default withRouter(function Signup(props) {
         email,
         password
       });
-      console.log("yay");
       setCurrentUser(apiRes.data.currentUser);
-      console.log("yay2");
       props.history.push("/dashboard");
-      console.log("----------", props);
     } catch (err) {
       setCurrentUser(null);
     }

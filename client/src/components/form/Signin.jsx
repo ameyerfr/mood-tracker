@@ -8,7 +8,7 @@ import IconMail from "../icon/IconMail";
 
 export default withRouter(function Signin(props) {
   const [email, setEmail] = useState("john.doe@domain.com");
-  const [password, setPassword] = useState("totototo");
+  const [password, setPassword] = useState("toto");
 
   const userContext = useContext(UserContext);
   const { setCurrentUser } = userContext;
@@ -16,9 +16,7 @@ export default withRouter(function Signin(props) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const apiRes = await APIHandler.post("/auth/signup", {
-        firstname,
-        lastname,
+      const apiRes = await APIHandler.post("/auth/signin", {
         email,
         password
       });
@@ -31,28 +29,6 @@ export default withRouter(function Signin(props) {
   return (
     <>
       <div className="field">
-        <label className="label">Firstname</label>
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            onChange={e => setFirstname(e.target.value)}
-            required
-          />
-        </div>
-      </div>
-      <div className="field">
-        <label className="label">Lastname</label>
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            onChange={e => setLastname(e.target.value)}
-            required
-          />
-        </div>
-      </div>
-      <div className="field">
         <label className="label">Email</label>
         <div className="control has-icons-left has-icons-right">
           <input
@@ -61,6 +37,7 @@ export default withRouter(function Signin(props) {
             placeholder="Email input"
             onChange={e => setEmail(e.target.value)}
             required
+            defaultValue={email}
           />
           <span className="icon is-small is-left">
             <IconMail size="lg" />
@@ -74,7 +51,7 @@ export default withRouter(function Signin(props) {
           <input
             className="input"
             type="password"
-            defaultValue=""
+            defaultValue={password}
             onChange={e => setPassword(e.target.value)}
             required
           />
