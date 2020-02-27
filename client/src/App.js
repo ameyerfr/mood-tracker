@@ -18,6 +18,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact path="/" component={Splash} />
+            <Route path="/dashboard" component={Dashboard} />
           </Switch>
         </div>
       </section>
