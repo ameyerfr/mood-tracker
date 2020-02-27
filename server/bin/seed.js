@@ -1,4 +1,4 @@
-require("dotenv").config(); // import all key/value pairs from .env in process.env : really usefull when going online :)
+require("dotenv").config();
 require("./../config/mongodb");
 
 const userModel = require("./../models/User.model.js")
@@ -11,6 +11,7 @@ async function seedTheMFDB() {
   try {
 
     const user = await userModel.create({
+      _id : "5e56a25c4587de245dc968a4",
       firstname : "John",
       lastname : "Doe",
       email : "john.doe@domain.com",
