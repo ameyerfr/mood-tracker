@@ -1,5 +1,5 @@
 // Use DEVMODE to be always logged with the seed user server side
-const _DEVMODE = true;
+const _DEVMODE = false;
 
 // CONFIG
 require("dotenv").config();
@@ -77,5 +77,6 @@ app.get("/", (req, res) => {
 // -----------------------------------------
 app.use(require("./routes/auth.js"));
 app.use(require("./routes/users.js"));
+app.use(require("./routes/contacts.js"));
 
 module.exports = app;
