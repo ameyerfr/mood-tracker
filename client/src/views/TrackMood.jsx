@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import Keywords from "../components/Keywords";
 import "../styles/tracker.css";
 
@@ -16,24 +16,25 @@ const TrackMood = () => {
 
   const changeBackground = (range) => {
     const moodColors = [
-      "#845ec2",
-      "#a178df",
-      "#be93fd",
-      "#dcb0ff",
-      "#faccff",
+      "#0064a2",
+      "#4a69aa",
+      "#6f6eaf",
+      "#8e73b1",
+      "#a879b1",
       "#fff",
-      "#c8fcdd",
-      "#98dfc9",
-      "#65c2b9",
-      "#24a5ab",
-      "#00889e"
+      "#d38bac",
+      "#e397aa",
+      "#efa4a9",
+      "#f8b3aa",
+      "#ffc2ad"
     ]
     return moodColors[range]
   }
 
   return (
     <div className="moodpage" style={{backgroundColor:colorValue}}>
-      {/* <h1>Track Your Mood Today</h1> */}
+      <h1>Hi, how are you feeling today?</h1>
+      <h2>{sliderValue}</h2>
       <div className="slidecontainer">
         <input
           type="range"
@@ -45,8 +46,8 @@ const TrackMood = () => {
         />
       </div>
       <div>
-      {/* <Keywords title="What made you feel good today?" /> */}
-      {/* <Keywords title="What made you feel bad today?" /> */}
+      <Keywords title="What made you feel good today?" />
+      <Keywords title="What made you feel bad today?" />
       </div>
     </div>
   );

@@ -7,6 +7,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #000;
+}
+
+.moodpage h1 {
+    margin: 20px;
+}
+
+.moodpage h2 {
+    font-size: 5em;
+    margin-bottom: 40px;
 }
 
 /* SLIDER */
@@ -16,7 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    margin-bottom: 40px;
 }
 
 .slider {
@@ -60,9 +70,5 @@
     justify-content: flex-start; */
     width: 100%;
     padding: 20px;
-
-  }
-
-  .keywords {
 
   }
