@@ -10,40 +10,47 @@ const bcrypt = require("bcryptjs");
 const minPasswordLength = 4;
 
 router.post("/auth/signup", (req, res, next) => {
-
   const { email, password, lastname, firstname } = req.body;
 
   // @todo : best if email validation here or check with a regex in the User model
-  if (!password || !email)  {
-    return res.status(403).json({msg : "Email and password are required" })
+  if (!password || !email) {
+    return res.status(403).json({ msg: "Email and password are required" });
   }
 
   if (password.length < minPasswordLength) {
-    return res.status(403).json({msg : `Please make your password at least ${minPasswordLength} characters.` })
+    return res.status(403).json({
+      msg: `Please make your password at least ${minPasswordLength} characters.`
+    });
   }
-
-  if ( userModel.find({ email : email}).count() > 0 ) {
-    return res.status(403).json({msg : "This email adress is already taken." })
-  }
-
-  const salt = bcrypt.genSaltSync(10);
-  const hashPass = bcrypt.hashSync(password, salt);
-
-  const newUser = {lastname, firstname, email, password: hashPass};
 
   userModel
-    .create(newUser)
-    .then(newUserFromDB => {
-      res.status(200).json({msg: "signup ok"});
+    .find({ email: email })
+    .then(results => {
+      if (results.length > 0) {
+        return res
+          .status(403)
+          .json({ msg: "This email adress is already taken." });
+      }
+
+      const salt = bcrypt.genSaltSync(10);
+      const hashPass = bcrypt.hashSync(password, salt);
+      const newUser = { lastname, firstname, email, password: hashPass };
+      userModel
+        .create(newUser)
+        .then(newUserFromDB => {
+          res.status(200).json({ msg: "signup ok" });
+        })
+        .catch(err => {
+          console.log("signup error", err);
+          next(err);
+        });
     })
-    .catch(err => {
-      console.log("signup error", err);
-      next(err);
-    });
+    .catch(next);
 });
 
 router.post("/auth/signin", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
+    console.log(err, user);
     if (err || !user) return res.status(403).json("invalid user infos"); // 403 : Forbidden
 
     /**
@@ -68,7 +75,6 @@ router.post("/auth/signin", (req, res, next) => {
           }
         })
       );
-
     });
   })(req, res, next); // IIFE (module) pattern here (see passport documentation)
 });
