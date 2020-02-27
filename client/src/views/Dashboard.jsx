@@ -8,17 +8,17 @@ const Dashboard = () => {
       <h1>Hi there</h1>
       <div className="pet-container">THERE IS A PET HERE</div>
       <DashLink 
-        title="Track"
+        title="Track Your Mood"
         page="/tracker"
         color="#c5c8ff"
       />
       <DashLink 
-        title="Stats"
+        title="See Your Stats"
         page="/statistics"
         color="#ffc2ad"
       />
       <DashLink 
-        title="Buddies"
+        title="Add Buddies"
         page="/contacts"
         color="#c8fcea"
       />
