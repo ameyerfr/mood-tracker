@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 // custom tools
 import UserContext from "../../auth/UserContext";
@@ -6,29 +6,69 @@ import APIHandler from "../../api/APIHandler";
 import IconPassword from "../icon/IconPassword";
 import IconMail from "../icon/IconMail";
 
-export default withRouter(function Signin(props) {
-  const [email, setEmail] = useState("john.doe@domain.com");
-  const [password, setPassword] = useState("toto");
-
+export default withRouter(function EditProfile(props) {
   const userContext = useContext(UserContext);
   const { setCurrentUser } = userContext;
 
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    APIHandler.get("/user")
+      .then(apiRes => {
+        setFirstname(apiRes.data.firstname);
+        setLastname(apiRes.data.lastname);
+        setEmail(apiRes.data.email);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   const handleSubmit = async e => {
     e.preventDefault();
+    const payload = {
+      firstname,
+      lastname,
+      email
+    };
+    if (password) payload.password = password;
+
     try {
-      const apiRes = await APIHandler.post("/auth/signin", {
-        email,
-        password
-      });
+      const apiRes = await APIHandler.patch("/user", payload);
       setCurrentUser(apiRes.data.currentUser);
-      console.log(setCurrentUser);
-      props.history.push("/dashboard");
+      props.history.push("/profile");
     } catch (err) {
-      setCurrentUser(null);
+      //setCurrentUser(null);
+      console.log(err);
     }
   };
   return (
     <>
+      <div className="field">
+        <label className="label">Firstname</label>
+        <div className="control">
+          <input
+            className="input"
+            type="text"
+            onChange={e => setFirstname(e.target.value)}
+            required
+            defaultValue={firstname}
+          />
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">Lastname</label>
+        <div className="control">
+          <input
+            className="input"
+            type="text"
+            onChange={e => setLastname(e.target.value)}
+            required
+            defaultValue={lastname}
+          />
+        </div>
+      </div>
       <div className="field">
         <label className="label">Email</label>
         <div className="control has-icons-left has-icons-right">
@@ -47,12 +87,12 @@ export default withRouter(function Signin(props) {
       </div>
 
       <div className="field">
-        <label className="label">Password</label>
+        <label className="label">New Password (optional)</label>
         <div className="control has-icons-left has-icons-right">
           <input
             className="input"
             type="password"
-            defaultValue={password}
+            defaultValue=""
             onChange={e => setPassword(e.target.value)}
             required
           />
@@ -70,9 +110,8 @@ export default withRouter(function Signin(props) {
         </div>
       </div>
       <p className="parag">
-        No account yet ?{" "}
-        <Link to="/login" className="link">
-          Register
+        <Link to="/logout" className="link">
+          Logout
         </Link>
       </p>
     </>

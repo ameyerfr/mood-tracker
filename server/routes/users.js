@@ -13,7 +13,9 @@ router.get("/user", checkUserAuth, async (req, res, next) => {
 
 router.patch("/user", checkUserAuth, async (req, res, next) => {
   try {
-    // todo patch on req.user._id
+    res.json(
+      await userModel.findByIdAndUpdate(req.user._id, req.body, { new: true })
+    );
   } catch (dbErr) {
     next(dbErr);
   }

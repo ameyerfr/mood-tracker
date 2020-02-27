@@ -13,23 +13,43 @@ import Pet from "./views/Pet";
 import Dashboard from "./views/Dashboard";
 import Contacts from "./views/Contacts";
 
-function App() {
-  return (
-    <div className="App">
-      <section className="section">
-        <div className="container">
-          <Switch>
-            <Route exact path="/" component={Splash} />
+// auth
+import { useAuth } from "./auth/useAuth";
+import UserContext from "./auth/UserContext";
+//import { ProtectedRoute } from "./auth/ProtectedRoute";
 
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/track" component={TrackMood} />
-            <Route path="*" component={NotFound} />
-          </Switch>
+function App() {
+  const { isLoading } = useAuth();
+  const [currentUser, setCurrentUser] = useState({});
+
+  // check src/auth/UserContext =>
+  // MANDATORY TO GET/SET loggedin currentUser against server response
+  const UserContextValue = {
+    currentUser,
+    setCurrentUser
+  };
+
+  return (
+    <UserContext.Provider value={UserContextValue}>
+      {isLoading ? null : (
+        <div className="App">
+          <section className="section">
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={Splash} />
+
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/track" component={TrackMood} />
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </div>
+          </section>
         </div>
-      </section>
-    </div>
+      )}
+    </UserContext.Provider>
   );
 }
 
