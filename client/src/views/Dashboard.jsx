@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/main.css";
-import DashLink from "../components/dashboard/DashLink";
+import DashLink from "../components/DashLink";
 
 const Dashboard = () => {
   return (
@@ -9,7 +9,7 @@ const Dashboard = () => {
       <div className="pet-container">THERE IS A PET HERE</div>
       <DashLink 
         title="Track Your Mood"
-        page="/tracker"
+        page="/track"
         color="#c5c8ff"
       />
       <DashLink 
