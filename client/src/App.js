@@ -3,9 +3,11 @@ import { Route, Switch } from "react-router-dom";
 import "bulma/css/bulma.css";
 
 import Splash from "./views/Splash";
+import NotFound from "./views/NotFound";
 import TrackMood from "./views/TrackMood";
 import Stats from "./views/Stats";
 import Register from "./views/Register";
+import Login from "./views/Login";
 import Profile from "./views/Profile";
 import Pet from "./views/Pet";
 import Dashboard from "./views/Dashboard";
@@ -18,6 +20,10 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact path="/" component={Splash} />
+
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="*" component={NotFound} />
           </Switch>
         </div>
       </section>

@@ -1,7 +1,107 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { Link, withRouter } from "react-router-dom";
+// custom tools
+import UserContext from "../../auth/UserContext";
+import APIHandler from "../../api/APIHandler";
+import IconPassword from "../icon/IconPassword";
+import IconMail from "../icon/IconMail";
 
-const Signup = () => {
-  return <div>Signup form</div>;
-};
+export default withRouter(function Signup(props) {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-export default Signup;
+  const userContext = useContext(UserContext);
+  const { setCurrentUser } = userContext;
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const apiRes = await APIHandler.post("/auth/signup", {
+        firstname,
+        lastname,
+        email,
+        password
+      });
+      console.log("yay");
+      setCurrentUser(apiRes.data.currentUser);
+      console.log("yay2");
+      props.history.push("/dashboard");
+      console.log("----------", props);
+    } catch (err) {
+      setCurrentUser(null);
+    }
+  };
+  return (
+    <>
+      <div className="field">
+        <label className="label">Firstname</label>
+        <div className="control">
+          <input
+            className="input"
+            type="text"
+            onChange={e => setFirstname(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">Lastname</label>
+        <div className="control">
+          <input
+            className="input"
+            type="text"
+            onChange={e => setLastname(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">Email</label>
+        <div className="control has-icons-left has-icons-right">
+          <input
+            className="input"
+            type="email"
+            placeholder="Email input"
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+          <span className="icon is-small is-left">
+            <IconMail size="lg" />
+          </span>
+        </div>
+      </div>
+
+      <div className="field">
+        <label className="label">Password</label>
+        <div className="control has-icons-left has-icons-right">
+          <input
+            className="input"
+            type="password"
+            defaultValue=""
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+          <span className="icon is-key is-left">
+            <IconPassword size="lg" />
+          </span>
+        </div>
+      </div>
+
+      <div className="field is-grouped">
+        <div className="control">
+          <button className="button is-link" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
+      </div>
+      <p className="parag">
+        Already have an account ?{" "}
+        <Link to="/signin" className="link">
+          signin
+        </Link>
+      </p>
+    </>
+  );
+});
