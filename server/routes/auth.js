@@ -11,20 +11,22 @@ const minPasswordLength = 4;
 
 router.post("/auth/signup", (req, res, next) => {
 
-  let errorMsg = "";
-
   const { email, password, lastname, firstname } = req.body;
 
   // @todo : best if email validation here or check with a regex in the User model
-  if (!password || !email) errorMsg += "Provide email and password.\n";
+  if (!password || !email)  {
+    return res.status(403).json({msg : "Email and password are required" })
+  }
 
-  if (password.length < minPasswordLength)
-    errorMsg += `Please make your password at least ${minPasswordLength} characters.`;
+  if (password.length < minPasswordLength) {
+    return res.status(403).json({msg : `Please make your password at least ${minPasswordLength} characters.` })
+  }
 
-  if (errorMsg) return res.status(403).json(errorMsg); // 403	Forbidden
+  if ( userModel.find({ email : email}).count() > 0 ) {
+    return res.status(403).json({msg : "This email adress is already taken." })
+  }
 
   const salt = bcrypt.genSaltSync(10);
-  // more on encryption : https://en.wikipedia.org/wiki/Salt_(cryptography)
   const hashPass = bcrypt.hashSync(password, salt);
 
   const newUser = {lastname, firstname, email, password: hashPass};
