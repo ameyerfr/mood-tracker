@@ -43,6 +43,7 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       // Close the store && display thank you msg
       closeStore();
       displayRandomMsg('thanks');
+      petJump(2);
     }
 
     apiCall();
