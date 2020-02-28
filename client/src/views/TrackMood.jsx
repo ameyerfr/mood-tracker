@@ -2,6 +2,8 @@ import React, { useState, useEffect, useReducer } from "react";
 import Keywords from "../components/Keywords";
 import "../styles/tracker.css";
 
+import moodScale from "../data/mood_scale";
+
 const TrackMood = () => {
   const [sliderValue, setSliderValue] = useState(5);
   const [colorValue, setColorValue] = useState("");
@@ -21,7 +23,7 @@ const TrackMood = () => {
       "#bdadef",
       "#d3aeef",
       "#e7afec",
-      "#fff",
+      "#f2f2f2",
       "#ffb1e6",
       "#ffb0d0",
       "#ffb2ba",
@@ -61,10 +63,10 @@ const TrackMood = () => {
           />
         </div>
         <div>
-        <Keywords title="What made you feel good today?" />
-        <Keywords title="What made you feel bad today?" />
+        <Keywords title="positive" />
+        <Keywords title="negative" />
         </div>
-        <buton className="btn">OK</buton>
+        <button className="btn-ok">OK</button>
       </form>
       
     </div>
