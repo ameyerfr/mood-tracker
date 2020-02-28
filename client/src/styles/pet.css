@@ -1,5 +1,30 @@
 .petContainer {
+  border:1px solid green;
   image-rendering:pixelated;
+  height: 100%;
+  padding:10px;
+}
+
+.petContainer .pet-infos{
+  border:1px solid red;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.petContainer .pet-playground {
+  border:1px solid pink;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.petContainer .pet-message {
+  border:1px solid blue;
+  height:20%;
+  padding:5px;
 }
 
 .petContainer .pet.egg {
@@ -25,7 +50,6 @@
         70%  { transform: translateY(0); }
         100% { transform: translateY(0); }
 }
-
 
 .petContainer .pet.jumping {
   animation-name: bouncy;

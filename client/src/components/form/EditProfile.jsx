@@ -11,6 +11,7 @@ export default withRouter(function EditProfile(props) {
   const { setCurrentUser } = userContext;
 
   const [firstname, setFirstname] = useState("");
+  const [msg, setMsg] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +26,12 @@ export default withRouter(function EditProfile(props) {
       .catch(err => console.log(err));
   }, []);
 
+  const handleSignout = () =>
+    APIHandler.post("/auth/signout").finally(() => {
+      props.history.push("/login");
+      setCurrentUser(null);
+    });
+
   const handleSubmit = async e => {
     e.preventDefault();
     const payload = {
@@ -37,14 +44,17 @@ export default withRouter(function EditProfile(props) {
     try {
       const apiRes = await APIHandler.patch("/user", payload);
       setCurrentUser(apiRes.data.currentUser);
+      setMsg(<div className="notification is-success">{apiRes.data.msg}</div>);
       props.history.push("/profile");
     } catch (err) {
-      //setCurrentUser(null);
-      console.log(err);
+      setMsg(
+        <div className="notification is-danger">{err.response.data.msg}</div>
+      );
     }
   };
   return (
     <>
+      {msg && msg}
       <div className="field">
         <label className="label">Firstname</label>
         <div className="control">
@@ -109,11 +119,11 @@ export default withRouter(function EditProfile(props) {
           </button>
         </div>
       </div>
-      <p className="parag">
-        <Link to="/logout" className="link">
+      <div className="buttons">
+        <button className="button is-danger" onClick={handleSignout}>
           Logout
-        </Link>
-      </p>
+        </button>
+      </div>
     </>
   );
 });
