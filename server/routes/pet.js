@@ -12,8 +12,12 @@ router.get("/pet", checkUserAuth, async (req, res, next) => {
 
 // Current user is able to update his pet only
 router.patch("/pet", checkUserAuth, async (req, res, next) => {
-  // Todo : Update the pet with pet.owner = req.user._id
-  res.status(200).json({ msg: "@todo" })
+  console.log("PATCH PET : ", req.body)
+  petModel.findOneAndUpdate({owner : req.user._id}, req.body, {new:true})
+  .then(result => {
+    console.log("RESULT : ", result)
+      res.status(200).json(result);
+  }).catch(next)
 });
 
 module.exports = router;

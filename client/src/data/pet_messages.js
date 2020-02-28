@@ -10,5 +10,8 @@ module.exports = {
   greeting : [
     "Nice to see you again !",
     "I just woke up !"
+  ],
+  thanks : [
+    "Thank you very much, this is great !"
   ]
 }
