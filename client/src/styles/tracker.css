@@ -10,6 +10,14 @@
     color: #000;
 }
 
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+}
+
 .moodpage h1 {
     margin: 20px;
 }

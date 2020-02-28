@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const DashLink = ({title,page,color}) => {
+const DashLink = ({title,page,color, gradient}) => {
     return (
         <div className="dashlink-wrapper">
             <Link to={page}>
