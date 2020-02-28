@@ -25,7 +25,8 @@ async function seedTheMFDB() {
     })
 
     const pet = await petModel.create({
-      owner : user._id
+      owner : user._id,
+      ownerCredits : 100
     })
 
     const mood = await dayMoodModel.create({
