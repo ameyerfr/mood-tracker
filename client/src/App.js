@@ -33,7 +33,6 @@ function App() {
     <UserContext.Provider value={UserContextValue}>
       {isLoading ? null : (
         <div className="App">
-          <section className="section">
             <div className="container">
               <Switch>
                 <Route exact path="/" component={Splash} />
@@ -47,7 +46,6 @@ function App() {
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>
-          </section>
         </div>
       )}
     </UserContext.Provider>
