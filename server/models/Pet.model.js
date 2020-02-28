@@ -11,10 +11,11 @@ const schema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "User"
     },
+  ownerCredits: { type : Number, min : 0, default : 0 },
   name: { type : String, default : getRandomName() },
-  hp: { type : Number, default : 100 },
+  hp: { type : Number, min : 0, max: 100, default : 100 },
   exp: { type : Number, default : 0 },
-  stage: { type : Number, enum : [0,1,2], default : 0 }
+  stage: { type : Number, default : 0 },
 });
 
 const petModel = mongoose.model("Pet", schema);
