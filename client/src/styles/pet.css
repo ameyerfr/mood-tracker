@@ -63,9 +63,67 @@
   animation-timing-function: cubic-bezier(0.89, 0.33, 0.44, 1.24);
 }
 
-.petContainer .item {
+/* PET STORE */
+.store-header {
+  border:1px solid blue;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size:1.2rem;
+  height:20%;
+}
+
+.pet-store .items {
+  border:1px solid pink;
+  height:80%;
+  overflow-y: scroll;
+}
+
+.pet-store .line-w {
+  border:1px solid red;
+  display: flex;
+  justify-content: center;
+  margin:10px 0;
+}
+
+.pet-store .item-w {
+  display: flex;
+  justify-content: center;
+  width:80px;
+}
+
+.pet-store .itemStats {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.pet-store .itemCost {
+  display: flex;
+  align-items: center;
+}
+
+.pet-store .item {
   background-image:url("/images/pet/items.png"); /* 160px * 128px */
   background-size: calc(160px*2);
+}
+
+.bigCoin {
+  display: inline-block;
+  background-image:url("/images/pet/coin.png"); /* 160px * 128px */
+  background-size: calc(48px);
+  height: 48px;
+  width: 48px;
+}
+
+
+.smallCoin {
+  display: inline-block;
+  background-image:url("/images/pet/coin.png"); /* 160px * 128px */
+  height: 24px;
+  width: 24px;
 }
 
 .item.hpot {
@@ -73,4 +131,11 @@
   height:56px;
   background-position-x:calc(-40px*2);
   background-position-y:calc(-99px*2);
+}
+
+.item.book {
+  width:62px;
+  height:62px;
+  background-position-x:calc(-129px*2);
+  background-position-y:calc(-33px*2);
 }

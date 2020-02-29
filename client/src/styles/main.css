@@ -1,12 +1,29 @@
+@font-face {
+ font-family: "RPGSystem";
+ src: url("./fonts/RPGSystem.ttf") format("truetype");
+}
+
 @import "./charts.css";
 @import "./form.css";
 @import "./header.css";
-@import "./pet.css";
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.flex-center-row {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-center-column {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* DASHBOARD */
