@@ -66,7 +66,7 @@ const TrackMood = () => {
         <Keywords title="positive" />
         <Keywords title="negative" />
         </div>
-        <button className="btn-ok">OK</button>
+        <button className="btn-ok">Ok</button>
       </form>
       
     </div>

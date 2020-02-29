@@ -5,7 +5,8 @@ module.exports = {
   ],
   cheer_up : [
     "Comon, its going to be a nicer day tommorrow.",
-    "Everyday is unique, enjoy it the best you can !"
+    "Everyday is unique, enjoy it the best you can !",
+    "I'm sorry you're feeling down today. Virtual hug!"
   ],
   greeting : [
     "Nice to see you again !",
