@@ -71,12 +71,22 @@ const PetModule = ({isStoreOpen, closeStore}) => {
     return newCredits;
   }
 
-  const onItemClick = (e) => {
+  const onItemClick = (e, itemCost) => {
+    if ( itemCost > petData.ownerCredits ) {
+      alert('No enough credits !')
+      return;
+    }
+
     let itemName = e.target.id.split("-")[1];
 
     // RED POT -> +5 HP (COST 20 credits)
     if (itemName === 'hpot') {
       updatePet({ hp : getUpdatedHP(+5), ownerCredits : getUpdatedCredits(-20) })
+    }
+
+    // BOOK -> +10XP (COST 50 credits)
+    if (itemName === 'book') {
+      updatePet({ exp : petData.exp + 10, ownerCredits : getUpdatedCredits(-50) })
     }
 
   }
@@ -87,13 +97,13 @@ const PetModule = ({isStoreOpen, closeStore}) => {
     if ( isJumping ) return;
 
     let jumpCount = 1;
-    petEL.current.classList.add("jumping");
+    if (petEL && petEL.current) petEL.current.classList.add("jumping");
     setIsJumping(true);
 
     let intID = setInterval(function() {
       if ( !!nb && jumpCount >= nb ) {
         clearInterval(intID);
-        petEL.current.classList.remove("jumping");
+        if (petEL && petEL.current) petEL.current.classList.remove("jumping");
         setIsJumping(false);
         return;
       }
@@ -142,7 +152,32 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       {isStoreOpen ? (
 
         <div className="pet-store">
-          <div id="item-hpot" className="item hpot" onClick={onItemClick}></div>
+          <div className="store-header">PET STORE - Credits <span className="bigCoin"></span> x {petData.ownerCredits}</div>
+          <div className="items">
+
+            <div className="line-w">
+              <div className="item-w">
+                <div id="item-hpot" className="item hpot" onClick={(e) => onItemClick(e, 20)}></div>
+              </div>
+
+              <div className="itemStats">
+                <span className="itemEffect">+20HP</span>
+                <span className="itemCost"><span className="smallCoin"></span> x 20</span>
+              </div>
+            </div>
+
+            <div className="line-w">
+              <div className="item-w">
+                <div id="item-book" className="item book" onClick={(e) => onItemClick(e, 50)}></div>
+              </div>
+
+              <div className="itemStats">
+                <span className="itemEffect">+10XP</span>
+                <span className="itemCost"><div className="smallCoin"></div> x 50</span>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       ) : (

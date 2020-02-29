@@ -1,3 +1,7 @@
+.petView {
+  font-family: "RPGSystem";
+  padding: 20px 0;
+}
 .petModuleContainer {
   width:300px;
   height:300px;
