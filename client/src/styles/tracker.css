@@ -184,13 +184,14 @@ img.emoji {
 /* ACCORDION */
 
 .accordion {
-    width: 100%;
+    width: 300px;
     border: none;
 }
 
 .accordion__button {
     background-color: #fff;
     border: none;
+    /* padding: 8px; */
 }
 
 .accordion__button:hover {

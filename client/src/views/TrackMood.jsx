@@ -35,7 +35,7 @@ const TrackMood = () => {
   }
 
   return (
-    <div className="moodpage" style={{backgroundColor:colorValue}}>
+    <div className="moodpage" style={{backgroundColor:"#fff"}}>
       <h1>How are you feeling today?</h1>
       <form className="form" onSubmit={handleSubmit}>
         <img className="emoji" src={moodScale[sliderValue].moodState} />
@@ -60,7 +60,7 @@ const TrackMood = () => {
           // clbk={}
         />
         </div> */}
-        <button className="btn-ok"><FontAwesomeIcon icon={faCheck} /></button>
+        <button style={{backgroundColor:colorValue, border:colorValue}} className="btn-ok"><FontAwesomeIcon icon={faCheck} /></button>
       </form>
       
     </div>
