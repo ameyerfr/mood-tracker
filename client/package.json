@@ -47,6 +47,7 @@
     "d3-voronoi": "^1.1.4",
     "d3-zoom": "^1.8.3",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "nivo": "^0.31.0",
     "nivo-generators": "^0.9.3",
     "prop-types": "^15.7.2",
