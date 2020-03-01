@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useReducer } from "react";
-import Keywords from "../components/Keywords";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+// import Keywords from "../components/Keywords";
+import Collapse from "../components/Collapse";
 import "../styles/tracker.css";
 
 import moodScale from "../data/mood_scale";
@@ -46,7 +49,8 @@ const TrackMood = () => {
             className="slider"
           />
         </div>
-        <div>
+        <Collapse />
+        {/* <div>
         <Keywords
           title="positive"
           // clbk={}
@@ -55,8 +59,8 @@ const TrackMood = () => {
           title="negative"
           // clbk={}
         />
-        </div>
-        <button className="btn-ok">Ok</button>
+        </div> */}
+        <button className="btn-ok"><FontAwesomeIcon icon={faCheck} /></button>
       </form>
       
     </div>

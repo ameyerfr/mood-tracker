@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const Keywords = ({ title }) => {
   const [tags, setTags] = useState([]);
@@ -44,10 +46,8 @@ const Keywords = ({ title }) => {
   };
 
   return (
-      <>
-        <div className="accordion" htmlFor={title}>What made you feel {title} today?</div>
-        {/* <div className="panel"> */}
-        <div>
+      <div className="tags">
+        {/* <label htmlFor={title}>What made you feel {title} today?</label> */}
             <span className="input-btn">
                 <input
                 type="text"
@@ -62,14 +62,14 @@ const Keywords = ({ title }) => {
                 onClick={handleClick}
                 className="btn-add"
                 >
-                Add
+                <FontAwesomeIcon icon={faPlus} />
                 </button>
             </span>
             
             <div className="tags-container">
             <ul className="ul-tags">
                 {tags.map((tag, i) => (
-                <li key={tag}>
+                <li className={title} key={tag}>
                     {tag}
                     <button
                     type="button"
@@ -84,7 +84,6 @@ const Keywords = ({ title }) => {
             </ul>
             </div>
         </div>
-      </>
 
   );
 };

@@ -5,7 +5,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: #000;
     font-size: 14px;
@@ -15,7 +15,7 @@
     width: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: #000;
 }
@@ -24,15 +24,10 @@
     margin: 20px;
 }
 
-.moodpage h2 {
-    font-size: 3em;
-    margin-bottom: 30px;
-}
-
 /* SLIDER */
 
 .slidecontainer {
-    width: 100%;
+    width: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +54,8 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #00adb5;
+    background: #E2F0CB;
+    border: 1px solid #333;
     cursor: pointer;
 }
 
@@ -67,75 +63,71 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #00adb5;
+    background: #E2F0CB;
+    border: 1px solid #333;
     cursor: pointer;
 }
 
 /* KEYWORDS / TAGS */
 
 .tags {
-    width: 85vw;
     margin: 20px 0;
-    /* background: white; */
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
-    /* border: 1px solid #d6d6d6; */
+    justify-content: space-evenly;
     border-radius: 2px;
     padding: 5px 5px 0;
 }
 
 .tags label {
-    margin: 5px 0;
+    margin-bottom: 15px;
 }
 
 span.input-btn {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .btn-add {
-    background-color: lightpink;
-    padding: 5px 10px;
-    border: 1px solid gray;
-    border-radius: 20px;
+    background-color: #B5EAD7;
+    padding: 8px 10px;
+    border: 1px solid #B5EAD7;
+    border-radius: 10px;
     margin: 0 5px;
 }
 
 .tags input {
-    padding: 5px 0;
+    padding: 8px 0;
     padding-left: 10px;
     border: none;
     border: 1px solid gray;
     border-radius: 20px;
-    width: 80%;
+    width: 100%;
 }
 
 .tags-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: flex-start;
     justify-content: flex-start;
     padding: 8px 5px 0;
-    height: 60px;
-    width: 100%;
-    /* overflow: hidden; */
-    overflow-y: scroll;
+    overflow-x: scroll;
 }
 
 ul.ul-tags {
     display: inline-flex;
     flex-wrap: wrap;
-    /* margin: 10px 0; */
     padding: 0;
     width: 100%;
 }
 
 ul.ul-tags li {
-    /* align-items: start; */
-    /* font-size: 11px; */
-    background: lightsalmon;
     border-radius: 5px;
     color: black;
     display: flex;
@@ -147,13 +139,20 @@ ul.ul-tags li {
     font-size: 14px;
 }
 
+ul.ul-tags li.positive {
+    background: #FFDAC1;
+}
+
+ul.ul-tags li.negative {
+    background: #C7CEEA;
+}
+
 ul.ul-tags li button {
     align-items: center;
     appearance: none;
     background: inherit;
     border: none;
     border-radius: 50%;
-    /* border-left: 1px solid lightgray; */
     color: #333;
     cursor: pointer;
     display: inline-flex;
@@ -166,56 +165,62 @@ ul.ul-tags li button {
     width: 15px;
 }
 
-ul.ul-tags li.li-tags {
+/* ul.ul-tags li.li-tags {
     background: none;
     flex-grow: 1;
     padding: 0;
-}
-
-/* TEST - ACCORDION */
-
-.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
-  }
-  
-  .active, .accordion:hover {
-    background-color: #ccc; 
-  }
-  
-  .panel {
-    padding: 0 18px;
-    display: none;
-    background-color: white;
-    overflow: hidden;
-  }
+} */
 
 /* EMOJI */
 
 img.emoji {
     width: 100px;
     margin-bottom: 30px;
-    /* filter: invert(60%); */
+    filter: grayscale(50%);
     opacity: .8
     /* position: absolute; */
 }
 
+/* ACCORDION */
+
+.accordion {
+    width: 100%;
+    border: none;
+}
+
+.accordion__button {
+    background-color: #fff;
+    border: none;
+}
+
+.accordion__button:hover {
+    background-color: ivory;
+}
+
+.accordion__item {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.accordion__panel {
+    width: 100%;
+    padding: 0 20px 20px;
+}
+
+
+
 /* OK BUTTON */
 
 .btn-ok {
-    background-color: lightgreen;
-    opacity: .8;
-    width: 100%;
+    background-color: #FFB7B2;
+    font-size: 14px;
+    /* opacity: .8; */
+    width: 80px;
     text-align: center;
-    padding: 5px 0;
+    padding: 10px 0;
+    border: 1px solid #FFB7B2;
     border-radius: 20px;
     margin-top: 30px;
+    position: absolute;
+    bottom: 10px;
 }
