@@ -3,9 +3,9 @@
   padding:20px;
 }
 
-.pet-container {
-    width: 300px;
-    height: 300px;
+.pet-wrapper {
+  width: 300px;
+  height: 300px;
 }
 
 .dashlink-wrapper {

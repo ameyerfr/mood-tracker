@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <div className="page-dashboard flex-center-column">
 
-      <div className="pet-container">
+      <div className="pet-wrapper">
         <PetModule />
       </div>
 
