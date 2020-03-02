@@ -63,6 +63,18 @@
   animation-timing-function: cubic-bezier(0.89, 0.33, 0.44, 1.24);
 }
 
+/* DINO */
+
+.pet.dino {
+  border:1px solid black;
+  width:175px;
+  height:175px;
+}
+
+.pet.dino.idle { background-image:url("/images/pet/dino_idle.png"); }
+.pet.dino.talking { background-image:url("/images/pet/dino_talking.png"); }
+.pet.dino.eating { background-image:url("/images/pet/dino_eating.gif"); }
+
 /* PET STORE */
 .store-header {
   border:1px solid blue;
