@@ -12,15 +12,6 @@ const Keywords = ({ title }) => {
     setTags(newTags);
   };
 
-//   const addTag = e => {
-//     e.preventDefault();
-//     if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
-//       return;
-//     }
-//     setTags([...tags, val.toLowerCase()]);
-//     inputRef.current.value = "";
-//   }
-
   const handleClick = e => {
     const val = inputRef.current.value;
     e.preventDefault();

@@ -4,23 +4,23 @@ import DashLink from "../components/DashLink";
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="dashboard">
       <h1>Hi there</h1>
       <div className="pet-container">THERE IS A PET HERE</div>
       <DashLink 
         title="Track Mood Today"
         page="/daymood/new"
-        color="#c5c8ff"
+        color="#FF9AA2"
       />
       <DashLink 
         title="See Stats"
         page="/statistics"
-        color="#ffc2ad"
+        color="#E2F0CB"
       />
       <DashLink 
         title="Add Buddies"
         page="/contacts"
-        color="#c8fcea"
+        color="#C7CEEA"
       />
     </div>
   )
