@@ -6,12 +6,13 @@ import petMessages from "../../data/pet_messages"
 import templateString from "../../helpers/templateString"
 import '../../styles/pet.css'
 
-const PetModule = ({isStoreOpen, closeStore}) => {
+const PetModule = () => {
   const userContext = useContext(UserContext);
   const { currentUser } = userContext;
 
   const [petData, setPetData] = useState({});
   const [currentMsg, setCurrentMsg] = useState("");
+  const [isStoreOpen, setIsStoreOpen] = useState(false);
   const [isTalking, setIsTalking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [petStage, setPetStage] = useState(0);
@@ -42,8 +43,7 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       setPetData(apiRes.data, onPetUpdated);
       setStageBasedOnExp(apiRes.data.exp)
 
-      // Close the store && display thank you msg
-      if (closeStore) { closeStore() }
+      closeStore();
 
       petJump(2);
       displayRandomMsg('thanks');
@@ -83,6 +83,14 @@ const PetModule = ({isStoreOpen, closeStore}) => {
   }
 
   // PET STORE
+
+  const onStoreClick = () => {
+    setIsStoreOpen(!isStoreOpen);
+  }
+
+  const closeStore = () => {
+    setIsStoreOpen(false);
+  }
 
   // Add or remove HP staying in the right range
   const getUpdatedHP = (hpAdded, min = 0, max = 100) => {
@@ -178,7 +186,10 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       {isStoreOpen ? (
 
         <div className="pet-store">
-          <div className="store-header">PET STORE - Credits <span className="bigCoin"></span> x {petData.ownerCredits}</div>
+          <div className="store-header">
+            <span className="store-back" onClick={closeStore}></span>
+            <div className="flex-center-row">Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
+          </div>
           <div className="items">
 
             <div className="line-w">
@@ -209,8 +220,17 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       ) : (
         <>
         <div className="pet-infos">
-          <div className="health">Health {petData.hp}/100</div>
-          <div className="exp">{petData.exp} XP</div>
+          <div className="health flex-center-column">
+            <div className="health-icon"></div>
+            {petData.hp}/100
+          </div>
+          <div className="store-w flex-center-column" onClick={onStoreClick}>
+            <div className="storeIcon"></div>
+          </div>
+          <div className="exp flex-center-column">
+            <div className="exp-icon">XP</div>
+            {petData.exp}
+          </div>
         </div>
 
         <div className="pet-playground">

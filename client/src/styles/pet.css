@@ -3,36 +3,55 @@
   font-family: "RPGSystem";
   image-rendering:pixelated;
   height: 100%;
-  padding:10px;
+  border:1px solid #d8d8d8;
+  border-radius: 5px;
 }
 
 .petContainer .pet-store {
   height:100%;
 }
 
-.petContainer .pet-infos{
-  border:1px solid #d8d8d8;
-  height: 10%;
+.petContainer .pet-infos {
+  /* border:1px solid #d8d8d8; */
+  /* border-radius: 5px 5px 0 0; */
+  height: 20%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding:0 10px;
 }
+
+.pet-infos .health-icon {
+  height:16px;
+  width:16px;
+  background-image: url("/images/pet/heart_16.png");
+}
+
+.pet-infos .storeIcon {
+  height:32px;
+  width:40px;
+  background-image: url("/images/pet/store-icon.png");
+  background-size: 40px;
+}
+
+.pet-infos .storeIcon:hover { cursor: pointer; }
 
 .petContainer .pet-playground {
   background-image:url("/images/pet/backgrounds/Green.png");
-  border-left:1px solid #d8d8d8;
-  border-right:1px solid #d8d8d8;
+  /* border-left:1px solid #d8d8d8;
+  border-right:1px solid #d8d8d8; */
   background-size: 10%;
-  height: 70%;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .petContainer .pet-message {
-  border:1px solid #d8d8d8;
+  /* border:1px solid #d8d8d8; */
+  border-radius: 0 0 5px 5px;
   height:20%;
-  padding:5px;
+  padding:5px 10px;
 }
 
 /* PET JUMP */
@@ -83,13 +102,24 @@
 /* PET STORE */
 .store-header {
   background-color: #58497933;
-  border:1px solid #d8d8d8;
   display:flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  font-size:1.2rem;
+  font-size:1rem;
   height:20%;
+  padding:20px;
 }
+
+.store-header .store-back {
+  display: block;
+  background-image:url("/images/pet/back_arrow.png");
+  background-position: -1px 0;
+  background-size: 35px;
+  width: 35px;
+  height:20px;
+}
+
+.store-header .store-back:hover { cursor:pointer; }
 
 .pet-store .items {
   height:80%;
