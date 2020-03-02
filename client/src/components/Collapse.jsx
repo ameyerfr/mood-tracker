@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Keywords from "./Keywords";
  
 import {
@@ -13,7 +13,24 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 // Demo styles, see 'Styles' section below for some notes on use.
 // import 'react-accessible-accordion/dist/fancy-example.css';
  
-export default function Collapse() {
+export default function Collapse({clbk}) {
+
+    const [positiveTags, setPositiveTags] = useState([])
+    const [negativeTags, setNegativeTags] = useState([])
+
+
+    const updatePositiveTags = (val) => {
+        setPositiveTags(val)
+    }
+
+    const updateNegativeTags = (val) => {
+        setNegativeTags(val)
+    }
+
+    useEffect(()=> {
+        clbk({positive: positiveTags, negative: negativeTags})
+    },[positiveTags, negativeTags])
+
     return (
         <Accordion allowZeroExpanded="true">
             <AccordionItem>
@@ -25,6 +42,7 @@ export default function Collapse() {
                 <AccordionItemPanel>
                     <Keywords
                         title="positive"
+                        clbk={updatePositiveTags}
                     />
                 </AccordionItemPanel>
             </AccordionItem>
@@ -37,6 +55,7 @@ export default function Collapse() {
                 <AccordionItemPanel>
                     <Keywords 
                         title="negative"
+                        clbk={updateNegativeTags}
                     />
                 </AccordionItemPanel>
             </AccordionItem>

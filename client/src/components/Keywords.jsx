@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const Keywords = ({ title }) => {
+const Keywords = ({ title, clbk }) => {
   const [tags, setTags] = useState([]);
   const inputRef = useRef(null);
 
@@ -11,6 +11,10 @@ const Keywords = ({ title }) => {
     newTags.splice(i, 1);
     setTags(newTags);
   };
+
+  useEffect(()=>{
+    clbk(tags)
+  }, [tags])
 
   const handleClick = e => {
     const val = inputRef.current.value;
@@ -44,7 +48,6 @@ const Keywords = ({ title }) => {
                 type="text"
                 ref={inputRef}
                 onKeyDown={inputKeyDown}
-                // onChange={clbk}
                 id={title}
                 name={title}
                 />

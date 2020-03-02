@@ -11,10 +11,21 @@ import APIHandler from "../api/APIHandler";
 const TrackMood = () => {
   const [sliderValue, setSliderValue] = useState(5);
   const [colorValue, setColorValue] = useState("");
+  const [tags, setTags] = useState([]);
+
+  const updateTags = (val) => {
+    // console.log(val)
+    setTags(val)
+    // setTags([...tags, val[val.length-1]])
+  }
 
   useEffect(() => {
     setColorValue(changeBackground(sliderValue))
   })
+
+  useEffect(()=> {
+    console.log("track mood component", tags)
+  },[tags])
 
   const sliderChange = e => {
     setSliderValue(+e.target.value)
@@ -27,11 +38,9 @@ const TrackMood = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const moodInfo = {
+    const newPost = {tags: tags, color: colorValue, slider:sliderValue}
 
-    }
-
-    APIHandler.post("/daymood/new")
+    APIHandler.post("/daymood/new", newPost)
   }
 
   return (
@@ -50,7 +59,7 @@ const TrackMood = () => {
             className="slider"
           />
         </div>
-        <Collapse />
+        <Collapse clbk={updateTags}/>
         {/* <div>
         <Keywords
           title="positive"

@@ -5,8 +5,11 @@ const checkUserAuth = require("../middlewares/checkUserAuth");
 
 // Create a new entry
 router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
+  console.log("hate hooks",req.body)
+  const newMood = {k_good: req.body.tags.positive, k_bad: req.body.tags.negative, mood: req.body.slider}
+  console.log(newMood)
   dayMoodModel
-    .create(req.body)
+    .create(newMood)
     .then(newMood => {
       res.status(200).json(newMood);
     })
@@ -16,7 +19,6 @@ router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
   // TODO new daymood object
   // day : new Date()
   // dayMoodModel.create({})
-  res.status(200).json({ msg: "@todo" });
 });
 
 // Get all the data for a Date range (for the logged in user)
