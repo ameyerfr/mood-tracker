@@ -6,16 +6,17 @@ import petMessages from "../../data/pet_messages"
 import templateString from "../../helpers/templateString"
 import '../../styles/pet.css'
 
-const PetModule = ({isStoreOpen, closeStore}) => {
+const PetModule = () => {
   const userContext = useContext(UserContext);
   const { currentUser } = userContext;
 
-  const petEL = useRef(null);
-
   const [petData, setPetData] = useState({});
   const [currentMsg, setCurrentMsg] = useState("");
+  const [isStoreOpen, setIsStoreOpen] = useState(false);
   const [isTalking, setIsTalking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
+  const [petStage, setPetStage] = useState(0);
+  const [petState, setPetState] = useState("idle");
 
   // First time, do an ajax request
   useEffect(() => {
@@ -23,6 +24,7 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       const apiRes = await APIHandler.get("/pet")
       console.log("Pet data : ", apiRes.data);
       setPetData(apiRes.data);
+      setStageBasedOnExp(apiRes.data.exp)
     }
     apiCall();
   }, []);
@@ -39,23 +41,56 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       // On AJAX return, set new values locally
       // So that the view gets updated
       setPetData(apiRes.data, onPetUpdated);
+      setStageBasedOnExp(apiRes.data.exp)
 
-      // Close the store && display thank you msg
       closeStore();
-      displayRandomMsg('thanks');
+
       petJump(2);
+      displayRandomMsg('thanks');
+
+      // If we upgraded his HP
+      if ('hp' in updatedValues) {
+        setPetState('eating');
+      }
+
     }
 
     apiCall();
   }
 
+  // STAGES of evolution based on exp
+  const setStageBasedOnExp = (exp) => {
+
+    // from 0 to 100 exp ( egg stage evolution every 20 exp )
+    let stage = Math.floor(exp/20);
+
+    // Maximum stage for now (Baby T-rex)
+    if ( stage > 6 ) { stage = 6; }
+
+    // Baby Trex
+    setPetStage(stage);
+  }
+
   // ON PET CLICK
-  const onPetClick = () => {
+  const onEggClick = () => {
     petJump(1);
     displayRandomMsg('first_time')
   }
 
+  const onDinoClick = () => {
+    petJump(1);
+    displayRandomMsg('cheer_up')
+  }
+
   // PET STORE
+
+  const onStoreClick = () => {
+    setIsStoreOpen(!isStoreOpen);
+  }
+
+  const closeStore = () => {
+    setIsStoreOpen(false);
+  }
 
   // Add or remove HP staying in the right range
   const getUpdatedHP = (hpAdded, min = 0, max = 100) => {
@@ -94,16 +129,14 @@ const PetModule = ({isStoreOpen, closeStore}) => {
   // PET JUMPING
   // Jump x nb of times, or infinite if no nb
   const petJump = (nb) => {
-    if ( isJumping ) return;
+    if ( isJumping || isTalking ) return;
 
     let jumpCount = 1;
-    if (petEL && petEL.current) petEL.current.classList.add("jumping");
     setIsJumping(true);
 
     let intID = setInterval(function() {
       if ( !!nb && jumpCount >= nb ) {
         clearInterval(intID);
-        if (petEL && petEL.current) petEL.current.classList.remove("jumping");
         setIsJumping(false);
         return;
       }
@@ -121,6 +154,7 @@ const PetModule = ({isStoreOpen, closeStore}) => {
 
   const displayRandomMsg = (msgType) => {
     if (isTalking) return;
+    setPetState("talking")
     setIsTalking(true);
 
     let user = (currentUser && currentUser.firstname) ? currentUser.firstname : 'NONAME';
@@ -137,8 +171,8 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       msgIndex++;
 
       if (msgIndex > msgToDisplay.length){
-        console.log("CLEAR INTERVALL");
          clearInterval(intID);
+         setPetState("idle")
          setIsTalking(false);
       }
 
@@ -152,7 +186,10 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       {isStoreOpen ? (
 
         <div className="pet-store">
-          <div className="store-header">PET STORE - Credits <span className="bigCoin"></span> x {petData.ownerCredits}</div>
+          <div className="store-header">
+            <span className="store-back" onClick={closeStore}></span>
+            <div className="flex-center-row">Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
+          </div>
           <div className="items">
 
             <div className="line-w">
@@ -183,12 +220,29 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       ) : (
         <>
         <div className="pet-infos">
-          <div className="health">Health {petData.hp}/100</div>
-          <div className="exp">{petData.exp} XP</div>
+          <div className="health flex-center-column">
+            <div className="health-icon"></div>
+            {petData.hp}/100
+          </div>
+          <div className="store-w flex-center-column" onClick={onStoreClick}>
+            <div className="storeIcon"></div>
+          </div>
+          <div className="exp flex-center-column">
+            <div className="exp-icon">XP</div>
+            {petData.exp}
+          </div>
         </div>
 
         <div className="pet-playground">
-          <div className="pet egg es0" ref={petEL} onClick={onPetClick}></div>
+          { petStage <= 5 ? (
+            <div className={`pet egg ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
+                 onClick={onEggClick}>
+            </div>
+          ) : (
+            <div className={`pet dino ${isJumping ? 'jumping' : ''} ${petState}`}
+                 onClick={onDinoClick}>
+            </div>
+          )}
         </div>
 
         <div className="pet-message">
