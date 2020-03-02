@@ -5,9 +5,15 @@
 const express = require("express");
 const router = new express.Router();
 const userModel = require("./../models/User.model");
+const petModel = require("./../models/Pet.model");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const minPasswordLength = 4;
+
+// Date handling
+const dateFns = require("date-fns");
+const mongoose = require("mongoose");
+var DateOnly = require("mongoose-dateonly")(mongoose);
 
 router.post("/auth/signup", (req, res, next) => {
   const { email, password, lastname, firstname } = req.body;
@@ -50,18 +56,48 @@ router.post("/auth/signup", (req, res, next) => {
 
 router.post("/auth/signin", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
-    console.log(err, user);
     if (err || !user) return res.status(403).json("invalid user infos"); // 403 : Forbidden
 
     /**
      * req.Login is a passport method
      * check the doc here : http://www.passportjs.org/docs/login/
      */
-    req.logIn(user, function(err) {
+    req.logIn(user, async function(err) {
+
       /* doc says: When the login operation completes, user will be assigned to req.user. */
       if (err) {
-        return res.json({ message: "Something went wrong logging in" });
+        return res.status(500).json({ error: err });
       }
+
+      let connect_diff = dateFns.differenceInDays( new DateOnly().toDate(), user.last_login.toDate() );
+
+      // USER did NOT connect today
+      // UPDATE PET HEALTH
+      // Depending on how long the user has been away
+      // 30% for the first day
+      // +12% for each additional day
+      if ( connect_diff >= 1 ) {
+
+        // Retrieve user pet
+        const pet = await petModel.findOne({owner : user._id});
+
+        // Remove 30% for the first day
+        pet.hp -= 30;
+
+        // If user hasnt connected in more than a day, remove 12% per additional day
+        if ( connect_diff > 1) { pet.hp -= (connect_diff - 1) * 12; }
+
+        // 0 should be the minimum value
+        if ( pet.hp < 0 ) { pet.hp = 0 }
+
+        const petSave = await pet.save();
+        console.log("petSave : ", petSave)
+
+      }
+
+      // Save user last login as TODAY
+      user.last_login =  new DateOnly().toDate()
+      await user.save();
 
       // We are now logged in
       const { _id, lastname, firstname, email } = user;
@@ -75,6 +111,7 @@ router.post("/auth/signin", (req, res, next) => {
           }
         })
       );
+
     });
   })(req, res, next); // IIFE (module) pattern here (see passport documentation)
 });

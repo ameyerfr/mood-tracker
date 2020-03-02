@@ -20,10 +20,14 @@ export default withRouter(function Signin(props) {
         email,
         password
       });
-      setCurrentUser(apiRes.data.currentUser);
-      console.log(setCurrentUser);
-      props.history.push("/dashboard");
+
+      if ( !!apiRes.data.currentUser ) {
+        setCurrentUser(apiRes.data.currentUser);
+        props.history.push("/dashboard");
+      } else { throw new Error("Error with the authentification")}
+
     } catch (err) {
+      console.log(err)
       setCurrentUser(null);
     }
   };
