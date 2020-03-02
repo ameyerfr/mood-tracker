@@ -112,15 +112,11 @@ export default withRouter(function EditProfile(props) {
         </div>
       </div>
 
-      <div className="field is-grouped">
-        <div className="control">
-          <button className="button is-link" onClick={handleSubmit}>
-            Submit
-          </button>
-        </div>
-      </div>
       <div className="buttons">
-        <button className="button is-danger" onClick={handleSignout}>
+        <button className="button btn-submit" onClick={handleSubmit}>
+          Update
+        </button>
+        <button className="button btn-logout" onClick={handleSignout}>
           Logout
         </button>
       </div>

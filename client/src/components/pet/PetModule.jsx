@@ -43,7 +43,7 @@ const PetModule = ({isStoreOpen, closeStore}) => {
       setStageBasedOnExp(apiRes.data.exp)
 
       // Close the store && display thank you msg
-      closeStore();
+      if (closeStore) { closeStore() }
 
       petJump(2);
       displayRandomMsg('thanks');

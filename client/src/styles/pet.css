@@ -1,5 +1,6 @@
 /* LAYOUT */
 .petContainer {
+  font-family: "RPGSystem";
   image-rendering:pixelated;
   height: 100%;
   padding:10px;
