@@ -1,26 +1,32 @@
 import React from "react";
 import "../styles/main.css";
+import "../styles/dashboard.css"
+
 import DashLink from "../components/DashLink";
+import PetModule from "../components/pet/PetModule"
 
 const Dashboard = () => {
   return (
-    <div>
-      <h1>Hi there</h1>
-      <div className="pet-container">THERE IS A PET HERE</div>
-      <DashLink 
+    <div className="page-dashboard">
+
+      <div className="pet-container">
+        <PetModule isStoreOpen={false} />
+      </div>
+
+      <DashLink
         title="Track Mood Today"
         page="/daymood/new"
-        color="#c5c8ff"
+        classN="new"
       />
-      <DashLink 
+      <DashLink
         title="See Stats"
         page="/statistics"
-        color="#ffc2ad"
+        classN="stats"
       />
-      <DashLink 
+      <DashLink
         title="Add Buddies"
         page="/contacts"
-        color="#c8fcea"
+        classN="contacts"
       />
     </div>
   )
