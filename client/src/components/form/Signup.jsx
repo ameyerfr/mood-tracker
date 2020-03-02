@@ -33,7 +33,7 @@ export default withRouter(function Signup(props) {
   return (
     <>
       <div className="field">
-        <label className="label">Firstname</label>
+        <label className="label">First Name</label>
         <div className="control">
           <input
             className="input"
@@ -44,7 +44,7 @@ export default withRouter(function Signup(props) {
         </div>
       </div>
       <div className="field">
-        <label className="label">Lastname</label>
+        <label className="label">Last Name</label>
         <div className="control">
           <input
             className="input"
@@ -88,7 +88,7 @@ export default withRouter(function Signup(props) {
 
       <div className="field is-grouped">
         <div className="control">
-          <button className="button is-link" onClick={handleSubmit}>
+          <button className="button btn-submit" onClick={handleSubmit}>
             Submit
           </button>
         </div>

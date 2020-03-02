@@ -5,8 +5,7 @@ const checkUserAuth = require("../middlewares/checkUserAuth");
 
 // Create a new entry
 router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
-  console.log("hate hooks",req.body)
-  const newMood = {k_good: req.body.tags.positive, k_bad: req.body.tags.negative, mood: req.body.slider}
+  const newMood = {k_good: req.body.tags.positive, k_bad: req.body.tags.negative, mood: req.body.intensity}
   console.log(newMood)
   dayMoodModel
     .create(newMood)

@@ -184,29 +184,43 @@ img.emoji {
 
 /* ACCORDION */
 
-.accordion {
+.keywords .accordion {
     width: 300px;
     border: none;
 }
 
-.accordion__button {
+/* .keywords .accordion__button {
     background-color: #fff;
     border: none;
-    /* padding: 8px; */
+} */
+
+.keywords .accordion-btn {
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 8px 0;
+    margin: 8px;
 }
 
-.accordion__button:hover {
+.keywords .accordion-btn:hover {
     background-color: ivory;
 }
 
-.accordion__item {
+/* .keywords .accordion__button:hover {
+    background-color: ivory;
+} */
+
+.keywords .accordion__item {
     width: 100%;
     border-radius: 10px;
+    border: none;
 }
 
-.accordion__panel {
+.keywords .accordion__panel {
     width: 100%;
     padding: 0 20px 20px;
+    border: none;
 }
 
 /* DATE */
@@ -218,15 +232,14 @@ p.date {
 /* OK BUTTON */
 
 .btn-ok {
-    background-color: #FFB7B2;
     font-size: 14px;
     /* opacity: .8; */
     width: 80px;
     text-align: center;
     padding: 10px 0;
-    border: 1px solid #FFB7B2;
+    border: 1px solid #333;
     border-radius: 20px;
     margin-top: 30px;
-    position: absolute;
-    bottom: 0%;
+    /* position: absolute; */
+    /* bottom: 0%; */
 }

@@ -20,7 +20,7 @@ const Dashboard = () => {
       />
       <DashLink
         title="See Stats"
-        page="/statistics"
+        page="/stats"
         classN="stats"
       />
       <DashLink

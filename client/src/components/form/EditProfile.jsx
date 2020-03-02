@@ -64,7 +64,7 @@ export default withRouter(function EditProfile(props) {
     <Accordion allowZeroExpanded="true">
       <AccordionItem>
         <AccordionItemHeading>
-          <AccordionItemButton className="btn-accordion">Edit Profile</AccordionItemButton>
+          <AccordionItemButton className="btn-edit">Edit Profile</AccordionItemButton>
         </AccordionItemHeading>
         <AccordionItemPanel>
           {msg && msg}

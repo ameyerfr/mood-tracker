@@ -2,9 +2,14 @@ import React from "react";
 
 const Splash = () => {
   return (
-    <>
-      <h1>Welcome to Tamamoodchi !</h1>
-    </>
+    <div className="splash-page">
+      {/* <h1>Welcome to TamaMOODchi !</h1> */}
+      <p>Never feel alone with TamaMOODchi</p>
+      {/* <img className="splash-img" src="/images/emotions/09.png" /> */}
+      {/* <img className="splash-img" src="/images/pet/egg_evolution.png" /> */}
+      <button className="btn-splash">Register</button>
+      <button className="btn-splash">Login</button>
+    </div>
   );
 };
 

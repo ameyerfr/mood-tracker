@@ -14,18 +14,16 @@ const TrackMood = () => {
   const [tags, setTags] = useState([]);
 
   const updateTags = (val) => {
-    // console.log(val)
     setTags(val)
-    // setTags([...tags, val[val.length-1]])
   }
 
   useEffect(() => {
     setColorValue(changeBackground(sliderValue))
   })
 
-  useEffect(()=> {
-    console.log("track mood component", tags)
-  },[tags])
+  // useEffect(()=> {
+  //   console.log("track mood component", tags)
+  // },[tags])
 
   const sliderChange = e => {
     setSliderValue(+e.target.value)
@@ -37,10 +35,8 @@ const TrackMood = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const newPost = {tags: tags, color: colorValue, slider:sliderValue}
-
-    APIHandler.post("/daymood/new", newPost)
+    const newMood = {tags: tags, intensity: sliderValue}
+    APIHandler.post("/daymood/new", newMood)
   }
 
   return (
@@ -59,18 +55,10 @@ const TrackMood = () => {
             className="slider"
           />
         </div>
-        <Collapse clbk={updateTags}/>
-        {/* <div>
-        <Keywords
-          title="positive"
-          // clbk={}
-          />
-        <Keywords
-          title="negative"
-          // clbk={}
+        <Collapse 
+          clbk={updateTags}
         />
-        </div> */}
-        <button style={{backgroundColor:colorValue, border:colorValue}} className="btn-ok"><FontAwesomeIcon icon={faCheck} /></button>
+        <button style={{backgroundColor:colorValue}} className="btn-ok"><FontAwesomeIcon icon={faCheck} /></button>
       </form>
       
     </div>

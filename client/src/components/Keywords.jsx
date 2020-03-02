@@ -42,7 +42,6 @@ const Keywords = ({ title, clbk }) => {
 
   return (
       <div className="tags">
-        {/* <label htmlFor={title}>What made you feel {title} today?</label> */}
             <span className="input-btn">
                 <input
                 type="text"

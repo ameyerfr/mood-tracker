@@ -68,7 +68,7 @@ export default withRouter(function Signin(props) {
 
       <div className="field is-grouped">
         <div className="control">
-          <button className="button is-link" onClick={handleSubmit}>
+          <button className="button btn-submit" onClick={handleSubmit}>
             Submit
           </button>
         </div>
