@@ -21,7 +21,7 @@ const Stats = () => {
   const [mood, setMood] = useState(0);
 
   useEffect(() => {
-    const moodByDate = APIHandler.get("/daymood/20200128/20200203?")
+    const dayMoods = APIHandler.get("/daymood/20200128/20200203?")
       .then(moods => {
         setMood(moods.data);
       })

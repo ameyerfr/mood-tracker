@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
-var DateOnly = require("mongoose-dateonly")(mongoose);
+//var DateOnly = require("mongoose-dateonly")(mongoose);
 const Schema = mongoose.Schema;
+const dateFns = require("date-fns");
 
 const schema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-  day: { type: DateOnly, default: Date.now() },
-  mood: { type: Number, min: 0, max: 10, default : 5},
+  day: { type: Number, default: dateFns.format(Date.now(), "yyyyMMdd") },
+  mood: { type: Number, min: 0, max: 10, default: 5 },
   k_good: { type: [String] },
   k_bad: { type: [String] }
 });
