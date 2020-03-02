@@ -8,12 +8,12 @@ const Dashboard = () => {
       <h1>Hi there</h1>
       <div className="pet-container">THERE IS A PET HERE</div>
       <DashLink 
-        title="Track Your Mood"
-        page="/track"
+        title="Track Mood Today"
+        page="/daymood/new"
         color="#c5c8ff"
       />
       <DashLink 
-        title="See Your Stats"
+        title="See Stats"
         page="/statistics"
         color="#ffc2ad"
       />

@@ -5,6 +5,14 @@ const checkUserAuth = require("../middlewares/checkUserAuth");
 
 // Create a new entry
 router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
+  dayMoodModel
+    .create(req.body)
+    .then(newMood => {
+      res.status(200).json(newMood);
+    })
+    .catch(err => {
+      res.status(500).json({ msg: err });
+    });
   // TODO new daymood object
   // day : new Date()
   // dayMoodModel.create({})
