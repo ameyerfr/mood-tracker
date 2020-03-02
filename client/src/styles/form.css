@@ -1,3 +1,9 @@
+/* LOGIN FORM */
+
+
+
+/* PROFILE */
+
 .profile {
     width: 100vw;
     height: 100vh;
@@ -42,6 +48,15 @@
 
 .profile .accordion {
     width: 280px;
+    border: none;
+}
+
+.profile .accordion__panel {
+    padding: 10px 0;
+
+}
+
+.profile .accordion__item + .accordion__item {
     border: none;
 }
 
