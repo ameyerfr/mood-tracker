@@ -7,7 +7,7 @@ module.exports = [
   {mood : 5, moodState : '/images/emotions/05.png', bgColor  : "#e2f0cb"},
   {mood : 6, moodState : '/images/emotions/06.png', bgColor  : "#f5e3c0"},
   {mood : 7, moodState : '/images/emotions/07.png', bgColor  : "#fed6bc"},
-  {mood : 8, moodState : '/images/emotions/08.png', bgColor  : "#fed6bc"},
+  {mood : 8, moodState : '/images/emotions/08.png', bgColor  : "#ffcbb7"},
   {mood : 9, moodState : '/images/emotions/09.png', bgColor  : "#ffc4b5"},
   {mood : 10, moodState : '/images/emotions/10.png', bgColor  : "#ffb7b2"},
   // etc

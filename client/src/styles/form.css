@@ -1,0 +1,64 @@
+/* LOGIN FORM */
+
+
+
+/* PROFILE */
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    font-size: 12px;
+}
+
+.input {
+    border-radius: 20px;
+    padding: 0 8px;
+}
+
+.icon {
+    margin: 10px;
+}
+
+.button {
+    border-radius: 20px;
+}
+
+.btn-submit {
+    background-color: #b5ead7;
+    border: 1px solid #b5ead7;
+}
+
+.btn-logout {
+    margin: 10px auto;
+    width: 280px;
+    background-color: #ffb7b2;
+    border: 1px solid #ffb7b2;
+}
+
+.btn-accordion {
+    width: 280px;
+    font-size: 17px;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ffb7b2;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.profile .accordion {
+    width: 280px;
+    border: none;
+}
+
+.profile .accordion__panel {
+    padding: 10px 0;
+
+}
+
+.profile .accordion__item + .accordion__item {
+    border: none;
+}
+

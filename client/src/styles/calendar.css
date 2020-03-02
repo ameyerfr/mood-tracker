@@ -210,4 +210,8 @@ header {
     .calendar .body .cell {
         height: 3em;
     }
+
+    .calendar .body .cell .number {
+        right: initial;
+    }
 }

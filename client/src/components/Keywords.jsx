@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const Keywords = ({ title }) => {
+const Keywords = ({ title, clbk }) => {
   const [tags, setTags] = useState([]);
   const inputRef = useRef(null);
 
@@ -12,14 +12,9 @@ const Keywords = ({ title }) => {
     setTags(newTags);
   };
 
-//   const addTag = e => {
-//     e.preventDefault();
-//     if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
-//       return;
-//     }
-//     setTags([...tags, val.toLowerCase()]);
-//     inputRef.current.value = "";
-//   }
+  useEffect(()=>{
+    clbk(tags)
+  }, [tags])
 
   const handleClick = e => {
     const val = inputRef.current.value;
@@ -53,7 +48,6 @@ const Keywords = ({ title }) => {
                 type="text"
                 ref={inputRef}
                 onKeyDown={inputKeyDown}
-                // onChange={clbk}
                 id={title}
                 name={title}
                 />

@@ -1,6 +1,6 @@
 @font-face {
- font-family: "RPGSystem";
- src: url("./fonts/RPGSystem.ttf") format("truetype");
+  font-family: "RPGSystem";
+  src: url("./fonts/RPGSystem.ttf") format("truetype");
 }
 
 @import "./charts.css";
@@ -8,20 +8,45 @@
 @import "./header.css";
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .flex-center-row {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .flex-center-column {
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* NAVBAR */
+
+.navbar {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.navlinks {
+  color: #333;
+}
+
+.navbar a:nth-child(1) {
+  color: #ff9aa2;
+  font-size: 26px;
+}
+
+.navbar a:nth-child(3) {
+  color: #c7ceea;
+  font-size: 26px;
 }

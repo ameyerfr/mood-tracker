@@ -6,6 +6,14 @@ import APIHandler from "../../api/APIHandler";
 import IconPassword from "../icon/IconPassword";
 import IconMail from "../icon/IconMail";
 
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel
+} from "react-accessible-accordion";
+
 export default withRouter(function EditProfile(props) {
   const userContext = useContext(UserContext);
   const { setCurrentUser } = userContext;
@@ -53,77 +61,81 @@ export default withRouter(function EditProfile(props) {
     }
   };
   return (
-    <>
-      {msg && msg}
-      <div className="field">
-        <label className="label">Firstname</label>
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            onChange={e => setFirstname(e.target.value)}
-            required
-            defaultValue={firstname}
-          />
-        </div>
-      </div>
-      <div className="field">
-        <label className="label">Lastname</label>
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            onChange={e => setLastname(e.target.value)}
-            required
-            defaultValue={lastname}
-          />
-        </div>
-      </div>
-      <div className="field">
-        <label className="label">Email</label>
-        <div className="control has-icons-left has-icons-right">
-          <input
-            className="input"
-            type="email"
-            placeholder="Email input"
-            onChange={e => setEmail(e.target.value)}
-            required
-            defaultValue={email}
-          />
-          <span className="icon is-small is-left">
-            <IconMail size="lg" />
-          </span>
-        </div>
-      </div>
+    <Accordion allowZeroExpanded="true">
+      <AccordionItem>
+        <AccordionItemHeading>
+          <AccordionItemButton className="btn-accordion">Edit Profile</AccordionItemButton>
+        </AccordionItemHeading>
+        <AccordionItemPanel>
+          {msg && msg}
+          <div className="field">
+            <label className="label">Firstname</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                onChange={e => setFirstname(e.target.value)}
+                required
+                defaultValue={firstname}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Lastname</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                onChange={e => setLastname(e.target.value)}
+                required
+                defaultValue={lastname}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Email</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                className="input"
+                type="email"
+                placeholder="Email input"
+                onChange={e => setEmail(e.target.value)}
+                required
+                defaultValue={email}
+              />
+              <span className="icon is-small is-left">
+                <IconMail size="lg" />
+              </span>
+            </div>
+          </div>
 
-      <div className="field">
-        <label className="label">New Password (optional)</label>
-        <div className="control has-icons-left has-icons-right">
-          <input
-            className="input"
-            type="password"
-            defaultValue=""
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-          <span className="icon is-key is-left">
-            <IconPassword size="lg" />
-          </span>
-        </div>
-      </div>
+          <div className="field">
+            <label className="label">New Password (optional)</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                className="input"
+                type="password"
+                defaultValue=""
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+              <span className="icon is-key is-left">
+                <IconPassword size="lg" />
+              </span>
+            </div>
+          </div>
 
-      <div className="field is-grouped">
-        <div className="control">
-          <button className="button is-link" onClick={handleSubmit}>
-            Submit
+          <button className="button btn-submit" onClick={handleSubmit}>
+            Update
           </button>
-        </div>
-      </div>
-      <div className="buttons">
-        <button className="button is-danger" onClick={handleSignout}>
+        </AccordionItemPanel>
+      </AccordionItem>
+
+      <AccordionItem>
+        <button className="button btn-logout" onClick={handleSignout}>
           Logout
         </button>
-      </div>
-    </>
+      </AccordionItem>
+    </Accordion>
   );
 });

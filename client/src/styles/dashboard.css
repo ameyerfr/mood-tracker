@@ -9,17 +9,33 @@
 }
 
 .dashlink-wrapper {
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     border-radius: 20px;
     margin: 10px 0;
     width: 100%;
     height: 100px;
-
+    
 }
 
-.dashlink-wrapper.new { background-color: #c5c8ff; }
-.dashlink-wrapper.stats { background-color: #ffc2ad; }
-.dashlink-wrapper.contacts { background-color: #c8fcea; }
+.dashlink-wrapper a {
+    color: #333;
+}
+
+.dashlink-wrapper.new { 
+    background-color: #ffdac1;
+    border: 1px solid #ffdac1;
+}
+
+.dashlink-wrapper.stats {
+    background-color: #c7ceea;
+    border: 1px solid #c7ceea;
+}
+
+.dashlink-wrapper.contacts {
+    background-color: #ffb7b2;
+    border: 1px solid #ffb7b2;
+    
+}
 
 .dashlink {
     display: flex;
