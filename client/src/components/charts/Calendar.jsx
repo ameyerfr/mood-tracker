@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import moodScale from "../../data/mood_scale";
+import APIHandler from "../../api/APIHandler";
+
 import {
   startOfWeek,
   addDays,
@@ -17,11 +20,23 @@ import "../../styles/calendar.css";
 const Calendar = ({ data }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [fetchStartDate, setFetchStartDate] = useState(0);
+  const [fetchEndDate, setFetchEndDate] = useState(0);
+
+  const [mood, setMood] = useState(0);
+  useEffect(() => {
+    const moodByDate = APIHandler.get("/daymood/mood/20200128/20200203?")
+      .then(moods => {
+        setMood(moods.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   const header = () => {
     const dateFormat = "MMMM yyyy";
     return (
       <div className="header row flex-middle">
-        {console.log(data)}
+        {/* {console.log(mood)} */}
         <div className="column col-start">
           <div className="icon" onClick={prevMonth}>
             chevron_left
@@ -65,9 +80,10 @@ const Calendar = ({ data }) => {
       for (let i = 0; i < 7; i++) {
         formattedDate = format(day, dateFormat);
         const cloneDay = day;
+
         days.push(
           <div
-            style={{ backgroundColor: "grey" }}
+            // style={{ backgroundColor: "grey" }}
             className={`column cell ${
               !isSameMonth(day, monthStart)
                 ? "disabled"
@@ -78,7 +94,7 @@ const Calendar = ({ data }) => {
             key={day}
             // onClick={() => onDateClick(parse(cloneDay))}
           >
-            {console.log(day)}
+            {/* {console.log(format(day, "yyyyMMdd"))} */}
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
           </div>
@@ -95,17 +111,32 @@ const Calendar = ({ data }) => {
     }
     return <div className="body">{rows}</div>;
   };
-  const nextMonth = () => {
-    setCurrentDate(addMonths(currentDate, 1));
+
+  function updateFetch() {
+    const monthStart = startOfMonth(currentDate);
+    const monthEnd = endOfMonth(monthStart);
+    const startDate = startOfWeek(monthStart);
+    const endDate = endOfWeek(monthEnd);
+    setFetchStartDate(format(startDate, "yyyyMMdd"));
+    setFetchEndDate(format(endDate, "yyyyMMdd"));
+  }
+
+  const nextMonth = async () => {
+    await setCurrentDate(addMonths(currentDate, 1));
+    updateFetch();
   };
-  const prevMonth = () => {
-    setCurrentDate(subMonths(currentDate, 1));
+  const prevMonth = async () => {
+    await setCurrentDate(subMonths(currentDate, 1));
+    updateFetch();
   };
   const onDateClick = day => {
     setSelectedDate(day);
   };
+
   return (
     <div className="calendar">
+      {fetchStartDate && console.log(fetchStartDate)}
+      {fetchEndDate && console.log(fetchEndDate)}
       <div>{header()}</div>
       <div>{days()}</div>
       <div>{cells()}</div>
