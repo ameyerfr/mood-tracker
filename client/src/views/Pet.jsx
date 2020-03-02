@@ -4,7 +4,7 @@ import "../styles/petView.css"
 
 const Pet = () => {
 
-  const [isStoreOpen, setIsStoreOpen] = useState(true);
+  const [isStoreOpen, setIsStoreOpen] = useState(false);
 
   const onButtonClick = () => setIsStoreOpen(!isStoreOpen);
   const closeStore = () => setIsStoreOpen(false);

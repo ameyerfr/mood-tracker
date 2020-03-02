@@ -14,8 +14,7 @@ const schema = new Schema({
   ownerCredits: { type : Number, min : 0, default : 0 },
   name: { type : String, default : getRandomName() },
   hp: { type : Number, min : 0, max: 100, default : 100 },
-  exp: { type : Number, default : 0 },
-  stage: { type : Number, default : 0 },
+  exp: { type : Number, default : 0 }
 });
 
 const petModel = mongoose.model("Pet", schema);

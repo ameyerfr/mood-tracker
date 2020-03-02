@@ -1,5 +1,5 @@
+/* LAYOUT */
 .petContainer {
-  border:1px solid green;
   image-rendering:pixelated;
   height: 100%;
   padding:10px;
@@ -7,11 +7,10 @@
 
 .petContainer .pet-store {
   height:100%;
-  border:1px solid purple;
 }
 
 .petContainer .pet-infos{
-  border:1px solid red;
+  border:1px solid #d8d8d8;
   height: 10%;
   display: flex;
   justify-content: space-between;
@@ -19,7 +18,10 @@
 }
 
 .petContainer .pet-playground {
-  border:1px solid pink;
+  background-image:url("/images/pet/backgrounds/Green.png");
+  border-left:1px solid #d8d8d8;
+  border-right:1px solid #d8d8d8;
+  background-size: 10%;
   height: 70%;
   display: flex;
   justify-content: center;
@@ -27,26 +29,12 @@
 }
 
 .petContainer .pet-message {
-  border:1px solid blue;
+  border:1px solid #d8d8d8;
   height:20%;
   padding:5px;
 }
 
-.petContainer .pet.egg {
-  border:1px solid black;
-  height:62px;
-  width:58px;
-  background-image:url("/images/pet/egg_evolution.png"); /* 201px * 61px */
-  background-position-y:calc(0px*2);
-  background-size: calc(201px*2);
-}
-
-.pet.egg.es0 { background-position-x:calc(0px*2); }
-.pet.egg.es1 { background-position-x:calc(-35px*2); }
-.pet.egg.es2 { background-position-x:calc(-70px*2); }
-.pet.egg.es3 { background-position-x:calc(-105px*2); }
-.pet.egg.es4 { background-position-x:calc(-139px*2); }
-.pet.egg.es5 { background-position-x:calc(-173px*2); }
+/* PET JUMP */
 
 @keyframes bouncy {
         0%   { transform: translateY(0); }
@@ -63,9 +51,38 @@
   animation-timing-function: cubic-bezier(0.89, 0.33, 0.44, 1.24);
 }
 
+/* DINO EGG */
+
+.petContainer .pet.egg {
+  height:62px;
+  width:58px;
+  background-image:url("/images/pet/egg_evolution.png"); /* 201px * 61px */
+  background-position-y:calc(0px*2);
+  background-size: calc(201px*2);
+}
+
+.pet.egg.es0 { background-position-x:calc(0px*2); }
+.pet.egg.es1 { background-position-x:calc(-35px*2); }
+.pet.egg.es2 { background-position-x:calc(-70px*2); }
+.pet.egg.es3 { background-position-x:calc(-105px*2); }
+.pet.egg.es4 { background-position-x:calc(-139px*2); }
+.pet.egg.es5 { background-position-x:calc(-173px*2); }
+
+/* DINO BABY */
+
+.pet.dino {
+  width:175px;
+  height:175px;
+}
+
+.pet.dino.idle { background-image:url("/images/pet/dino_idle_trsp.png"); }
+.pet.dino.talking { background-image:url("/images/pet/dino_talking_trsp.png"); }
+.pet.dino.eating { background-image:url("/images/pet/dino_eating_trsp.gif"); }
+
 /* PET STORE */
 .store-header {
-  border:1px solid blue;
+  background-color: #58497933;
+  border:1px solid #d8d8d8;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -74,16 +91,21 @@
 }
 
 .pet-store .items {
-  border:1px solid pink;
   height:80%;
   overflow-y: scroll;
+  padding:0 20px;
 }
 
 .pet-store .line-w {
-  border:1px solid red;
+  border:1px solid #d8d8d8;
   display: flex;
   justify-content: center;
   margin:10px 0;
+  padding:5px 0;
+}
+
+.pet-store .line-w:hover {
+  border:1px solid #7e5b61;
 }
 
 .pet-store .item-w {
@@ -109,6 +131,7 @@
   background-image:url("/images/pet/items.png"); /* 160px * 128px */
   background-size: calc(160px*2);
 }
+
 
 .bigCoin {
   display: inline-block;
