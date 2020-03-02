@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
-// import Keywords from "../components/Keywords";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { format } from 'date-fns';
 import Collapse from "../components/Collapse";
 import "../styles/tracker.css";
 
@@ -36,7 +36,8 @@ const TrackMood = () => {
 
   return (
     <div className="moodpage" style={{backgroundColor:"#fff"}}>
-      <h1>How are you feeling today?</h1>
+      <p className="date">{format(new Date(), "'Today is' PPPP")}</p>
+      <h1>How are you feeling?</h1>
       <form className="form" onSubmit={handleSubmit}>
         <img className="emoji" src={moodScale[sliderValue].moodState} />
         <div className="slidecontainer">

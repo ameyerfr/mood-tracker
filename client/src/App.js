@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import "bulma/css/bulma.css";
 
+import Navbar from "./components/Navbar";
 import Splash from "./views/Splash";
 import NotFound from "./views/NotFound";
 import TrackMood from "./views/TrackMood";
@@ -34,6 +35,7 @@ function App() {
       {isLoading ? null : (
         <div className="App">
           {/* <div className="container"> */}
+            <Navbar />
             <Switch>
               <Route exact path="/" component={Splash} />
               <Route path="/register" component={Register} />

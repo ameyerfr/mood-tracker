@@ -26,6 +26,27 @@
   align-items: center;
 }
 
+/* NAVBAR */
+
+.navbar {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.navbar a:nth-child(1) {
+  font-size: 22px;
+  color: #FF9AA2;
+}
+
+.navbar a:nth-child(3) {
+  font-size: 22px;
+  color: #C7CEEA;
+}
+
 /* DASHBOARD */
 .dashboard {
   width: 100vw;
