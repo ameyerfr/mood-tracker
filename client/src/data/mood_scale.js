@@ -9,8 +9,7 @@ module.exports = [
   {mood : 7, moodState : '/images/emotions/07.png', bgColor  : "#fed6bc"},
   {mood : 8, moodState : '/images/emotions/08.png', bgColor  : "#ffcbb7"},
   {mood : 9, moodState : '/images/emotions/09.png', bgColor  : "#ffc4b5"},
-  {mood : 10, moodState : '/images/emotions/10.png', bgColor  : "#ffb7b2"},
-  // etc
+  {mood : 10, moodState : '/images/emotions/10.png', bgColor  : "#ffb7b2"}
 ] // The index of the array is the mood value (0 to 10 => 11 states)
 
 // "#c7ceea", "#b2dbf0", "#abe6e5", "#b7ead9", "#d1eece", "#e2f0cb", "#f5e3c0",

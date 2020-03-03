@@ -17,19 +17,18 @@ module.exports = {
     "You’ll never find a rainbow if you’re looking down."
   ],
   greeting : [
-    "Nice to see you again !",
+    "Nice to see you again ${this.user}!",
     "I just woke up !",
     "Hi there ! How are you today ?",
     "Hi ${this.user}, I missed you !",
     "Hello ! Did you miss me ?",
     "Today is a brand new day !"
-
   ],
   thanks : [
     "Thank you very much, this is great !",
     "Nice ! A million thanks to you !",
     "You don't know how much you make me happy. Thanks !",
     "Thanks a lot !",
-    "Thank you !"
+    "Thank you ${this.user} !"
   ]
 }
