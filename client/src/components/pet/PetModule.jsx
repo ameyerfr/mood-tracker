@@ -11,7 +11,10 @@ const PetModule = () => {
   const { currentUser } = userContext;
 
   const [petData, setPetData] = useState({});
+  const [previousMsg, setPreviousMsg] = useState("");
   const [currentMsg, setCurrentMsg] = useState("");
+  const [requestingMsg, setRequestingMsg] = useState("Fetching pet...");
+  const [isRequesting, setIsRequesting] = useState(true);
   const [isStoreOpen, setIsStoreOpen] = useState(false);
   const [isTalking, setIsTalking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
@@ -20,20 +23,24 @@ const PetModule = () => {
 
   // First time, do an ajax request
   useEffect(() => {
-    const apiCall = async () => {
-      const apiRes = await APIHandler.get("/pet")
+    APIHandler.get("/pet").then((apiRes) => {
       console.log("Pet data : ", apiRes.data);
+
       setPetData(apiRes.data);
       setStageBasedOnExp(apiRes.data.exp)
-    }
-    apiCall();
+
+      setIsRequesting(false);
+
+    }).catch(err => {
+      setRequestingMsg("Unable to fetch pet!")
+      console.log("Error : ", err)
+    });
   }, []);
 
   // AJAX Request for PATCH of the pet with new Values
   const updatePet = (updatedValues, onPetUpdated) => {
     const newObject = {...petData}
     Object.assign(newObject, updatedValues)
-    console.log("NEW OBJECT : ", newObject);
 
     const apiCall = async () => {
       const apiRes = await APIHandler.patch("/pet", newObject)
@@ -148,7 +155,8 @@ const PetModule = () => {
   const getRandomMsg = (msgType, templateValues) => {
     let msgArr = petMessages[msgType];
     let randomMsg = templateString(msgArr[Math.floor(Math.random()*msgArr.length)], templateValues)
-    if ( randomMsg === currentMsg && msgArr.length > 1 ) { return getRandomMsg(msgType, templateValues) }
+    if ( randomMsg === previousMsg && msgArr.length > 1 ) { return getRandomMsg(msgType, templateValues) }
+    setPreviousMsg(randomMsg)
     return randomMsg;
   }
 
@@ -158,8 +166,7 @@ const PetModule = () => {
     setIsTalking(true);
 
     let user = (currentUser && currentUser.firstname) ? currentUser.firstname : 'NONAME';
-    let msgToDisplay = getRandomMsg(msgType, {user : user, name : petData.name})
-
+    let msgToDisplay = `${petData.name} : `.concat(getRandomMsg(msgType, {user : user, name : petData.name}))
 
     let msgIndex = 0;
     let newStr = '';
@@ -183,72 +190,76 @@ const PetModule = () => {
   return (
     <div className="petContainer">
 
-      {isStoreOpen ? (
-
-        <div className="pet-store">
-          <div className="store-header">
-            <span className="store-back" onClick={closeStore}></span>
-            <div className="flex-center-row">Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
-          </div>
-          <div className="items">
-
-            <div className="line-w">
-              <div className="item-w">
-                <div id="item-hpot" className="item hpot" onClick={(e) => onItemClick(e, 20)}></div>
-              </div>
-
-              <div className="itemStats">
-                <span className="itemEffect">+5HP</span>
-                <span className="itemCost"><span className="smallCoin"></span> x 20</span>
-              </div>
-            </div>
-
-            <div className="line-w">
-              <div className="item-w">
-                <div id="item-book" className="item book" onClick={(e) => onItemClick(e, 50)}></div>
-              </div>
-
-              <div className="itemStats">
-                <span className="itemEffect">+10XP</span>
-                <span className="itemCost"><div className="smallCoin"></div> x 50</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
+      { isRequesting ? (
+        <div className="pet-loader flex-center-column">{requestingMsg}</div>
       ) : (
-        <>
-        <div className="pet-infos">
-          <div className="health flex-center-column">
-            <div className="health-icon"></div>
-            {petData.hp}/100
-          </div>
-          <div className="store-w flex-center-column" onClick={onStoreClick}>
-            <div className="storeIcon"></div>
-          </div>
-          <div className="exp flex-center-column">
-            <div className="exp-icon">XP</div>
-            {petData.exp}
-          </div>
-        </div>
+        isStoreOpen ?
 
-        <div className="pet-playground">
-          { petStage <= 5 ? (
-            <div className={`pet egg ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
-                 onClick={onEggClick}>
+          <div className="pet-store">
+            <div className="store-header">
+              <span className="store-back" onClick={closeStore}></span>
+              <div className="flex-center-row">Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
             </div>
-          ) : (
-            <div className={`pet dino ${isJumping ? 'jumping' : ''} ${petState}`}
-                 onClick={onDinoClick}>
-            </div>
-          )}
-        </div>
+            <div className="items">
 
-        <div className="pet-message">
-          <span>{currentMsg}</span>
-        </div>
-        </>
+              <div className="line-w">
+                <div className="item-w">
+                  <div id="item-hpot" className="item hpot" onClick={(e) => onItemClick(e, 20)}></div>
+                </div>
+
+                <div className="itemStats">
+                  <span className="itemEffect">+5HP</span>
+                  <span className="itemCost"><span className="smallCoin"></span> x 20</span>
+                </div>
+              </div>
+
+              <div className="line-w">
+                <div className="item-w">
+                  <div id="item-book" className="item book" onClick={(e) => onItemClick(e, 50)}></div>
+                </div>
+
+                <div className="itemStats">
+                  <span className="itemEffect">+10XP</span>
+                  <span className="itemCost"><div className="smallCoin"></div> x 50</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        :
+          <>
+          <div className="pet-infos">
+            <div className="health flex-center-column">
+              <div className="health-icon"></div>
+              {petData.hp}/100
+            </div>
+            <div className="store-w flex-center-column" onClick={onStoreClick}>
+              <div className="storeIcon"></div>
+            </div>
+            <div className="exp flex-center-column">
+              <div className="exp-icon">XP</div>
+              {petData.exp}
+            </div>
+          </div>
+
+          <div className="pet-playground">
+            { petStage <= 5 ? (
+              <div className={`pet egg ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
+                   onClick={onEggClick}>
+              </div>
+            ) : (
+              <div className={`pet dino ${isJumping ? 'jumping' : ''} ${petState}`}
+                   onClick={onDinoClick}>
+              </div>
+            )}
+          </div>
+
+          <div className="pet-message">
+            <span>{currentMsg}</span>
+          </div>
+          </>
+
       )}
 
     </div>
