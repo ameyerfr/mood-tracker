@@ -19,6 +19,7 @@ const PetModule = () => {
   const [isTalking, setIsTalking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [petStage, setPetStage] = useState(0);
+  const [petStageName, setPetStageName] = useState("");
   const [petState, setPetState] = useState("idle");
 
   // First time, do an ajax request
@@ -78,6 +79,7 @@ const PetModule = () => {
     if ( stage > 6 ) { stage = 6; }
 
     setPetStage(stage);
+    setPetStageName(stage <= 5 ? 'egg' : 'dino');
   }
 
   const interactWithUserBasedOnExp = (exp, petName) => {
@@ -253,17 +255,17 @@ const PetModule = () => {
             </div>
           </div>
 
-          <div className="pet-playground">
-            { petStage <= 5 ? (
-              <div className={`pet egg ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
+          <div className={`pet-playground ${petStageName}`}>
+            { petStageName === 'egg' ? (
+              <div className={`pet ${petStageName} ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
                    onClick={onPetClick}>
               </div>
             ) : (
-              <div className={`pet dino ${isJumping ? 'jumping' : ''} ${petState}`}
+              <div className={`pet ${petStageName} ${isJumping ? 'jumping' : ''} ${petState}`}
                    onClick={onPetClick}>
               </div>
             )}
-            <div className="pet-shadow"></div>
+            <div className={`pet-shadow ${isJumping ? 'jumping' : '' }`}></div>
           </div>
 
           <div className="pet-message">
