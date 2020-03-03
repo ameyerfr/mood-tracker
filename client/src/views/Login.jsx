@@ -1,7 +1,6 @@
 import React from "react";
 import Signin from "../components/form/Signin";
 import AuthHeader from "../components/AuthHeader";
-import "../styles/hideNavbar.css";
 
 const Login = () => {
   return (
