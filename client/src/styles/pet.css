@@ -24,6 +24,11 @@
   padding:0 10px;
 }
 
+.pet-infos .health,
+.pet-infos .exp {
+  width:45px;
+}
+
 .pet-infos .health-icon {
   height:16px;
   width:16px;

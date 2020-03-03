@@ -28,13 +28,16 @@ const PetModule = () => {
 
       setPetData(apiRes.data);
       setStageBasedOnExp(apiRes.data.exp)
+      interactWithUserBasedOnExp(apiRes.data.exp, apiRes.data.name);
 
       setIsRequesting(false);
+
 
     }).catch(err => {
       setRequestingMsg("Unable to fetch pet!")
       console.log("Error : ", err)
     });
+
   }, []);
 
   // AJAX Request for PATCH of the pet with new Values
@@ -74,17 +77,22 @@ const PetModule = () => {
     // Maximum stage for now (Baby T-rex)
     if ( stage > 6 ) { stage = 6; }
 
-    // Baby Trex
     setPetStage(stage);
   }
 
-  // ON PET CLICK
-  const onEggClick = () => {
-    petJump(1);
-    displayRandomMsg('first_time')
+  const interactWithUserBasedOnExp = (exp, petName) => {
+
+    petJump(4);
+
+    if (exp === 0) {
+      displayRandomMsg('first_time', petName);
+    } else {
+      displayRandomMsg('greeting', petName);
+    }
   }
 
-  const onDinoClick = () => {
+  // ON PET CLICK
+  const onPetClick = () => {
     petJump(1);
     displayRandomMsg('cheer_up')
   }
@@ -160,13 +168,15 @@ const PetModule = () => {
     return randomMsg;
   }
 
-  const displayRandomMsg = (msgType) => {
+  const displayRandomMsg = (msgType, petName = 'Dino') => {
     if (isTalking) return;
     setPetState("talking")
     setIsTalking(true);
 
     let user = (currentUser && currentUser.firstname) ? currentUser.firstname : 'NONAME';
-    let msgToDisplay = `${petData.name} : `.concat(getRandomMsg(msgType, {user : user, name : petData.name}))
+    let pName = petData.name ? petData.name : petName;
+
+    let msgToDisplay = `${pName} : `.concat(getRandomMsg(msgType, {user : user, name : pName}))
 
     let msgIndex = 0;
     let newStr = '';
@@ -246,11 +256,11 @@ const PetModule = () => {
           <div className="pet-playground">
             { petStage <= 5 ? (
               <div className={`pet egg ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
-                   onClick={onEggClick}>
+                   onClick={onPetClick}>
               </div>
             ) : (
               <div className={`pet dino ${isJumping ? 'jumping' : ''} ${petState}`}
-                   onClick={onDinoClick}>
+                   onClick={onPetClick}>
               </div>
             )}
           </div>
