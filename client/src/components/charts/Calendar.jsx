@@ -26,15 +26,18 @@ const Calendar = ({ data }) => {
   const [fetchEndDate, setFetchEndDate] = useState(0);
 
   const [mood, setMood] = useState(0);
+
   useEffect(() => {
-    const moodByDate = APIHandler.get(
-      `/daymood/mood/${fetchStartDate}/${fetchEndDate}?`
-    )
+    updateFetch();
+  }, [currentDate]);
+
+  useEffect(() => {
+    APIHandler.get(`/daymood/mood/${fetchStartDate}/${fetchEndDate}?`)
       .then(moods => {
         setMood(moods.data);
       })
       .catch(err => console.log(err));
-  }, [currentDate]);
+  }, [fetchStartDate, fetchEndDate]);
 
   const header = () => {
     const dateFormat = "MMMM yyyy";
@@ -98,11 +101,11 @@ const Calendar = ({ data }) => {
         const cloneDay = day;
         days.push(
           <div
-            style={
-              moodScore
-                ? { backgroundColor: moodScale[moodScore].bgColor }
-                : { backgroundColor: "white" }
-            }
+            // style={
+            //   moodScore
+            //     ? { backgroundColor: /*moodScale[moodScore].bgColor*/ "white" }
+            //     : { backgroundColor: "white" }
+            // }
             className={`column cell ${
               !isSameMonth(day, monthStart)
                 ? "disabled"
@@ -118,9 +121,9 @@ const Calendar = ({ data }) => {
                 <img src={moodScale[moodScore].moodState} />
               </span>
             ) : (
-              <span className="number">{formattedDate}</span>
+              <span className="moodCell"></span>
             )}
-            <span className="bg">{formattedDate}</span>
+            <span className="date-number">{formattedDate}</span>
           </div>
         );
         day = addDays(day, 1);
@@ -151,10 +154,6 @@ const Calendar = ({ data }) => {
   const prevMonth = () => {
     setCurrentDate(subMonths(currentDate, 1));
   };
-
-  useEffect(() => {
-    updateFetch();
-  }, [currentDate]);
 
   const onDateClick = day => {
     setSelectedDate(day);

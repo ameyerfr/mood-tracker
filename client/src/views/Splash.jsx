@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/hideNavbar.css";
 
 const Splash = () => {
   return (

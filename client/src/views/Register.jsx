@@ -1,5 +1,6 @@
 import React from "react";
 import Signup from "../components/form/Signup";
+import "../styles/hideNavbar.css";
 
 const Register = () => {
   return (

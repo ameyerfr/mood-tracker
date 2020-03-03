@@ -1,5 +1,6 @@
 import React from "react";
 import Signin from "../components/form/Signin";
+import "../styles/hideNavbar.css";
 
 const Login = () => {
   return (
