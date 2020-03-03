@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const AddFriend = () => {
+
+  
+
   return (
     <div>
       <form>
@@ -25,7 +28,7 @@ const AddFriend = () => {
             <input
               className="input"
               type="email"
-              placeholder="Email input"
+              placeholder="Email"
               // onChange={}
               required
             />
@@ -37,7 +40,7 @@ const AddFriend = () => {
         <div className="btn-wrapper">
           <button
             type="button"
-            // onClick={handleClick}
+            // onClick={}
             className="btn-add"
           >
             <FontAwesomeIcon icon={faPlus} />

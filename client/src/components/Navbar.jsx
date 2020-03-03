@@ -20,7 +20,7 @@ const Navbar = () => {
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
       </NavLink>
       <NavLink className="navlinks" to="/dashboard">
-        TamaMOODchi
+        <img className="img-logo" src="/images/emotions/05.png" alt="logo"/>
       </NavLink>
       <NavLink className="navlinks" to="/profile">
         <FontAwesomeIcon icon={faUserCircle} />
