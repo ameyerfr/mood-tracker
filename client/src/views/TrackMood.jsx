@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
@@ -12,6 +13,7 @@ const TrackMood = () => {
   const [sliderValue, setSliderValue] = useState(5);
   const [colorValue, setColorValue] = useState("");
   const [tags, setTags] = useState([]);
+  const [btnClicked, setClicked] = useState(false);
 
   const updateTags = (val) => {
     setTags(val)
@@ -33,10 +35,20 @@ const TrackMood = () => {
      return moodScale[range].bgColor
   }
 
+  const handleClick = () => {
+    setClicked(true);
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
     const newMood = {tags: tags, intensity: sliderValue}
     APIHandler.post("/daymood/new", newMood)
+    .then(res => {
+      // disable button once submitted ?
+      handleClick()
+      // useHistory().push("/dashboard");
+    })
+    .catch(err => console.error(err))
   }
 
   return (
@@ -58,7 +70,14 @@ const TrackMood = () => {
         <Collapse 
           clbk={updateTags}
         />
-        <button style={{backgroundColor:colorValue}} className="btn-ok"><FontAwesomeIcon icon={faCheck} /></button>
+        <button
+          style={btnClicked ? {backgroundColor: "#333"} : {backgroundColor:colorValue}}
+          className= "btn-ok"
+          onClick={btnClicked ? undefined : handleClick}
+          disabled={btnClicked}
+        >
+          <FontAwesomeIcon icon={faCheck} />
+        </button>
       </form>
       
     </div>
