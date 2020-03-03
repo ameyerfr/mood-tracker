@@ -1,9 +1,9 @@
 /* LAYOUT */
 .petContainer {
-  font-family: "RPGSystem";
+  /* font-family: "RPGSystem"; */
   image-rendering:pixelated;
   height: 100%;
-  border:1px solid #d8d8d8;
+  /* border:1px solid #d8d8d8; */
   border-radius: 5px;
 }
 
