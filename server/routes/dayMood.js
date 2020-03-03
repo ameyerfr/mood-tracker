@@ -31,6 +31,7 @@ router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
       // We increase the pet stats
       const pet = await petModel.findOne({ owner : req.user._id })
       pet.hp += 20;
+      if (pet.hp > 100) { pet.hp = 100; }
       pet.exp += 10;
       pet.ownerCredits += 100;
       await pet.save();
