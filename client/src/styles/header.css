@@ -1,0 +1,8 @@
+.authheader {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 50px 0;
+    border-bottom: 1px solid rgb(206, 205, 205);
+}

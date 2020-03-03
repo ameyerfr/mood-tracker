@@ -19,6 +19,7 @@ const PetModule = () => {
   const [isTalking, setIsTalking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [petStage, setPetStage] = useState(0);
+  const [petStageName, setPetStageName] = useState("");
   const [petState, setPetState] = useState("idle");
 
   // First time, do an ajax request
@@ -28,13 +29,16 @@ const PetModule = () => {
 
       setPetData(apiRes.data);
       setStageBasedOnExp(apiRes.data.exp)
+      interactWithUser(apiRes.data.exp, apiRes.data.hp, apiRes.data.name);
 
       setIsRequesting(false);
+
 
     }).catch(err => {
       setRequestingMsg("Unable to fetch pet!")
       console.log("Error : ", err)
     });
+
   }, []);
 
   // AJAX Request for PATCH of the pet with new Values
@@ -51,6 +55,9 @@ const PetModule = () => {
       setStageBasedOnExp(apiRes.data.exp)
 
       closeStore();
+
+      // Dont show appreciation if HP still 0
+      if (apiRes.data.hp === 0) { return; }
 
       petJump(2);
       displayRandomMsg('thanks');
@@ -74,17 +81,33 @@ const PetModule = () => {
     // Maximum stage for now (Baby T-rex)
     if ( stage > 6 ) { stage = 6; }
 
-    // Baby Trex
     setPetStage(stage);
+    setPetStageName(stage <= 5 ? 'egg' : 'dino');
+  }
+
+  const interactWithUser = (exp, hp, petName) => {
+
+    if (hp === 0) {
+      setPetState("sleeping");
+      setCurrentMsg("Your pet is hibernating. Track your mood or give him food to wake him up !")
+      return;
+    }
+
+    petJump(4);
+
+    if (exp === 0) {
+      displayRandomMsg('first_time', petName);
+    } else {
+      displayRandomMsg('greeting', petName);
+    }
   }
 
   // ON PET CLICK
-  const onEggClick = () => {
-    petJump(1);
-    displayRandomMsg('first_time')
-  }
+  const onPetClick = () => {
 
-  const onDinoClick = () => {
+    // No interactions if sleeping
+    if(petState === 'sleeping') { return; }
+
     petJump(1);
     displayRandomMsg('cheer_up')
   }
@@ -160,13 +183,15 @@ const PetModule = () => {
     return randomMsg;
   }
 
-  const displayRandomMsg = (msgType) => {
+  const displayRandomMsg = (msgType, petName = 'Dino') => {
     if (isTalking) return;
     setPetState("talking")
     setIsTalking(true);
 
     let user = (currentUser && currentUser.firstname) ? currentUser.firstname : 'NONAME';
-    let msgToDisplay = `${petData.name} : `.concat(getRandomMsg(msgType, {user : user, name : petData.name}))
+    let pName = petData.name ? petData.name : petName;
+
+    let msgToDisplay = `${pName} : `.concat(getRandomMsg(msgType, {user : user, name : pName}))
 
     let msgIndex = 0;
     let newStr = '';
@@ -188,7 +213,7 @@ const PetModule = () => {
   }
 
   return (
-    <div className="petContainer">
+    <div className="petContainer shadow">
 
       { isRequesting ? (
         <div className="pet-loader flex-center-column">{requestingMsg}</div>
@@ -243,16 +268,18 @@ const PetModule = () => {
             </div>
           </div>
 
-          <div className="pet-playground">
-            { petStage <= 5 ? (
-              <div className={`pet egg ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
-                   onClick={onEggClick}>
+          <div className={`pet-playground ${petStageName}`}>
+            <div className={`pet-sleeping ${petState === 'sleeping' ? '' : 'is-hidden'}`}></div>
+            { petStageName === 'egg' ? (
+              <div className={`pet ${petStageName} ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
+                   onClick={onPetClick}>
               </div>
             ) : (
-              <div className={`pet dino ${isJumping ? 'jumping' : ''} ${petState}`}
-                   onClick={onDinoClick}>
+              <div className={`pet ${petStageName} ${isJumping ? 'jumping' : ''} ${petState}`}
+                   onClick={onPetClick}>
               </div>
             )}
+            <div className={`pet-shadow ${isJumping ? 'jumping' : '' }`}></div>
           </div>
 
           <div className="pet-message">

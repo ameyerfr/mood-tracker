@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import "bulma/css/bulma.css";
 
 import Navbar from "./components/Navbar";
@@ -10,7 +10,6 @@ import Stats from "./views/Stats";
 import Register from "./views/Register";
 import Login from "./views/Login";
 import Profile from "./views/Profile";
-import Pet from "./views/Pet";
 import Dashboard from "./views/Dashboard";
 import Contacts from "./views/Contacts";
 
@@ -19,7 +18,7 @@ import { useAuth } from "./auth/useAuth";
 import UserContext from "./auth/UserContext";
 //import { ProtectedRoute } from "./auth/ProtectedRoute";
 
-function App() {
+function App({ location }) {
   const { isLoading } = useAuth();
   const [currentUser, setCurrentUser] = useState({});
 
@@ -31,11 +30,16 @@ function App() {
   };
 
   return (
+
     <UserContext.Provider value={UserContextValue}>
       {isLoading ? null : (
         <div className="App">
-          {/* <div className="container"> */}
-          <Navbar />
+          {
+            location.pathname != "/login" 
+            && location.pathname != "/register" 
+            && location.pathname != "/"
+            && <Navbar />
+          }
           <Switch>
             <Route exact path="/" component={Splash} />
             <Route path="/register" component={Register} />
@@ -44,14 +48,12 @@ function App() {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/daymood/new" component={TrackMood} />
             <Route path="/stats" component={Stats} />
-            <Route path="/pet" component={Pet} />
             <Route path="*" component={NotFound} />
           </Switch>
-          {/* </div> */}
         </div>
       )}
     </UserContext.Provider>
   );
 }
 
-export default App;
+export default withRouter(App);

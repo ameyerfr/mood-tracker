@@ -75,7 +75,7 @@ export default withRouter(function Signin(props) {
       </div>
       <p className="parag">
         No account yet ?{" "}
-        <Link to="/login" className="link">
+        <Link to="/register" className="link">
           Register
         </Link>
       </p>

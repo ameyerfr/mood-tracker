@@ -3,12 +3,19 @@
 .form-page {
     width: 100vw;
     height: 100vh;
-    padding: 20px;
+    padding: 0;
     font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form-page p.parag {
     font-size: 15px;
+}
+
+.form-wrapper {
+    padding: 30px;
 }
 
 /* PROFILE */
@@ -23,6 +30,7 @@
 }
 
 .input {
+    width: 300px;
     border-radius: 20px;
     padding: 0 8px;
 }
@@ -36,6 +44,7 @@
 }
 
 .btn-submit {
+    margin: 8px 0;
     background-color: #b5ead7;
     border: 1px solid #333;
 }
