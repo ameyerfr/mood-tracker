@@ -1,7 +1,23 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const petNamesList = ["Cubzero", "Pengliff", "Cowatti"]
+const petNamesList = [
+  "Archie",
+  "Barney",
+  "Betty",
+  "Bernadette",
+  "Bob",
+  "Fergus",
+  "Gary",
+  "Kevin",
+  "Larry",
+  "Lloyd",
+  "Matilda",
+  "Olga",
+  "Pam",
+  "Rufus"
+]
+
 const getRandomName = () => {
   return petNamesList[Math.floor(Math.random()*petNamesList.length)]
 }

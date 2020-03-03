@@ -1,23 +1,46 @@
 const express = require("express");
 const router = new express.Router();
 const dayMoodModel = require("../models/DayMood.model");
+const petModel = require("../models/Pet.model");
 const checkUserAuth = require("../middlewares/checkUserAuth");
+const dateFns = require("date-fns");
 
 // Create a new entry
 router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
-  const newMood = {k_good: req.body.tags.positive, k_bad: req.body.tags.negative, mood: req.body.intensity}
-  console.log(newMood)
+
+  const newMood = {  owner : req.user._id,
+                     k_good: req.body.tags.positive,
+                     k_bad: req.body.tags.negative,
+                     mood: req.body.intensity }
+
+  console.log("NEW MOOD OBJECT : ", newMood);
+
+  // Check for previous entry
+  // We make it impossible to make an entry twice.
+  const moodOfDay = await dayMoodModel.findOne({ owner : req.user._id,
+                                                 day : dateFns.format(Date.now(), "yyyyMMdd") });
+  if ( moodOfDay ) {
+    return res.status(409).json({ msg: 'Mood of the day already exists for this owner/day' });
+  }
+
   dayMoodModel
     .create(newMood)
-    .then(newMood => {
+    .then(async (newMood) => {
+
+      // When we input the mood of the day
+      // We increase the pet stats
+      const pet = await petModel.findOne({ owner : req.user._id })
+      pet.hp += 20;
+      pet.exp += 10;
+      pet.ownerCredits += 100;
+      await pet.save();
+
       res.status(200).json(newMood);
+
     })
     .catch(err => {
       res.status(500).json({ msg: err });
     });
-  // TODO new daymood object
-  // day : new Date()
-  // dayMoodModel.create({})
 });
 
 // Get all the data for a Date range (for the logged in user)
