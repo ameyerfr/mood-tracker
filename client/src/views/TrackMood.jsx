@@ -41,7 +41,6 @@ const TrackMood = ({history}) => {
     APIHandler.post("/daymood/new", newMood)
     .then(res => {
       // disable button once submitted ?
-      handleClick()
       history.push("/dashboard");
     })
     .catch(err => console.error(err))

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const AuthHeader = () => {
     return (
         <div className="authheader">
-            <Link exact to="/">TamaMoodchi</Link>
+            <Link to="/">TamaMoodchi</Link>
         </div>
     )
 }
