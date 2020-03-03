@@ -1,6 +1,7 @@
 import React from "react";
 import Signup from "../components/form/Signup";
 import AuthHeader from "../components/AuthHeader";
+import "../styles/hideNavbar.css";
 
 const Register = () => {
   return (
