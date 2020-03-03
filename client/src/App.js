@@ -35,18 +35,18 @@ function App() {
       {isLoading ? null : (
         <div className="App">
           {/* <div className="container"> */}
-            <Navbar />
-            <Switch>
-              <Route exact path="/" component={Splash} />
-              <Route path="/register" component={Register} />
-              <Route path="/login" component={Login} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/daymood/new" component={TrackMood} />
-              <Route path="/stats" component={Stats} />
-              <Route path="/pet" component={Pet} />
-              <Route path="*" component={NotFound} />
-            </Switch>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Splash} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/daymood/new" component={TrackMood} />
+            <Route path="/stats" component={Stats} />
+            <Route path="/pet" component={Pet} />
+            <Route path="*" component={NotFound} />
+          </Switch>
           {/* </div> */}
         </div>
       )}
