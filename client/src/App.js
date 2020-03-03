@@ -10,7 +10,6 @@ import Stats from "./views/Stats";
 import Register from "./views/Register";
 import Login from "./views/Login";
 import Profile from "./views/Profile";
-import Pet from "./views/Pet";
 import Dashboard from "./views/Dashboard";
 import Contacts from "./views/Contacts";
 
@@ -49,7 +48,6 @@ function App({ location }) {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/daymood/new" component={TrackMood} />
             <Route path="/stats" component={Stats} />
-            <Route path="/pet" component={Pet} />
             <Route path="*" component={NotFound} />
           </Switch>
         </div>

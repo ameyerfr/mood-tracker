@@ -31,6 +31,7 @@ router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
       // We increase the pet stats
       const pet = await petModel.findOne({ owner : req.user._id })
       pet.hp += 20;
+      if (pet.hp > 100) { pet.hp = 100; }
       pet.exp += 10;
       pet.ownerCredits += 100;
       await pet.save();
@@ -46,12 +47,13 @@ router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
 // Get all the data for a Date range (for the logged in user)
 // range exemple : /daymood/20200101/20200227 (from 01 Jan 2020 to 27 Feb 2020, all inclusive)
 // specific day exemple : /daymood/20200227 (for 27 Feb 2020)
+// If no start / end is passed, it gives back the mood of the day
 router.get(
-  "/daymood/:startDate/:endDate?",
+  "/daymood/:startDate?/:endDate?",
   checkUserAuth,
   async (req, res, next) => {
     try {
-      startDate = Number(req.params.startDate);
+      startDate = !!req.params.startDate ? Number(req.params.startDate) : Number(dateFns.format(Date.now(), "yyyyMMdd"))
       endDate = !!req.params.endDate ? Number(req.params.endDate) : startDate;
       res.json(
         await dayMoodModel.find({
