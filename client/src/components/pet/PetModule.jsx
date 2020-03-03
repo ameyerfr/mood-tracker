@@ -29,7 +29,7 @@ const PetModule = () => {
 
       setPetData(apiRes.data);
       setStageBasedOnExp(apiRes.data.exp)
-      interactWithUserBasedOnExp(apiRes.data.exp, apiRes.data.name);
+      interactWithUser(apiRes.data.exp, apiRes.data.hp, apiRes.data.name);
 
       setIsRequesting(false);
 
@@ -55,6 +55,9 @@ const PetModule = () => {
       setStageBasedOnExp(apiRes.data.exp)
 
       closeStore();
+
+      // Dont show appreciation if HP still 0
+      if (apiRes.data.hp === 0) { return; }
 
       petJump(2);
       displayRandomMsg('thanks');
@@ -82,7 +85,13 @@ const PetModule = () => {
     setPetStageName(stage <= 5 ? 'egg' : 'dino');
   }
 
-  const interactWithUserBasedOnExp = (exp, petName) => {
+  const interactWithUser = (exp, hp, petName) => {
+
+    if (hp === 0) {
+      setPetState("sleeping");
+      setCurrentMsg("Your pet is hibernating. Track your mood or give him food to wake him up !")
+      return;
+    }
 
     petJump(4);
 
@@ -95,6 +104,10 @@ const PetModule = () => {
 
   // ON PET CLICK
   const onPetClick = () => {
+
+    // No interactions if sleeping
+    if(petState === 'sleeping') { return; }
+
     petJump(1);
     displayRandomMsg('cheer_up')
   }
@@ -256,6 +269,7 @@ const PetModule = () => {
           </div>
 
           <div className={`pet-playground ${petStageName}`}>
+            <div className={`pet-sleeping ${petState === 'sleeping' ? '' : 'is-hidden'}`}></div>
             { petStageName === 'egg' ? (
               <div className={`pet ${petStageName} ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
                    onClick={onPetClick}>

@@ -46,7 +46,7 @@
 
 .petContainer .pet-playground {
   position: relative;
-  background-image:url("/images/pet/backgrounds/Green.png");
+  background-image:url("/images/pet/backgrounds/Orange_2.jpg");
   background-size: 10%;
   height: 60%;
   display: flex;
@@ -72,6 +72,15 @@
 .pet-playground.dino .pet-shadow {
   bottom:-35px;
   left:33%;
+}
+
+.pet-playground .pet-sleeping {
+  position: absolute;
+  background-image:url("/images/pet/zzz-trsp.gif");
+  background-size: 150px;
+  width: 150px;
+  height: 110px;
+  z-index: 3;
 }
 
 
@@ -136,9 +145,10 @@
 .pet.dino {
   width:175px;
   height:175px;
+  background-image:url("/images/pet/dino_idle_trsp.png");
 }
 
-.pet.dino.idle { background-image:url("/images/pet/dino_idle_trsp.png"); }
+.pet.dino.sleeping { background-image:url("/images/pet/dino_sleeping_trsp.png"); }
 .pet.dino.talking { background-image:url("/images/pet/dino_talking_trsp.png"); }
 .pet.dino.eating { background-image:url("/images/pet/dino_eating_trsp.gif"); }
 

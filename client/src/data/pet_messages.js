@@ -30,5 +30,6 @@ module.exports = {
     "You don't know how much you make me happy. Thanks !",
     "Thanks a lot !",
     "Thank you ${this.user} !"
-  ]
+  ],
+  sleeping : ["Zzz... zzz... zzz..."]
 }
