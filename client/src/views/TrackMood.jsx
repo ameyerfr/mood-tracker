@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faFastForward } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
 import Collapse from "../components/Collapse";
 import "../styles/tracker.css";
@@ -14,6 +14,8 @@ const TrackMood = () => {
   const [colorValue, setColorValue] = useState("");
   const [tags, setTags] = useState([]);
   const [btnClicked, setClicked] = useState(false);
+
+  const history = useHistory();
 
   const updateTags = (val) => {
     setTags(val)
@@ -46,7 +48,7 @@ const TrackMood = () => {
     .then(res => {
       // disable button once submitted ?
       handleClick()
-      // useHistory().push("/dashboard");
+      history.push("/dashboard");
     })
     .catch(err => console.error(err))
   }
@@ -71,12 +73,12 @@ const TrackMood = () => {
           clbk={updateTags}
         />
         <button
-          style={btnClicked ? {backgroundColor: "#333"} : {backgroundColor:colorValue}}
+          style={btnClicked ? {backgroundColor: "#fff", borderColor:colorValue} : {backgroundColor:colorValue}}
           className= "btn-ok"
           onClick={btnClicked ? undefined : handleClick}
           disabled={btnClicked}
         >
-          <FontAwesomeIcon icon={faCheck} />
+          {btnClicked ? "Saved !" : <FontAwesomeIcon icon={faCheck} />}
         </button>
       </form>
       
