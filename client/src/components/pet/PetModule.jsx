@@ -198,7 +198,7 @@ const PetModule = () => {
   }
 
   return (
-    <div className="petContainer">
+    <div className="petContainer shadow">
 
       { isRequesting ? (
         <div className="pet-loader flex-center-column">{requestingMsg}</div>
@@ -263,6 +263,7 @@ const PetModule = () => {
                    onClick={onPetClick}>
               </div>
             )}
+            <div className="pet-shadow"></div>
           </div>
 
           <div className="pet-message">
