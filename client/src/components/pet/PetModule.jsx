@@ -19,6 +19,7 @@ const PetModule = () => {
   const [isTalking, setIsTalking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [petStage, setPetStage] = useState(0);
+  const [petStageName, setPetStageName] = useState("");
   const [petState, setPetState] = useState("idle");
 
   // First time, do an ajax request
@@ -28,7 +29,7 @@ const PetModule = () => {
 
       setPetData(apiRes.data);
       setStageBasedOnExp(apiRes.data.exp)
-      interactWithUserBasedOnExp(apiRes.data.exp, apiRes.data.name);
+      interactWithUser(apiRes.data.exp, apiRes.data.hp, apiRes.data.name);
 
       setIsRequesting(false);
 
@@ -55,6 +56,9 @@ const PetModule = () => {
 
       closeStore();
 
+      // Dont show appreciation if HP still 0
+      if (apiRes.data.hp === 0) { return; }
+
       petJump(2);
       displayRandomMsg('thanks');
 
@@ -78,9 +82,16 @@ const PetModule = () => {
     if ( stage > 6 ) { stage = 6; }
 
     setPetStage(stage);
+    setPetStageName(stage <= 5 ? 'egg' : 'dino');
   }
 
-  const interactWithUserBasedOnExp = (exp, petName) => {
+  const interactWithUser = (exp, hp, petName) => {
+
+    if (hp === 0) {
+      setPetState("sleeping");
+      setCurrentMsg("Your pet is hibernating. Track your mood or give him food to wake him up !")
+      return;
+    }
 
     petJump(4);
 
@@ -93,6 +104,10 @@ const PetModule = () => {
 
   // ON PET CLICK
   const onPetClick = () => {
+
+    // No interactions if sleeping
+    if(petState === 'sleeping') { return; }
+
     petJump(1);
     displayRandomMsg('cheer_up')
   }
@@ -253,17 +268,18 @@ const PetModule = () => {
             </div>
           </div>
 
-          <div className="pet-playground">
-            { petStage <= 5 ? (
-              <div className={`pet egg ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
+          <div className={`pet-playground ${petStageName}`}>
+            <div className={`pet-sleeping ${petState === 'sleeping' ? '' : 'is-hidden'}`}></div>
+            { petStageName === 'egg' ? (
+              <div className={`pet ${petStageName} ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
                    onClick={onPetClick}>
               </div>
             ) : (
-              <div className={`pet dino ${isJumping ? 'jumping' : ''} ${petState}`}
+              <div className={`pet ${petStageName} ${isJumping ? 'jumping' : ''} ${petState}`}
                    onClick={onPetClick}>
               </div>
             )}
-            <div className="pet-shadow"></div>
+            <div className={`pet-shadow ${isJumping ? 'jumping' : '' }`}></div>
           </div>
 
           <div className="pet-message">

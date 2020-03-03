@@ -45,7 +45,8 @@
 .pet-infos .storeIcon:hover { cursor: pointer; }
 
 .petContainer .pet-playground {
-  background-image:url("/images/pet/backgrounds/Green.png");
+  position: relative;
+  background-image:url("/images/pet/backgrounds/Orange_2.jpg");
   background-size: 10%;
   height: 60%;
   display: flex;
@@ -54,11 +55,34 @@
   align-items: center;
 }
 
-.pet-playground .pet-shadow {
-  height:20px;
-  width:20px;
-  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 15%);
+.pet-playground .pet {
+  z-index: 2;
 }
+
+.pet-playground .pet-shadow {
+  z-index: 1;
+  position: absolute;
+  bottom: 0px;
+  height:120px;
+  width:120px;
+  background: radial-gradient(circle, rgb(60, 60, 60) 0%, rgba(0,0,0,0) 50%);
+  transform: scaleY(-0.3) scaleX(1);
+}
+
+.pet-playground.dino .pet-shadow {
+  bottom:-35px;
+  left:33%;
+}
+
+.pet-playground .pet-sleeping {
+  position: absolute;
+  background-image:url("/images/pet/zzz-trsp.gif");
+  background-size: 150px;
+  width: 150px;
+  height: 110px;
+  z-index: 3;
+}
+
 
 .petContainer .pet-message {
   border-radius: 0 0 5px 5px;
@@ -84,6 +108,21 @@
   animation-timing-function: cubic-bezier(0.89, 0.33, 0.44, 1.24);
 }
 
+@keyframes shadowjump {
+        0%   { transform: scaleY(-0.3) scaleX(1); }
+        20%  { transform: scaleY(-0.3) scaleX(0.8); }
+        50%  { transform: scaleY(-0.3) scaleX(1.1); }
+        70%  { transform: scaleY(-0.3) scaleX(1); }
+        100% { transform: scaleY(-0.3) scaleX(1); }
+}
+
+.pet-playground .pet-shadow.jumping {
+  animation-name: shadowjump;
+  animation-duration:1s;
+  animation-iteration-count: infinite;
+  /* animation-timing-function: cubic-bezier(0.89, 0.33, 0.44, 1.24); */
+}
+
 /* DINO EGG */
 
 .petContainer .pet.egg {
@@ -106,9 +145,10 @@
 .pet.dino {
   width:175px;
   height:175px;
+  background-image:url("/images/pet/dino_idle_trsp.png");
 }
 
-.pet.dino.idle { background-image:url("/images/pet/dino_idle_trsp.png"); }
+.pet.dino.sleeping { background-image:url("/images/pet/dino_sleeping_trsp.png"); }
 .pet.dino.talking { background-image:url("/images/pet/dino_talking_trsp.png"); }
 .pet.dino.eating { background-image:url("/images/pet/dino_eating_trsp.gif"); }
 
