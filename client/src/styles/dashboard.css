@@ -8,8 +8,8 @@
     height: 300px;
     margin-bottom: 10px;
     box-shadow: 0px 10px 14px -7px #899599;
-    border: 1px solid #333;
-    border-radius: 20px;
+    /* border: 1px solid #333; */
+    /* border-radius: 20px; */
 }
 
 .dashlink-wrapper {
