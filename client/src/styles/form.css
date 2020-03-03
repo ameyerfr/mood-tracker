@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+.form-page .title {
+    font-size: 25px;
+}
+
 .form-page p.parag {
     font-size: 15px;
 }

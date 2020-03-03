@@ -1,0 +1,25 @@
+/* NAVBAR */
+
+.navbar {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.navlinks {
+    color: #333;
+}
+
+.navbar a:nth-child(1) {
+    color: #ff9aa2;
+    font-size: 26px;
+}
+
+.navbar a:nth-child(3) {
+    color: #c7ceea;
+    font-size: 26px;
+}

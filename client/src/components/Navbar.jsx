@@ -6,6 +6,8 @@ import {
   faUserCircle
 } from "@fortawesome/free-solid-svg-icons";
 
+import "../styles/navbar.css";
+
 const Navbar = () => {
 
   return (
