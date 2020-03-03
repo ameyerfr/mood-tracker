@@ -1,0 +1,34 @@
+.contacts-page {
+    width: 100vw;
+    height: 100vh;
+    padding: 30px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #000;
+    font-size: 14px;
+}
+
+.contacts-page h1 {
+    font-size: 22px;
+}
+
+.contacts-page form {
+    margin: 20px 0;
+
+}
+
+.contacts-page .btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contacts-page .btn-add {
+    margin-top: 10px;
+    padding: 8px 20px;
+    background-color: #FFDAC1;
+    border: 1px solid #FFDAC1;
+}
+

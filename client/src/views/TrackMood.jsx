@@ -32,13 +32,12 @@ const TrackMood = ({ history }) => {
   }
 
   const handleSubmit = e => {
-    setClicked(true);
+    setClicked(true); // disables button once clicked
     e.preventDefault();
     const newMood = {tags: tags, intensity: sliderValue}
     APIHandler.post("/daymood/new", newMood)
     .then(res => {
-      // disable button once submitted ?
-      history.push("/dashboard");
+      history.push("/dashboard"); // redirects to dashboard
     })
     .catch(err => console.error(err))
   }

@@ -35,9 +35,9 @@ function App({ location }) {
       {isLoading ? null : (
         <div className="App">
           {
-            location.pathname != "/login" 
+            location.pathname != "/" 
             && location.pathname != "/register" 
-            && location.pathname != "/"
+            && location.pathname != "/login"
             && <Navbar />
           }
           <Switch>
@@ -48,6 +48,7 @@ function App({ location }) {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/daymood/new" component={TrackMood} />
             <Route path="/stats" component={Stats} />
+            <Route path="/buddies" component={Contacts} />
             <Route path="*" component={NotFound} />
           </Switch>
         </div>

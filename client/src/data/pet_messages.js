@@ -19,7 +19,7 @@ module.exports = {
   greeting : [
     "Nice to see you again ${this.user}!",
     "I just woke up !",
-    "Hi there ! How are you today ?",
+    "Hi there ${this.user} ! How are you today ?",
     "Hi ${this.user}, I missed you !",
     "Hello ! Did you miss me ?",
     "Today is a brand new day !"
