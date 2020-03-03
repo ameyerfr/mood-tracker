@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Splash = () => {
   return (
@@ -7,8 +8,8 @@ const Splash = () => {
       <p>Never feel alone with TamaMOODchi</p>
       {/* <img className="splash-img" src="/images/emotions/09.png" /> */}
       {/* <img className="splash-img" src="/images/pet/egg_evolution.png" /> */}
-      <button className="btn-splash">Register</button>
-      <button className="btn-splash">Login</button>
+      <Link to="/register"><button className="btn-splash">Register</button></Link>
+      <Link to="/login"><button className="btn-splash">Login</button></Link>
     </div>
   );
 };

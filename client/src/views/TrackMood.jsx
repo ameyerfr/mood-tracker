@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faFastForward } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
-import Collapse from "../components/Collapse";
+import Collapse from "../components/tracker/Collapse";
 import "../styles/tracker.css";
 
 import moodScale from "../data/mood_scale";
