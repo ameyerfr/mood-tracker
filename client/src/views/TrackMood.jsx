@@ -9,7 +9,7 @@ import "../styles/tracker.css";
 import moodScale from "../data/mood_scale";
 import APIHandler from "../api/APIHandler";
 
-const TrackMood = ({history}) => {
+const TrackMood = ({ history }) => {
   const [sliderValue, setSliderValue] = useState(5);
   const [colorValue, setColorValue] = useState("");
   const [tags, setTags] = useState([]);
@@ -31,11 +31,8 @@ const TrackMood = ({history}) => {
      return moodScale[range].bgColor
   }
 
-  const handleClick = () => {
-    setClicked(true);
-  }
-
   const handleSubmit = e => {
+    setClicked(true);
     e.preventDefault();
     const newMood = {tags: tags, intensity: sliderValue}
     APIHandler.post("/daymood/new", newMood)
@@ -68,7 +65,6 @@ const TrackMood = ({history}) => {
         <button
           style={btnClicked ? {backgroundColor: "#fff", borderColor:colorValue} : {backgroundColor:colorValue}}
           className= "btn-ok"
-          onClick={btnClicked ? undefined : handleClick}
           disabled={btnClicked}
         >
           {btnClicked ? "Saved !" : <FontAwesomeIcon icon={faCheck} />}
