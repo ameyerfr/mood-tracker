@@ -198,7 +198,7 @@ const PetModule = () => {
               </div>
 
               <div className="itemStats">
-                <span className="itemEffect">+20HP</span>
+                <span className="itemEffect">+5HP</span>
                 <span className="itemCost"><span className="smallCoin"></span> x 20</span>
               </div>
             </div>
