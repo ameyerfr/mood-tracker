@@ -269,6 +269,7 @@ const PetModule = () => {
           </div>
 
           <div className={`pet-playground ${petStageName}`}>
+            <div className="pet-w">
             <div className={`pet-sleeping ${petState === 'sleeping' ? '' : 'is-hidden'}`}></div>
             { petStageName === 'egg' ? (
               <div className={`pet ${petStageName} ${isJumping ? 'jumping' : ''} ${petState} es${petStage}`}
@@ -280,6 +281,7 @@ const PetModule = () => {
               </div>
             )}
             <div className={`pet-shadow ${isJumping ? 'jumping' : '' }`}></div>
+            </div>
           </div>
 
           <div className="pet-message">
