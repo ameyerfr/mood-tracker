@@ -46,7 +46,7 @@ const KeyFeatures = () => {
             </div>
             <div className="flex-center-row features-box">
               <p className="splash-text">
-                Understand your mood triggers with cute charts
+                Understand your mood triggers with bubble charts
               </p>
               <img className="splash-img" src="/images/emotions/08.png" />
             </div>
