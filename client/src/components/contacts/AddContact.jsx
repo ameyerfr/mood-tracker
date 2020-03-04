@@ -19,9 +19,7 @@ const AddContact = ({clbk}) => {
 
   return (
     <>
-    <h2>Add Buddy</h2>
-
-    <form>
+    <form className="round-input">
         <div className="field">
           <label className="label">Name</label>
           <div className="control">
