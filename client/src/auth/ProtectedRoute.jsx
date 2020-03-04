@@ -18,6 +18,6 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
     <Route {...rest} render={props => <Component {...props} />} />
   ) : (
     // if not logged in redirect to signin
-    <Redirect to="/signin" />
+    <Redirect to="/login" />
   );
 };
