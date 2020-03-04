@@ -30,46 +30,46 @@ async function seedTheMFDB() {
     const mood = await dayMoodModel.create([
       {
         owner: user._id,
-        day: 20200128,
+        day: 20200228,
         mood: 3,
         k_good: ["beer", "sunny", "nap"],
         k_bad: ["work", "tired", "kids"]
       },
       {
         owner: user._id,
-        day: 20200129,
+        day: 20200229,
         mood: 8,
         k_good: ["beer", "sunny", "nap", "wine", "food"],
         k_bad: ["rain"]
       },
       {
         owner: user._id,
-        day: 20200130,
+        day: 20200301,
         mood: 1,
         k_bad: ["work", "tired", "kids", "rain", "hangover"]
       },
       {
         owner: user._id,
-        day: 20200131,
+        day: 20200302,
         mood: 6,
         k_good: ["beer", "wine", "pizza"],
         k_bad: ["rain"]
       },
       {
         owner: user._id,
-        day: 20200201,
+        day: 20200303,
         mood: 3,
         k_good: ["beer"],
         k_bad: ["boss", "hangover", "rain", "lazy"]
       },
       {
         owner: user._id,
-        day: 20200202,
+        day: 20200304,
         mood: 5
       },
       {
         owner: user._id,
-        day: 20200203,
+        day: 20200305,
         mood: 9,
         k_good: ["beer", "holidays", "nap", "pizza"]
       }

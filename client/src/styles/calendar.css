@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
+:root {
+    --main-color: #ffcbb7;
+}
+
 .icon {
     font-family: 'Material Icons', serif;
     font-style: normal;
@@ -53,7 +57,7 @@ header {
     position: relative;
     width: 100%;
     background: white;
-    border: 1px solid lightgray;
+    border: 1px solid var(--main-color);
     height: auto;
     margin: 0 auto;
     color: #777;
@@ -64,13 +68,15 @@ header {
     font-weight: 700;
     font-size: 115%;
     padding: 1.5em 0;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid var(--main-color);
+    background-color: var(--main-color);
+    color: #FFF;
 }
 
 .calendar .header .icon {
     cursor: pointer;
     /* transition: .15s ease-out; */
-    color: #ffdac1;
+    /*     color: #ffb7b2; */
     font-size: 40px;
     text-indent: -8px;
     position: relative;
@@ -93,7 +99,7 @@ header {
 .calendar .days {
     text-transform: uppercase;
     font-weight: 400;
-    color: gray;
+    color: var(--main-color);
     font-size: 70%;
     padding: .75em 0;
     border-bottom: 1px solid lightgray;
@@ -109,13 +115,13 @@ header {
     transition: 0.25s ease-out;
 }
 
-.calendar .body .cell:hover {
+/* .calendar .body .cell:hover {
     background: whitesmoke;
     transition: 0.5s ease-out;
-}
+} */
 
 .calendar .body .selected {
-    background-color: #ffdac1;
+    background-color: var(--main-color);
 }
 
 .calendar .body .row {
@@ -193,6 +199,11 @@ header {
     right: 2px;
 }
 
+.moodCell img {
+    display: block;
+    max-height: 100%;
+    margin: 0 auto;
+}
 
 /* Responsive */
 
@@ -220,7 +231,7 @@ header {
 
     .calendar .body .cell {
         height: 3em;
-        padding: 0.60rem;
+        padding: 0.50rem;
     }
 
     .calendar .body .cell .number {
