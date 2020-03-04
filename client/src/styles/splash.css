@@ -1,33 +1,54 @@
 /* SPLASH PAGE */
 
 .splash-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 50px 20px;
-  }
-  
-  .btn-splash {
-    font-size: 1rem;
-    width: 150px;
-    padding: 10px 0;
-    margin: 8px 0;
-    border-radius: 20px;
-  }
-  
-  .splash-page .btn-reg {
-    background-color: #ffb7b2;
-    border: 1px solid #333;
-  }
-  
-  .splash-page .btn-login {
-    background-color: #c7ceea;
-    border: 1px solid #333;
-  }
-  
-  img.splash-img {
-    margin: 20px 0 10px;
-    width: 400px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 50px 20px;
+}
+
+.splash-page p {
+  font-size: 11px;
+}
+
+.splash-page .title-wrapper {
+  margin-top: 40px;
+}
+
+.splash-page .btn-wrapper {
+  margin: 40px;
+}
+
+.btn-splash {
+  font-size: 1rem;
+  width: 150px;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-radius: 20px;
+}
+
+.splash-page .btn-reg {
+  background-color: #ffb7b2;
+  border: 1px solid #333;
+}
+
+.splash-page .btn-login {
+  background-color: #c7ceea;
+  border: 1px solid #333;
+}
+
+img.splash-img {
+  margin: 10px 0 0;
+  width: 400px;
+}
+
+img.splash-detail {
+  margin: 8px 0 10px;
+  width: 200px;
+}
+
+img.splash-features {
+  padding-top: 40px;
+  width: 250px;
+}
