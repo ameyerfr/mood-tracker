@@ -13,7 +13,7 @@ const Contacts = () => {
   // const handleAdd = e => {
   //   setFriends({...friends, name: email})
   // }
- 
+
   return (
     <div className="contacts-page">
       <h1>Add Buddies</h1>

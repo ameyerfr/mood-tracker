@@ -25,7 +25,7 @@ const Dashboard = () => {
       />
       <DashLink
         title="Add Buddies"
-        page="/buddies"
+        page="/contacts"
         classN="contacts"
       />
     </div>
