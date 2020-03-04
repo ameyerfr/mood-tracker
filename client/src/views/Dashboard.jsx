@@ -15,17 +15,17 @@ const Dashboard = () => {
         </div>
 
         <DashLink
-          title="Track Mood Today"
+          title="Today's Mood"
           page="/daymood/new"
           classN="new"
         />
         <DashLink
-          title="See Stats"
+          title="Mood Stats"
           page="/stats"
           classN="stats"
         />
         <DashLink
-          title="Add Buddies"
+          title="Mood Buddies"
           page="/contacts"
           classN="contacts"
         />

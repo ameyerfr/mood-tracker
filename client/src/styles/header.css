@@ -3,6 +3,10 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 50px 0;
+    padding: 40px 0 30px;
     border-bottom: 1px solid rgb(206, 205, 205);
+}
+
+.authheader img {
+    width: 250px;
 }

@@ -1,12 +1,21 @@
 const express = require("express");
 const router = new express.Router();
+
+if ( process.env.GMAIL_ADDRESS ) {
+  const mailer = require("../config/nodemailer");
+}
+
+const contactModel = require("../models/Contact.model");
+const userModel = require("../models/User.model");
 const dayMoodModel = require("../models/DayMood.model");
 const petModel = require("../models/Pet.model");
+
 const checkUserAuth = require("../middlewares/checkUserAuth");
 const dateFns = require("date-fns");
 
 // Create a new entry
 router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
+
   const newMood = {
     owner: req.user._id,
     k_good: req.body.tags.positive,
@@ -14,7 +23,8 @@ router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
     mood: req.body.intensity
   };
 
-  console.log("NEW MOOD OBJECT : ", newMood);
+  // We need the user later
+  const user = await userModel.findById(req.user._id)
 
   // Check for previous entry
   // We make it impossible to make an entry twice.
@@ -22,6 +32,7 @@ router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
     owner: req.user._id,
     day: dateFns.format(Date.now(), "yyyyMMdd")
   });
+
   if (moodOfDay) {
     return res
       .status(409)
@@ -31,6 +42,7 @@ router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
   dayMoodModel
     .create(newMood)
     .then(async newMood => {
+
       // When we input the mood of the day
       // We increase the pet stats
       const pet = await petModel.findOne({ owner: req.user._id });
@@ -40,7 +52,38 @@ router.post("/daymood/new", checkUserAuth, async (req, res, next) => {
       pet.ownerCredits += 100;
       await pet.save();
 
-      res.status(200).json(newMood);
+      // Get the rules for mood support
+      const badMoodDuration = user.preferences.contact_friend_rule[0];
+      const moodThreshold = user.preferences.contact_friend_rule[1];
+
+      // Search the moods from previous days
+      dayMoodModel.find({
+        owner: req.user._id,
+        day : {
+          $gte : dateFns.format( dateFns.subDays(Date.now(), badMoodDuration), "yyyyMMdd"),
+          $lte : dateFns.format(Date.now(), "yyyyMMdd")
+        }
+      }).then(async (results) => {
+
+        const total = results.reduce((acc, dm) => {
+          return acc + dm.mood;
+        }, 0)
+
+        const moodAverage = total / results.length;
+
+        // The user is having an average mood
+        // Less than moodThreshold for badMoodDuration days
+        if ( moodAverage < moodThreshold ) {
+          console.log("USER NEEDS EMOTIONAL SUPPORT");
+          if ( process.env.GMAIL_ADDRESS ) {
+            await sendMailsToContacts(user, moodAverage);
+          }
+        }
+
+        res.status(200).json(newMood);
+
+      })
+
     })
     .catch(err => {
       res.status(500).json({ msg: err });
@@ -183,5 +226,39 @@ router.get(
     }
   }
 );
+
+const sendMailsToContacts = (user, moodAverage) => {
+  try {
+
+    contactModel.find({ owner : user._id })
+    .then(contacts => {
+      contacts.forEach((contact, i ) => {
+
+        mailer.sendEmail({
+          to : contact.email,
+          subject : `Your friend ${user.firstname} needs support !`,
+          html : `
+          Hey, ${contact.name} ! <br>
+
+          I am an automatic email from the tamaMOODchi APP (well being tracker).<br><br>
+
+          Your friend ${user.firstname} ${user.lastname} could really use a little help !<br>
+          He's had a combined mood score of ${moodAverage} / 10 these past days... not great heh ?<br><br>
+
+          So if you are a good friend, call or message your friend ?<br ><br >
+
+          Than you for your help !<br><br>
+
+          http://tamamoodchi.com
+          `
+        }, (success) => {
+          console.log("MAILING SUCCESS : ", contact.email)
+        });
+
+      })
+    })
+
+  } catch (error) { console.log("MAILING ERROR : ", error) }
+}
 
 module.exports = router;
