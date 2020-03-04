@@ -34,18 +34,19 @@ const Contacts = () => {
   return (
     <div className="page contacts-page flex-center-column">
 
-      <h1>Manage your buddies</h1>
+      <div className="content-wrapper">
+        <h1>Manage your buddies</h1>
 
-      <div className="form-wrapper">
+        <p>Add a list of buddies so that tamaMOODchi remind them to cheer you up if needed !</p>
+
         <AddContact clbk={onContactAdd} />
+
+        {contacts.length === 0 ? (
+          <div className="contacts-loader">Fetching contacts...</div>
+        ) : (
+          <ContactList contacts={contacts} />
+        )}
       </div>
-
-      {contacts.length === 0 ? (
-        <div className="contacts-loader">Fetching contacts...</div>
-      ) : (
-        <ContactList contacts={contacts} />
-      )}
-
     </div>
   );
 };
