@@ -12,24 +12,29 @@ const Contacts = () => {
 
   const [contacts, setContacts] = useState([]);
 
-  // const handleAdd = e => {
-  //   setFriends({...friends, name: email})
-  // }
-
-  const onContactAdd = (e) => {
-
-  }
-
   // First load
   useEffect(() => {
-
     APIHandler.get("/contacts")
     .then(apiRes => {
-      console.log("Api res : ", apiRes)
       setContacts(apiRes.data)
     }).catch(err => console.log(err))
-
   }, [])
+
+  const onContactAdd = (contact) => {
+    APIHandler.post("/contacts/new", contact)
+    .then(apiRes => {
+      setContacts([...contacts, apiRes.data])
+    }).catch(err => console.log(err))
+  }
+
+  const onContactDelete = (contactIndex) => {
+    const c = contacts[contactIndex];
+    APIHandler.delete("/contacts", c._id)
+    .then(apiRes => {
+      console.log("apiRes : ", apiRes)
+      setContacts( contacts.filter((c,i) => { return i != contactIndex } ) )
+    }).catch(err => console.log(err))
+  }
 
   return (
     <div className="page contacts-page flex-center-column">
@@ -44,7 +49,7 @@ const Contacts = () => {
         {contacts.length === 0 ? (
           <div className="contacts-loader">Fetching contacts...</div>
         ) : (
-          <ContactList contacts={contacts} />
+          <ContactList contacts={contacts} clbk={onContactDelete} />
         )}
       </div>
     </div>

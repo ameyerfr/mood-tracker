@@ -9,12 +9,20 @@ const AddContact = ({clbk}) => {
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
 
+  const clearFields = () => {
+    setContactName("");
+    setContactEmail("");
+  }
+
   const onContactAdd = (e) => {
     e.preventDefault();
+    if (!contactName || !contactEmail) { return; }
+
     clbk({
       name : contactName,
       email : contactEmail
     })
+    clearFields();
   }
 
   return (
@@ -26,6 +34,8 @@ const AddContact = ({clbk}) => {
             <input
               className="input"
               type="text"
+              placeholder="ex: George"
+              value={contactName}
               onChange={(e) => { setContactName(e.target.value) }}
               required
             />
@@ -37,7 +47,8 @@ const AddContact = ({clbk}) => {
             <input
               className="input"
               type="email"
-              placeholder="Email"
+              placeholder="ex: george@mail.com"
+              value={contactEmail}
               onChange={(e) => { setContactEmail(e.target.value) }}
               required
             />
