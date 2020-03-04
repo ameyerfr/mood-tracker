@@ -21,16 +21,14 @@ const Contacts = () => {
   }
 
   // First load
-  useEffect(async () => {
-    const apiCall = async () => {
-      const apiRes = await APIHandler.get("/contacts")
+  useEffect(() => {
+
+    APIHandler.get("/contacts")
+    .then(apiRes => {
       console.log("Api res : ", apiRes)
       setContacts(apiRes.data)
-    }
+    }).catch(err => console.log(err))
 
-    apiCall();
-
-    return () => {};
   }, [])
 
   return (
