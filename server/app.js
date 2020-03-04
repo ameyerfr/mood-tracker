@@ -3,11 +3,11 @@ const _DEVMODE = true;
 
 // CONFIG
 require("dotenv").config();
-require("./config/mongodb")
+require("./config/mongodb");
 require("./config/passport");
 
 // REQUIRES
-const express = require('express');
+const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 const cors = require("cors");
@@ -54,21 +54,21 @@ app.use(passport.session());
 // -----------------------------------------
 if (_DEVMODE === true) {
   app.use(function devMode(req, res, next) {
-      req.user = {
-        _id: "5e56a25c4587de245dc968a4",
-        firstname: "John",
-        lastname: "Doe",
-        email: "john.doe@domain.com"
-      }
-      next();
-    });
+    req.user = {
+      _id: "5e56a25c4587de245dc968a4",
+      firstname: "John",
+      lastname: "Doe",
+      email: "john.doe@domain.com"
+    };
+    next();
+  });
 }
 
 //------------------------------------------
 // BASE ROUTE
 // -----------------------------------------
 app.get("/", (req, res) => {
-  console.log("USER : ", req.user)
+  console.log("USER : ", req.user);
   res.send("Mood tracking server is running on port : " + process.env.PORT);
 });
 
