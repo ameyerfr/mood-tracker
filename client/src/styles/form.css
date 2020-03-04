@@ -1,6 +1,6 @@
-/* GENERAL */
+/* GENERAL CSS FOR ALL FORMS */
 
-.round-input input {
+.control input {
   border-radius: 20px;
   padding: 0 8px;
 }
