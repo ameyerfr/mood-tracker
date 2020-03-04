@@ -236,18 +236,27 @@ const sendMailsToContacts = (user, moodAverage) => {
 
         mailer.sendEmail({
           to : contact.email,
-          subject : `Your friend ${user.firstname} needs support !`,
+          subject : `Check how ${user.firstname} is doing !`,
           html : `
           Hey, ${contact.name} ! <br>
 
-          I am an automatic email from the tamaMOODchi APP (well being tracker).<br><br>
+          I am an automatic email from <a href="#">TAMAMOODCHI</a>, a mood-tracking application that encourages friends to take care of each other.<br><br>
 
-          Your friend ${user.firstname} ${user.lastname} could really use a little help !<br>
-          He's had a combined mood score of ${moodAverage} / 10 these past days... not great heh ?<br><br>
+          You are receiving this email because you are listed as one of ${user.firstname} ${user.lastname}'s friends. 
+          He/she has been feeling low lately and it would be nice if you check in with him/her ASAP.<br><br>
 
-          So if you are a good friend, call or message your friend ?<br ><br >
+          Let you friend know that you are there for him/her:<br>
+          Call. Send a message. Send memes or funny videos. Have lunch together. Just hang out and laugh. <br><br>
 
-          Than you for your help !<br><br>
+          Also, check out TAMAMOODCHI! Track your mood and take care of a virtual pet today! <br><br>
+          
+          ***<br><br>
+
+          Info for demo purposes:<br><br>
+
+          Your friend has a combined mood score of ${moodAverage} / 10 these past days...<br><br>
+
+          ***<br><br>
 
           http://tamamoodchi.com
           `
