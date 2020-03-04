@@ -45,7 +45,6 @@
 .pet-infos .storeIcon:hover { cursor: pointer; }
 
 .petContainer .pet-playground {
-  position: relative;
   background-image:url("/images/pet/backgrounds/Orange_2.jpg");
   background-size: 10%;
   height: 60%;
@@ -55,14 +54,20 @@
   align-items: center;
 }
 
+.pet-w {
+  position: relative;
+}
+
 .pet-playground .pet {
+  position: relative;
   z-index: 2;
 }
 
-.pet-playground .pet-shadow {
+.pet-w .pet-shadow {
   z-index: 1;
   position: absolute;
-  bottom: 0px;
+  bottom:-58px;
+  left:-53%;
   height:120px;
   width:120px;
   background: radial-gradient(circle, rgb(60, 60, 60) 0%, rgba(0,0,0,0) 50%);
@@ -70,17 +75,24 @@
 }
 
 .pet-playground.dino .pet-shadow {
-  bottom:-35px;
-  left:33%;
+  bottom:-38px;
+  left:22%;
 }
 
 .pet-playground .pet-sleeping {
   position: absolute;
+  top:-50%;
+  left:-50%;
   background-image:url("/images/pet/zzz-trsp.gif");
   background-size: 150px;
   width: 150px;
   height: 110px;
   z-index: 3;
+}
+
+.pet-playground.dino .pet-sleeping {
+  top:0%;
+  left:10%;
 }
 
 

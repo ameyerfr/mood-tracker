@@ -30,25 +30,8 @@
   box-shadow: 0px 10px 14px -7px #899599;
 }
 
-/* NAVBAR */
-
-.navbar {
-  width: 100%;
-  padding: 10px 10px 0;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  border-bottom: 1px solid #d8d8d8;
-}
-
-.navlinks {
-  color: #333;
-}
-
-.navbar a:nth-child(1) {
-  color: #ff9aa2;
-  font-size: 26px;
+.page {
+  padding: 20px 0 0 0;
 }
 
 .navbar a:nth-child(3) {
@@ -87,4 +70,12 @@
 img.splash-img {
   margin: 20px 0 10px;
   width: 80%;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
 }

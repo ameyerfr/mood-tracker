@@ -1,24 +1,22 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleLeft,
   faUserCircle
 } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = () => {
+import "../styles/navbar.css";
 
+const Navbar = () => {
+  let history = useHistory();
   return (
-    <nav
-      // id=""
-      // onClick={}
-      className="navbar"
-    >
-      <NavLink className="navlinks" to="/dashboard">
+    <nav className="navbar">
+      <button className="navlinks btn-back" onClick={() => history.goBack()}>
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-      </NavLink>
+      </button>
       <NavLink className="navlinks" to="/dashboard">
-        TamaMOODchi
+        <img className="img-logo" src="/images/emotions/05.png" alt="logo" />
       </NavLink>
       <NavLink className="navlinks" to="/profile">
         <FontAwesomeIcon icon={faUserCircle} />
