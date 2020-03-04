@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from "react";
 import APIHandler from "../../api/APIHandler";
 import BubbleChart from "@weknow/react-bubble-chart-d3";
-import dataBubbleTest from "../../data/test_bubble_data";
 import { subDays, format } from "date-fns";
 let moodData;
-//import ReactBubbleChart from "react-bubble-chart";
 
-const Bubble = ({ dateRange }) => {
+const Bubble = ({ dateRange, filterByType }) => {
   let dateToday = format(new Date(), "yyyyMMdd");
   let dateLastWeek = format(subDays(new Date(), 7), "yyyyMMdd");
 
   const [moodScore, setMoodScore] = useState("all");
-  const [keywordsType, setKeywordsType] = useState("both");
 
   const [moodKeywords, setMoodKeywords] = useState([]);
-
-  /*   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [fetchStartDate, setFetchStartDate] = useState(dateLastWeek);
-  const [fetchEndDate, setFetchEndDate] = useState(dateToday); */
 
   const [mood, setMood] = useState(0);
 
@@ -31,24 +23,28 @@ const Bubble = ({ dateRange }) => {
   }, [dateRange]);
 
   useEffect(() => {
+    console.log(filterByType);
     moodData = [];
-    for (let key in mood.k_good) {
-      moodData.push({
-        value: Number(mood.k_good[key]),
-        label: key,
-        color: "#E7C9C9"
-      });
+    if (filterByType === "t_both" || filterByType === "t_good") {
+      for (let key in mood.k_good) {
+        moodData.push({
+          value: Number(mood.k_good[key]),
+          label: key,
+          color: "#E7C9C9"
+        });
+      }
     }
-    for (let key in mood.k_bad) {
-      moodData.push({
-        value: Number(mood.k_bad[key]),
-        label: key,
-        color: "#D3D8E2"
-      });
+    if (filterByType === "t_both" || filterByType === "t_bad") {
+      for (let key in mood.k_bad) {
+        moodData.push({
+          value: Number(mood.k_bad[key]),
+          label: key,
+          color: "#D3D8E2"
+        });
+      }
     }
-    console.log(moodData);
     setMoodKeywords(moodData);
-  }, [mood]);
+  }, [mood, filterByType]);
   /*   bubbleClick = label => {
     console.log("Custom bubble click func");
   };
@@ -57,9 +53,8 @@ const Bubble = ({ dateRange }) => {
   }; */
   return (
     <>
-      {moodKeywords && (
+      {moodKeywords.length > 0 && (
         <>
-          {console.log(dateRange)}
           <BubbleChart
             graph={{
               zoom: 1,
@@ -67,7 +62,7 @@ const Bubble = ({ dateRange }) => {
               offsetY: 0
             }}
             width={300}
-            height={500}
+            height={300}
             padding={0} // optional value, number that set the padding between bubbles
             showLegend={false} // optional value, pass false to disable the legend.
             legendPercentage={20} // number that represent the % of with that legend going to use.

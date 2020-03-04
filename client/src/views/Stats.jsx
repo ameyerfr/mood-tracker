@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import ResponsiveCalendar from "../components/charts/ResponsiveCalendar";
 import Bubble from "../components/charts/Bubble";
-import APIHandler from "../api/APIHandler";
 import { format, subDays } from "date-fns";
 import Calendar from "../components/charts/Calendar";
 import ChartsNav from "../components/charts/ChartsNav";
 import ChartsByDate from "../components/charts/ChartsByDate";
-//const moment = require("moment");
+import ChartsByType from "../components/charts/ChartsByType";
 
 const Stats = () => {
   //default date (lastweek => today)
@@ -16,7 +14,10 @@ const Stats = () => {
   const [statType, setStatType] = useState("moodscore");
 
   // filter by date (default : this week)
-  const [filterByDate, setFilterByDate] = useState("thisweek");
+  const [filterByDate, setFilterByDate] = useState("last7");
+
+  // filter by date (default : this week)
+  const [filterByType, setFilterByType] = useState("t_both");
 
   // date range to send to the components as props (default : from last week to today)
   const [dateRange, setDateRange] = useState(`${startDate}/${endDate}`);
@@ -27,13 +28,16 @@ const Stats = () => {
   const handleFilterByDate = value => {
     setFilterByDate(value);
   };
+  const handleFilterByType = value => {
+    setFilterByType(value);
+  };
 
   useEffect(() => {
-    if (filterByDate === "thisall") {
+    if (filterByDate === "alldate") {
       startDate = format(subDays(new Date(), 20000), "yyyyMMdd");
-    } else if (filterByDate === "thisyear") {
+    } else if (filterByDate === "last365") {
       startDate = format(subDays(new Date(), 365), "yyyyMMdd");
-    } else if (filterByDate === "thismonth") {
+    } else if (filterByDate === "last30") {
       startDate = format(subDays(new Date(), 30), "yyyyMMdd");
     } else {
       startDate = format(subDays(new Date(), 7), "yyyyMMdd");
@@ -43,13 +47,15 @@ const Stats = () => {
 
   return (
     <section className="section">
-      {/*       {dateRange && console.log(dateRange)} */}
       <h1 className="title">Your moods</h1>
       <div className="container">
         <ChartsNav clbk={handleClick} />
         {statType !== "moodscore" && <ChartsByDate clbk={handleFilterByDate} />}
         {statType === "moodscore" && <Calendar />}
-        {statType === "keyword" && <Bubble dateRange={dateRange} />}
+        {statType === "keyword" && (
+          <Bubble dateRange={dateRange} filterByType={filterByType} />
+        )}
+        {statType !== "moodscore" && <ChartsByType clbk={handleFilterByType} />}
       </div>
     </section>
   );

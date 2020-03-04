@@ -1,0 +1,43 @@
+.good-bg-color.is-selected,
+.good-bg-color:hover {
+    background-color: #E7C9C9;
+    border-color: #E7C9C9;
+    color: #777;
+}
+
+.good-bg-color {
+    color: #E7C9C9;
+    font-weight: bold;
+    border-color: #E7C9C9;
+}
+
+.bad-bg-color {
+    color: #D3D8E2;
+    font-weight: bold;
+    border-color: #D3D8E2;
+}
+
+.both-bg-color {
+    color: #d1eece;
+    font-weight: bold;
+    border-color: #d1eece;
+}
+
+.bad-bg-color.is-selected,
+.bad-bg-color:hover {
+    background-color: #D3D8E2;
+    border-color: #D3D8E2;
+    color: #777;
+}
+
+.both-bg-color.is-selected,
+.both-bg-color:hover {
+    background-color: #d1eece;
+    border-color: #d1eece;
+    color: #777;
+}
+
+.button.is-info,
+.button.is-info:hover {
+    background-color: #FFCBB7;
+}

@@ -1,60 +1,60 @@
 import React, { useState } from "react";
 
 const ChartsByDate = ({ clbk }) => {
-  const [activeClass, setActiveClass] = useState("thisweek");
+  const [activeClass, setActiveClass] = useState("last7");
   const clicked = val => {
     setActiveClass(val);
   };
   return (
-    <div className="buttons">
+    <div className="buttons has-addons">
       <div
         className={
-          activeClass === "thisweek"
+          activeClass === "last7"
             ? "button is-info is-small"
             : "button is-small"
         }
         onClick={() => {
-          clbk("thisweek");
-          clicked("thisweek");
+          clbk("last7");
+          clicked("last7");
         }}
       >
-        7 days
+        last 7 days
       </div>
       <div
         className={
-          activeClass === "thismonth"
+          activeClass === "last30"
             ? "button is-info is-small"
             : "button is-small"
         }
         onClick={() => {
-          clbk("thismonth");
-          clicked("thismonth");
+          clbk("last30");
+          clicked("last30");
         }}
       >
-        30 days
+        last 30 days
       </div>
       <div
         className={
-          activeClass === "thisyear"
+          activeClass === "last365"
             ? "button is-info is-small"
             : "button is-small"
         }
         onClick={() => {
-          clbk("thisyear");
-          clicked("thisyear");
+          clbk("last365");
+          clicked("last365");
         }}
       >
-        365 days
+        last 365 days
       </div>
       <div
         className={
-          activeClass === "thisall"
+          activeClass === "alldate"
             ? "button is-info is-small"
             : "button is-small"
         }
         onClick={() => {
-          clbk("thisall");
-          clicked("thisall");
+          clbk("alldate");
+          clicked("alldate");
         }}
       >
         All

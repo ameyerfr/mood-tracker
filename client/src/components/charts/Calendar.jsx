@@ -43,7 +43,6 @@ const Calendar = ({ data }) => {
     const dateFormat = "MMMM yyyy";
     return (
       <div className="header row flex-middle">
-        {/* {console.log(mood)} */}
         <div className="column col-start">
           <div className="icon" onClick={prevMonth}>
             chevron_left
@@ -85,7 +84,6 @@ const Calendar = ({ data }) => {
     let formattedDate = "";
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
-        //if (mood.payload.includes(format(day, "yyyyMMdd"))) console.log("yo");
         let found = false;
         let moodScore;
         if (mood.payload) {
