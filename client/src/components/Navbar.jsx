@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleLeft,
@@ -10,15 +10,25 @@ import "../styles/navbar.css";
 
 const Navbar = () => {
   let history = useHistory();
+  let location = useLocation();
   return (
     <nav className="navbar">
+      {/* <button className="navlinks btn-back" onClick={() => history.goBack()}>
+        <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+      </button> */}
+      {"/dashboard" != location.pathname ? 
       <button className="navlinks btn-back" onClick={() => history.goBack()}>
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-      </button>
+      </button> : null
+      }
       <NavLink className="navlinks" to="/dashboard">
-        <img className="img-logo" src="/images/emotions/05.png" alt="logo" />
+        <img className="img-logo" src="/images/logo.png" alt="logo" />
+        {/* {"/dashboard" === location.pathname ? 
+          <img className="img-logo" src="/images/logo.png" alt="logo" /> :
+          <img className="img-icon" src="/images/emotions/emoticon.gif" alt="logo" />
+        } */}
       </NavLink>
-      <NavLink className="navlinks" to="/profile">
+      <NavLink className="navlinks btn-profile" to="/profile">
         <FontAwesomeIcon icon={faUserCircle} />
       </NavLink>
     </nav>

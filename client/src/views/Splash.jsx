@@ -6,7 +6,7 @@ const Splash = () => {
   return (
     <div className="splash-page">
       {/* <h1>Welcome to TamaMOODchi !</h1> */}
-      <p>Never feel alone with</p>
+      <p>Never feel alone with ...</p>
       <img src="/images/logo.png" alt="logo"/>
       {/* <img className="splash-img" src="/images/emotions/09.png" alt="mood"/> */}
       {/* <img className="splash-img" src="/images/pet/egg_evolution.png" alt="egg"/> */}
