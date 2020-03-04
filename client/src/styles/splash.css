@@ -1,11 +1,13 @@
 /* SPLASH PAGE */
 
 .splash-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 50px 20px;
+  padding: 100px 20px;
+}
+
+.splash-page .splash-header-wrapper {
+  width: 100%;
+  /* height: 550px; */
+  /* border-bottom: 1px solid; */
 }
 
 .splash-page p {
@@ -64,9 +66,51 @@ img.splash-img {
   width: 50px;
 }
 
+img.splash-egg {
+  width: 58px;
+  image-rendering: auto;
+}
+
 p.splash-text {
   font-size: 12px;
   width: 200px;
   margin: 20px 10px;
   text-align: center;
+}
+
+/* ACCORDION */
+
+.splash-page .accordion {
+  width: 100%;
+  border: none;
+}
+
+.btn-key {
+  color: #000;
+  width: 150px;
+  font-size: 1rem;
+  text-align: center;
+  padding: 8px 0;
+  margin-top: 50px;
+  border: 1px solid #333;
+  background-color: #B5EAD7;
+  border-radius: 20px;
+}
+
+.splash-page .accordion__panel {
+  width: 300px;
+  padding: 10px 0;
+
+}
+
+.splash-page .accordion__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-page .accordion__item+.accordion__item {
+  width: 300px;
+  border: none;
 }

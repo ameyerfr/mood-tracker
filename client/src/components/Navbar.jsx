@@ -13,9 +13,6 @@ const Navbar = () => {
   let location = useLocation();
   return (
     <nav className="navbar">
-      {/* <button className="navlinks btn-back" onClick={() => history.goBack()}>
-        <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-      </button> */}
       {"/dashboard" != location.pathname ? 
       <button className="navlinks btn-back" onClick={() => history.goBack()}>
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
@@ -23,10 +20,6 @@ const Navbar = () => {
       }
       <NavLink className="navlinks" to="/dashboard">
         <img className="img-logo" src="/images/logo.png" alt="logo" />
-        {/* {"/dashboard" === location.pathname ? 
-          <img className="img-logo" src="/images/logo.png" alt="logo" /> :
-          <img className="img-icon" src="/images/emotions/emoticon.gif" alt="logo" />
-        } */}
       </NavLink>
       <NavLink className="navlinks btn-profile" to="/profile">
         <FontAwesomeIcon icon={faUserCircle} />
