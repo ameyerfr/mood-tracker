@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleLeft,
@@ -7,20 +7,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/navbar.css";
-import {useHistory} from "react-router-dom";
+
 const Navbar = () => {
-  let history = useHistory()
+  let history = useHistory();
   return (
-    <nav
-      // id=""
-      // onClick={}
-      className="navbar"
-    >
+    <nav className="navbar">
       <button className="navlinks btn-back" onClick={() => history.goBack()}>
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
       </button>
       <NavLink className="navlinks" to="/dashboard">
-        <img className="img-logo" src="/images/emotions/05.png" alt="logo"/>
+        <img className="img-logo" src="/images/emotions/05.png" alt="logo" />
       </NavLink>
       <NavLink className="navlinks" to="/profile">
         <FontAwesomeIcon icon={faUserCircle} />
