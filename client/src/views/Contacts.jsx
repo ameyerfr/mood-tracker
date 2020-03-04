@@ -22,9 +22,15 @@ const Contacts = () => {
 
   // First load
   useEffect(async () => {
-    const apiRes = await APIHandler.get("/contacts")
-    console.log("Api res : ", apiRes)
-    setContacts(apiRes.data)
+    const apiCall = async () => {
+      const apiRes = await APIHandler.get("/contacts")
+      console.log("Api res : ", apiRes)
+      setContacts(apiRes.data)
+    }
+
+    apiCall();
+
+    return () => {};
   }, [])
 
   return (
