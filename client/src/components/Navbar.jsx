@@ -16,7 +16,7 @@ const Navbar = () => {
       // onClick={}
       className="navbar"
     >
-      <button className="navlinks" onClick={() => history.goBack()}>
+      <button className="navlinks btn-back" onClick={() => history.goBack()}>
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
       </button>
       <NavLink className="navlinks" to="/dashboard">
