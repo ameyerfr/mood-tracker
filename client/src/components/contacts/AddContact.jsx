@@ -1,23 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import IconMail from "../icon/IconMail";
 import "../../styles/contacts.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const AddFriend = () => {
+const AddContact = ({clbk}) => {
 
-  
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+
+  const onContactAdd = (e) => {
+    e.preventDefault();
+    clbk({
+      name : contactName,
+      email : contactEmail
+    })
+  }
 
   return (
-    <div>
-      <form>
+    <>
+    <h2>Add Buddy</h2>
+
+    <form>
         <div className="field">
           <label className="label">Name</label>
           <div className="control">
             <input
               className="input"
               type="text"
-              // onChange={}
+              onChange={(e) => { setContactName(e.target.value) }}
               required
             />
           </div>
@@ -29,7 +40,7 @@ const AddFriend = () => {
               className="input"
               type="email"
               placeholder="Email"
-              // onChange={}
+              onChange={(e) => { setContactEmail(e.target.value) }}
               required
             />
             <span className="icon is-small is-left">
@@ -39,15 +50,15 @@ const AddFriend = () => {
         </div>
         <div className="btn-wrapper">
           <button
-            type="button"
-            // onClick={}
+            type="submit"
             className="btn-add"
+            onClick={onContactAdd}
           >
             <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>
-      </form>
-    </div>);
+    </form>
+    </>);
 };
 
-export default AddFriend;
+export default AddContact;

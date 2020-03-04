@@ -30,5 +30,52 @@
   box-shadow: 0px 10px 14px -7px #899599;
 }
 
+.page {
+  padding: 20px 0 0 0;
+}
 
+.navbar a:nth-child(3) {
+  color: #c7ceea;
+  font-size: 26px;
+}
 
+/* SPLASH PAGE */
+
+.splash-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 50px 20px;
+}
+
+.btn-splash {
+  font-size: 1rem;
+  width: 150px;
+  padding: 10px 0;
+  margin: 8px 0;
+  border-radius: 20px;
+}
+
+.splash-page .btn-reg {
+  background-color: #ffb7b2;
+  border: 1px solid #333;
+}
+
+.splash-page .btn-login {
+  background-color: #b5ead7;
+  border: 1px solid #333;
+}
+
+img.splash-img {
+  margin: 20px 0 10px;
+  width: 80%;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
