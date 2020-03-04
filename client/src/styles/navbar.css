@@ -14,6 +14,11 @@
     color: #333;
 }
 
+.btn-back {
+    color: #ff9aa2;
+    font-size: 26px;
+}
+
 .navbar a:nth-child(1) {
     color: #ff9aa2;
     font-size: 26px;
