@@ -38,7 +38,7 @@
   border: 1px solid #333;
 }
 
-img.splash-img {
+img.splash-logo {
   margin: 10px 0 0;
   width: 400px;
 }
@@ -51,4 +51,22 @@ img.splash-detail {
 img.splash-features {
   padding-top: 40px;
   width: 250px;
+}
+
+.features-box {
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 10px 0;
+}
+
+img.splash-img {
+  width: 50px;
+}
+
+p.splash-text {
+  font-size: 12px;
+  width: 200px;
+  margin: 20px 10px;
+  text-align: center;
 }
