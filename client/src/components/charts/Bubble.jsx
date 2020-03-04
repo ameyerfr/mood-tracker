@@ -4,26 +4,27 @@ import BubbleChart from "@weknow/react-bubble-chart-d3";
 import { subDays, format } from "date-fns";
 let moodData;
 
-const Bubble = ({ dateRange, filterByType }) => {
+const Bubble = ({ dateRange, filterByType, filterByMood, allMood }) => {
+  let m;
   let dateToday = format(new Date(), "yyyyMMdd");
   let dateLastWeek = format(subDays(new Date(), 7), "yyyyMMdd");
 
-  const [moodScore, setMoodScore] = useState("all");
+  let moodScore = filterByMood;
 
   const [moodKeywords, setMoodKeywords] = useState([]);
 
   const [mood, setMood] = useState(0);
-
+  console.log(moodScore);
   useEffect(() => {
-    APIHandler.get(`/daymood/keywords/${moodScore}/${dateRange}?`)
+    allMood ? (m = "all") : (m = moodScore);
+    APIHandler.get(`/daymood/keywords/${m}/${dateRange}?`)
       .then(moods => {
         setMood(moods.data);
       })
       .catch(err => console.log(err));
-  }, [dateRange]);
+  }, [dateRange, moodScore, allMood]);
 
   useEffect(() => {
-    console.log(filterByType);
     moodData = [];
     if (filterByType === "t_both" || filterByType === "t_good") {
       for (let key in mood.k_good) {
@@ -55,6 +56,7 @@ const Bubble = ({ dateRange, filterByType }) => {
     <>
       {moodKeywords.length > 0 && (
         <>
+          {/* {moodScore && console.log(moodScore)} */}
           <BubbleChart
             graph={{
               zoom: 1,

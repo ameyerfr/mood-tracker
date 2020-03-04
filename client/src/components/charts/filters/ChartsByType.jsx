@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const ChartsByType = ({ clbk }) => {
-  const [activeClass, setActiveClass] = useState("t_both");
+const ChartsByType = ({ clbk, filterByType }) => {
+  const [activeClass, setActiveClass] = useState(filterByType);
   const clicked = val => {
     setActiveClass(val);
   };

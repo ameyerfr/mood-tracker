@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const ChartsByDate = ({ clbk }) => {
-  const [activeClass, setActiveClass] = useState("last7");
+const ChartsByDate = ({ clbk, filterByDate }) => {
+  const [activeClass, setActiveClass] = useState(filterByDate);
   const clicked = val => {
     setActiveClass(val);
   };

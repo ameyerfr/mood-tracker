@@ -41,3 +41,19 @@
 .button.is-info:hover {
     background-color: #FFCBB7;
 }
+
+.chartsbymood,
+.chartsbymood .slidecontainer {
+    width: 280px;
+}
+
+/* .chartsbymood .slidecontainer input {
+    width: 370px;
+}
+ */
+.chartsbymood .emoji {
+    max-width: 50px;
+    margin-bottom: 10px;
+    position: relative;
+    left: -15px;
+}
