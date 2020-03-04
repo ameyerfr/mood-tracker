@@ -7,10 +7,10 @@ const ContactList = ({contacts, clbk}) => {
     <div className="contacts-list">
     <h2>Your buddies</h2>
     {contacts.map((contact, i) => (
-      <div className="contact-item shadow">
+      <div className="contact-item shadow" key={i}>
         <div>{contact.name}</div>
         <div><FontAwesomeIcon icon={faAt} /> {contact.email}</div>
-        <span className="contact-delete"><FontAwesomeIcon icon={faTrash} /> delete</span>
+        <span className="contact-delete" onClick={ (e) => {clbk(i)} }><FontAwesomeIcon icon={faTrash} /> delete</span>
       </div>
     ))}
     </div>

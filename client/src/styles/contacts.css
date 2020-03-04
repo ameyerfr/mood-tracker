@@ -21,8 +21,10 @@
   border:1px solid #d8d8d8;
   border-radius: 15px;
   padding:10px;
+  margin-bottom:20px;
 }
 
 .contacts-page .contact-delete {
   color:#ff9aa1;
+  cursor: pointer;
 }
