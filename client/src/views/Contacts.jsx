@@ -47,7 +47,7 @@ const Contacts = () => {
         <AddContact clbk={onContactAdd} />
 
         {contacts.length === 0 ? (
-          <div className="contacts-loader">Fetching contacts...</div>
+          <div className="contacts-loader">No contacts...</div>
         ) : (
           <ContactList contacts={contacts} clbk={onContactDelete} />
         )}
