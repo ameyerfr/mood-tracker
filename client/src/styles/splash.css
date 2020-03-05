@@ -30,6 +30,11 @@
   border-radius: 20px;
 }
 
+
+.btn-splash {
+  box-shadow: 0 2px 2px rgba(0,0,0,.2) inset, 0 0 0 rgba(0,0,0,0);
+}
+
 .splash-page .btn-reg {
   background-color: #ffb7b2;
   border: 1px solid #333;
@@ -39,6 +44,16 @@
   background-color: #c7ceea;
   border: 1px solid #333;
 }
+
+.btn-splash:hover,
+.btn-splash:active {
+  /* border: 1px solid #333; */
+  box-shadow: 0 0 0 rgba(0,0,0,0) inset,
+			0 2px 2px rgba(0,0,0,.1),
+			0 4px 4px rgba(0,0,0,.1),
+			0 8px 8px rgba(0,0,0,.1);
+}
+
 
 img.splash-logo {
   margin: 10px 0 0;
@@ -92,10 +107,14 @@ p.splash-text {
   text-align: center;
   padding: 8px 0;
   margin-top: 50px;
+  background-color: #E2F0CB;
   border: 1px solid #333;
-  background-color: #B5EAD7;
   border-radius: 20px;
 }
+
+/* .btn-key:hover, .btn-key:active {
+  border: 1px solid #333;
+} */
 
 .splash-page .accordion__panel {
   width: 300px;
