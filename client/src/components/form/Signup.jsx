@@ -11,27 +11,35 @@ export default withRouter(function Signup(props) {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMessage] = useState("");
 
   const userContext = useContext(UserContext);
   const { setCurrentUser } = userContext;
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    try {
-      const apiRes = await APIHandler.post("/auth/signup", {
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      APIHandler.post("/auth/signup", {
         firstname,
         lastname,
         email,
         password
-      });
-      setCurrentUser(apiRes.data.currentUser);
-      props.history.push("/dashboard");
-    } catch (err) {
-      setCurrentUser(null);
-    }
+      }).then(results => {
+        setCurrentUser(results.data.currentUser);
+        props.history.push("/dashboard");
+      }).catch((error) => {
+        setCurrentUser(null);
+        if ( error.response.data.msg ) {
+          setErrorMessage(error.response.data.msg)
+        }
+      })
+
   };
+  
   return (
     <>
+      {errorMsg && <div className="notification is-danger">{errorMsg}</div>}
+
       <div className="field">
         <label className="label">First Name</label>
         <div className="control">
