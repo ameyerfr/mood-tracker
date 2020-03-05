@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const Keywords = ({ title, clbk }) => {
+const Keywords = ({ title, clbk, tagsData, dataSaved }) => {
   const [tags, setTags] = useState([]);
   const inputRef = useRef(null);
 
@@ -11,6 +11,11 @@ const Keywords = ({ title, clbk }) => {
     newTags.splice(i, 1);
     setTags(newTags);
   };
+
+  useEffect(()=>{
+    console.log("tags : ",tagsData)
+    setTags(tagsData)
+  }, [])
 
   useEffect(()=>{
     clbk(tags)
