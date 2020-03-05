@@ -14,10 +14,32 @@ const TrackMood = ({ history }) => {
   const [colorValue, setColorValue] = useState("");
   const [tags, setTags] = useState([]);
   const [btnClicked, setClicked] = useState(false);
+  const [toEdit, setEdit] = useState(false);
+  const [{day, mood, k_good, k_bad}, setData] = useState({day:"", mood:"", k_good:[], k_bad:[]});
 
   const updateTags = (val) => {
     setTags(val)
   }
+
+  useEffect(() => {
+    APIHandler.get("/daymood")
+    .then(res => {
+      if (res.data.length == 0) return;
+      console.log("res is here", res.data)
+      const { day, mood, k_good, k_bad } = res.data[0];
+
+      console.log(day)
+      setSliderValue(Number(mood))
+
+      //setData({...res.data[0]});
+      
+      //if (res.data) setEdit(true)
+      setEdit(true)
+    })
+    .catch(err => console.error(err))
+
+    return () => {}
+  }, [])
 
   useEffect(() => {
     setColorValue(changeBackground(sliderValue))
@@ -42,35 +64,45 @@ const TrackMood = ({ history }) => {
     .catch(err => console.error(err))
   }
 
+  // fetch data and display on daymood/edit
+
   return (
+    <>
     <div className="moodpage" style={{backgroundColor:"#fff"}}>
       <p className="date">{format(new Date(), "'Today is' PPPP")}</p>
-      <h1>How are you feeling?</h1>
-      <form className="form" onSubmit={handleSubmit}>
-        <img className="emoji" src={moodScale[sliderValue].moodState} alt="mood"/>
-        <div className="slidecontainer">
-          <input
-            type="range"
-            min={0}
-            max={10}
-            value={sliderValue}
-            onChange={sliderChange}
-            className="slider"
+      { !!toEdit ? (
+        <h1>Today you are feeling...</h1>
+      ) : (
+        <h1>How are you feeling?</h1>
+      )}
+        <form className="form" onSubmit={handleSubmit}>
+          <img className="emoji" src={moodScale[sliderValue].moodState} alt="mood"/>
+          <div className="slidecontainer">
+            <input
+              type="range"
+              min={0}
+              max={10}
+              value={sliderValue}
+              onChange={sliderChange}
+              className="slider"
+            />
+          </div>
+          <Collapse 
+            clbk={updateTags}
           />
-        </div>
-        <Collapse 
-          clbk={updateTags}
-        />
-        <button
-          style={btnClicked ? {backgroundColor: "#fff", borderColor:colorValue} : {backgroundColor:colorValue}}
-          className= "btn-ok"
-          disabled={btnClicked}
-        >
-          {btnClicked ? "Saved !" : <FontAwesomeIcon icon={faCheck} />}
-        </button>
-      </form>
-      
+
+          { !toEdit && (
+          <button
+            style={btnClicked ? {backgroundColor: "#fff", borderColor:colorValue} : {backgroundColor:colorValue}}
+            className= "btn-ok"
+            disabled={btnClicked}
+          >
+            {btnClicked ? "Saved !" : <FontAwesomeIcon icon={faCheck} />}
+          </button>
+          )}
+        </form>
     </div>
+    </>
   );
 };
 
