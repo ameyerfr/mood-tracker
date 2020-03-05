@@ -6,51 +6,45 @@ const ChartsByDate = ({ clbk, filterByDate }) => {
     setActiveClass(val);
   };
   return (
-    <div className="buttons has-addons">
+    <div className="buttons has-addons is-centered">
       <div
         className={
-          activeClass === "last7"
-            ? "button is-info is-small"
-            : "button is-small"
+          activeClass === "last7" ? "button is-info" : "button is-basic"
         }
         onClick={() => {
           clbk("last7");
           clicked("last7");
         }}
       >
-        last 7 days
+        {"<"} 7 days
       </div>
       <div
         className={
-          activeClass === "last30"
-            ? "button is-info is-small"
-            : "button is-small"
+          activeClass === "last30" ? "button is-info" : "button is-basic"
         }
         onClick={() => {
           clbk("last30");
           clicked("last30");
         }}
       >
-        last 30 days
+        {"<"} 30 days
       </div>
       <div
         className={
-          activeClass === "last365"
-            ? "button is-info is-small"
-            : "button is-small"
+          activeClass === "last365" ? "button is-info" : "button is-basic"
         }
         onClick={() => {
           clbk("last365");
           clicked("last365");
         }}
       >
-        last 365 days
+        {"<"} 365 days
       </div>
-      <div
+      {/*       <div
         className={
           activeClass === "alldate"
-            ? "button is-info is-small"
-            : "button is-small"
+            ? "button is-info"
+            : "button is-basic"
         }
         onClick={() => {
           clbk("alldate");
@@ -58,7 +52,7 @@ const ChartsByDate = ({ clbk, filterByDate }) => {
         }}
       >
         All
-      </div>
+      </div> */}
     </div>
   );
 };

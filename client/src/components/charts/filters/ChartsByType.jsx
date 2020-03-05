@@ -6,7 +6,7 @@ const ChartsByType = ({ clbk, filterByType }) => {
     setActiveClass(val);
   };
   return (
-    <div className="buttons has-addons">
+    <div className="buttons has-addons is-centered">
       <div
         className={
           activeClass === "t_bad"
@@ -18,7 +18,7 @@ const ChartsByType = ({ clbk, filterByType }) => {
           clicked("t_bad");
         }}
       >
-        Bad mood
+        Negative
       </div>
       <div
         className={
@@ -44,7 +44,7 @@ const ChartsByType = ({ clbk, filterByType }) => {
           clicked("t_good");
         }}
       >
-        Good mood
+        Positive
       </div>
     </div>
   );

@@ -25,6 +25,8 @@ const Stats = () => {
 
   const [allMood, setAllmood] = useState(true);
 
+  const [isChecked, setIsChecked] = useState(false);
+
   // date range to send to the components as props (default : from last week to today)
   const [dateRange, setDateRange] = useState(`${startDate}/${endDate}`);
 
@@ -43,6 +45,9 @@ const Stats = () => {
   const handleCheck = () => {
     setAllmood(!allMood);
   };
+  const toggleFilter = () => {
+    setIsChecked(!isChecked);
+  };
   useEffect(() => {
     if (filterByDate === "alldate") {
       startDate = format(subDays(new Date(), 20000), "yyyyMMdd");
@@ -58,27 +63,26 @@ const Stats = () => {
 
   return (
     <section className="section">
-      {console.log(filterByMood)}
-      <h1 className="title">Your moods</h1>
+      {/*       <h1 className="title has-text-centered">
+        <img
+          className="gif-egg"
+          src="/images/emotions/emoticon.gif"
+          alt="Your moods"
+        />
+      </h1> */}
       <div className="container">
         <ChartsNav clbk={handleClick} />
         {statType !== "moodscore" && (
           <>
-            <ChartsByDate
-              clbk={handleFilterByDate}
-              filterByDate={filterByDate}
-            />
-            <ChartsByMood
-              clbk={handleFilterByMood}
-              filterByMood={filterByMood}
-              clbkCheck={handleCheck}
-              allMood={allMood}
+            <ChartsByType
+              clbk={handleFilterByType}
+              filterByType={filterByType}
             />
           </>
         )}
         {statType === "moodscore" && <Calendar />}
         {statType === "keyword" && (
-          <div style={{ minHeight: "306px" }}>
+          <div className="bubble-chart">
             <Bubble
               dateRange={dateRange}
               filterByType={filterByType}
@@ -89,9 +93,17 @@ const Stats = () => {
         )}
         {statType !== "moodscore" && (
           <>
-            <ChartsByType
-              clbk={handleFilterByType}
-              filterByType={filterByType}
+            <ChartsByMood
+              clbk={handleFilterByMood}
+              filterByMood={filterByMood}
+              clbkCheck={handleCheck}
+              allMood={allMood}
+              toggleFilter={toggleFilter}
+              isChecked={isChecked}
+            />
+            <ChartsByDate
+              clbk={handleFilterByDate}
+              filterByDate={filterByDate}
             />
           </>
         )}

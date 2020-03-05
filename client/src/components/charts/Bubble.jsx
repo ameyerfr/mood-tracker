@@ -14,7 +14,6 @@ const Bubble = ({ dateRange, filterByType, filterByMood, allMood }) => {
   const [moodKeywords, setMoodKeywords] = useState([]);
 
   const [mood, setMood] = useState(0);
-  console.log(moodScore);
   useEffect(() => {
     allMood ? (m = "all") : (m = moodScore);
     APIHandler.get(`/daymood/keywords/${m}/${dateRange}?`)
@@ -31,7 +30,7 @@ const Bubble = ({ dateRange, filterByType, filterByMood, allMood }) => {
         moodData.push({
           value: Number(mood.k_good[key]),
           label: key,
-          color: "#E7C9C9"
+          color: "#FF9AA1"
         });
       }
     }
@@ -40,7 +39,7 @@ const Bubble = ({ dateRange, filterByType, filterByMood, allMood }) => {
         moodData.push({
           value: Number(mood.k_bad[key]),
           label: key,
-          color: "#D3D8E2"
+          color: "#C7CEEA"
         });
       }
     }
