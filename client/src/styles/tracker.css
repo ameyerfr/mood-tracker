@@ -179,7 +179,6 @@ img.emoji {
     width: 100px;
     margin-bottom: 30px;
     opacity: .8
-    /* position: absolute; */
 }
 
 /* ACCORDION */
@@ -188,11 +187,6 @@ img.emoji {
     width: 300px;
     border: none;
 }
-
-/* .keywords .accordion__button {
-    background-color: #fff;
-    border: none;
-} */
 
 .keywords .accordion-btn {
     font-size: 1rem;
