@@ -11,6 +11,7 @@ import ContactList from "../components/contacts/ContactList";
 const Contacts = () => {
 
   const [contacts, setContacts] = useState([]);
+  const [errorMsg, setErrorMessage] = useState("");
 
   // First load
   useEffect(() => {
@@ -18,13 +19,19 @@ const Contacts = () => {
     .then(apiRes => {
       setContacts(apiRes.data)
     }).catch(err => console.log(err))
+    return () => {};
   }, [])
 
   const onContactAdd = (contact) => {
     APIHandler.post("/contacts/new", contact)
     .then(apiRes => {
       setContacts([...contacts, apiRes.data])
-    }).catch(err => console.log(err))
+    }).catch((error) => {
+      if ( error.response.data.msg ) {
+        setErrorMessage(error.response.data.msg)
+        setTimeout(() => { setErrorMessage('') }, 2000)
+      }
+    })
   }
 
   const onContactDelete = (contactIndex) => {
@@ -40,6 +47,8 @@ const Contacts = () => {
     <div className="page contacts-page flex-center-column">
 
       <div className="content-wrapper">
+        {errorMsg && <div className="notification is-danger">{errorMsg}</div>}
+
         <h1>Manage Buddies</h1>
 
         <p>Who do you want to talk to when you're feeling down? Who can cheer you up? Add them here! </p>
