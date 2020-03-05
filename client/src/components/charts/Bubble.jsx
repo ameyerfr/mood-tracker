@@ -53,7 +53,7 @@ const Bubble = ({ dateRange, filterByType, filterByMood, allMood }) => {
   }; */
   return (
     <>
-      {moodKeywords.length > 0 && (
+      {moodKeywords.length > 0 ? (
         <>
           {/* {moodScore && console.log(moodScore)} */}
           <BubbleChart
@@ -91,6 +91,11 @@ const Bubble = ({ dateRange, filterByType, filterByMood, allMood }) => {
             data={moodKeywords}
           />
         </>
+      ) : (
+        <div className="notification">
+          <h3>No data !</h3>
+          <img src="/images/emotions/00.png" alt="Sad egg" />
+        </div>
       )}
     </>
   );

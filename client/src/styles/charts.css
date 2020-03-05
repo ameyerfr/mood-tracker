@@ -137,3 +137,18 @@
     justify-content: center;
     align-items: center;
 }
+
+.bubble-chart .notification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+}
+
+.bubble-chart .notification img {
+    margin-top: 10px;
+    width: 120px;
+}

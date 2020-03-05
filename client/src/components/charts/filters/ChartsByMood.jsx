@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moodScale from "../../../data/mood_scale";
 import "../../../styles/css library/wickedcss.min.css";
 
@@ -7,10 +7,12 @@ const ChartsByMood = ({
   filterByMood,
   clbkCheck,
   toggleFilter,
-  isChecked
+  isChecked,
+  handleEggPosition,
+  eggPosition
 }) => {
   const [sliderValue, setSliderValue] = useState(filterByMood);
-  const [movingEgg, setMovingEgg] = useState("46%");
+  const [movingEgg, setMovingEgg] = useState(eggPosition);
   const leftValue = [
     "0%",
     "10%",
@@ -26,14 +28,20 @@ const ChartsByMood = ({
   ];
   const sliderChange = moodscore => {
     setSliderValue(moodscore);
-    setMovingEgg(leftValue[moodscore]);
   };
+  useEffect(() => {
+    setMovingEgg(leftValue[sliderValue]);
+  }, [sliderValue]);
+  useEffect(() => {
+    handleEggPosition(movingEgg);
+  }, [movingEgg]);
   /*     onClick = {() => {
     clbk("t_good");
     clicked("t_good");
 }} */
   return (
     <>
+      {eggPosition && console.log(eggPosition)}
       <div className="container flex">
         <div className="filterMood">
           {console.log(isChecked)}
@@ -55,7 +63,7 @@ const ChartsByMood = ({
             className="emoji"
             src={moodScale[sliderValue].moodState}
             alt="mood"
-            style={{ marginLeft: movingEgg }}
+            style={{ marginLeft: eggPosition }}
           />
           <div className="slidecontainer">
             <input
