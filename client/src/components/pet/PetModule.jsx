@@ -154,6 +154,15 @@ const PetModule = () => {
       updatePet({ exp : petData.exp + 10, ownerCredits : getUpdatedCredits(-50) })
     }
 
+    // BUNNY -> +50HP - +50XP (COST 200 credits)
+    if (itemName === 'bunny') {
+      updatePet({
+        hp : getUpdatedHP(+50),
+        exp : petData.exp + 50,
+        ownerCredits : getUpdatedCredits(-200)
+      })
+    }
+
   }
 
   // PET JUMPING
@@ -222,7 +231,7 @@ const PetModule = () => {
 
           <div className="pet-store">
             <div className="store-header">
-              <span className="store-back" onClick={closeStore}></span>
+              <span className="store-back" onClick={closeStore}>&lt; BACK</span>
               <div className="flex-center-row">Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
             </div>
             <div className="items">
@@ -249,6 +258,19 @@ const PetModule = () => {
                 </div>
               </div>
 
+              { petStageName === 'dino' && (
+              <div className="line-w">
+                <div className="item-w">
+                  <div id="item-bunny" className="item bunny" onClick={(e) => onItemClick(e, 200)}></div>
+                </div>
+
+                <div className="itemStats">
+                  <span className="itemEffect">+50HP +50XP</span>
+                  <span className="itemCost"><div className="smallCoin"></div> x 200</span>
+                </div>
+              </div>
+              )}
+              
             </div>
           </div>
 
