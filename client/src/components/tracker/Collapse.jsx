@@ -13,7 +13,7 @@ import "react-accessible-accordion/dist/fancy-example.css";
 // Demo styles, see 'Styles' section below for some notes on use.
 // import 'react-accessible-accordion/dist/fancy-example.css';
 
-export default function Collapse({ clbk }) {
+export default function Collapse({ clbk, tagsData, dataSaved }) {
   const [positiveTags, setPositiveTags] = useState([]);
   const [negativeTags, setNegativeTags] = useState([]);
 
@@ -42,6 +42,8 @@ export default function Collapse({ clbk }) {
             <Keywords
                 title="positive"
                 clbk={updatePositiveTags}
+                tagsData={tagsData.positive}
+                dataSaved={dataSaved}
             />
           </AccordionItemPanel>
         </AccordionItem>
@@ -55,6 +57,8 @@ export default function Collapse({ clbk }) {
             <Keywords
                 title="negative"
                 clbk={updateNegativeTags}
+                tagsData={tagsData.negative}
+                dataSaved={dataSaved}
             />
           </AccordionItemPanel>
         </AccordionItem>

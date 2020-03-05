@@ -12,10 +12,10 @@ import APIHandler from "../api/APIHandler";
 const TrackMood = ({ history }) => {
   const [sliderValue, setSliderValue] = useState(5);
   const [colorValue, setColorValue] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState({});
   const [btnClicked, setClicked] = useState(false);
-  const [toEdit, setEdit] = useState(false);
-  const [{day, mood, k_good, k_bad}, setData] = useState({day:"", mood:"", k_good:[], k_bad:[]});
+  const [dataSaved, setDataSaved] = useState(false);
+  const [{mood, k_good, k_bad}, setData] = useState({mood:"", k_good:[], k_bad:[]});
 
   const updateTags = (val) => {
     setTags(val)
@@ -25,16 +25,14 @@ const TrackMood = ({ history }) => {
     APIHandler.get("/daymood")
     .then(res => {
       if (res.data.length == 0) return;
-      console.log("res is here", res.data)
-      const { day, mood, k_good, k_bad } = res.data[0];
-
-      console.log(day)
+      const { mood, k_good, k_bad } = res.data[0];
+      setTags({
+        positive : ["beer"],
+        negative: ["lalala"]
+      })
+      console.log(tags)
       setSliderValue(Number(mood))
-
-      //setData({...res.data[0]});
-      
-      //if (res.data) setEdit(true)
-      setEdit(true)
+      setDataSaved(true)
     })
     .catch(err => console.error(err))
 
@@ -70,7 +68,7 @@ const TrackMood = ({ history }) => {
     <>
     <div className="moodpage" style={{backgroundColor:"#fff"}}>
       <p className="date">{format(new Date(), "'Today is' PPPP")}</p>
-      { !!toEdit ? (
+      { !!dataSaved ? (
         <h1>Today you are feeling...</h1>
       ) : (
         <h1>How are you feeling?</h1>
@@ -89,9 +87,11 @@ const TrackMood = ({ history }) => {
           </div>
           <Collapse 
             clbk={updateTags}
+            tagsData={tags}
+            dataSaved={dataSaved}
           />
 
-          { !toEdit && (
+          { !dataSaved && (
           <button
             style={btnClicked ? {backgroundColor: "#fff", borderColor:colorValue} : {backgroundColor:colorValue}}
             className= "btn-ok"
