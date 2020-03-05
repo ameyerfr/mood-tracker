@@ -16,6 +16,7 @@ const PetModule = () => {
   const [requestingMsg, setRequestingMsg] = useState("Fetching pet...");
   const [isRequesting, setIsRequesting] = useState(true);
   const [isStoreOpen, setIsStoreOpen] = useState(false);
+  const [notEnoughCredits, setNotEnoughCredits] = useState(false);
   const [isTalking, setIsTalking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [petStage, setPetStage] = useState(0);
@@ -138,9 +139,9 @@ const PetModule = () => {
 
   const onItemClick = (e, itemCost) => {
     if ( itemCost > petData.ownerCredits ) {
-      alert('No enough credits !')
+      setNotEnoughCredits(true);
       return;
-    }
+    } else { setNotEnoughCredits(false) }
 
     let itemName = e.target.id.split("-")[1];
 
@@ -152,6 +153,15 @@ const PetModule = () => {
     // BOOK -> +10XP (COST 50 credits)
     if (itemName === 'book') {
       updatePet({ exp : petData.exp + 10, ownerCredits : getUpdatedCredits(-50) })
+    }
+
+    // BUNNY -> +50HP - +50XP (COST 200 credits)
+    if (itemName === 'bunny') {
+      updatePet({
+        hp : getUpdatedHP(+50),
+        exp : petData.exp + 50,
+        ownerCredits : getUpdatedCredits(-200)
+      })
     }
 
   }
@@ -222,8 +232,9 @@ const PetModule = () => {
 
           <div className="pet-store">
             <div className="store-header">
-              <span className="store-back" onClick={closeStore}></span>
-              <div className="flex-center-row">Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
+              <span className="store-back" onClick={closeStore}>&lt; BACK</span>
+
+              <div className="flex-center-row">{notEnoughCredits && "NOT Enough " }Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
             </div>
             <div className="items">
 
@@ -248,6 +259,19 @@ const PetModule = () => {
                   <span className="itemCost"><div className="smallCoin"></div> x 50</span>
                 </div>
               </div>
+
+              { petStageName === 'dino' && (
+              <div className="line-w">
+                <div className="item-w">
+                  <div id="item-bunny" className="item bunny" onClick={(e) => onItemClick(e, 200)}></div>
+                </div>
+
+                <div className="itemStats">
+                  <span className="itemEffect">+50HP +50XP</span>
+                  <span className="itemCost"><div className="smallCoin"></div> x 200</span>
+                </div>
+              </div>
+              )}
 
             </div>
           </div>

@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const contactModel = require("../models/Contact.model");
 const checkUserAuth = require("../middlewares/checkUserAuth");
+const validateEmail = require("../middlewares/validateEmail");
 
 router.get("/contacts", checkUserAuth, async (req, res, next) => {
   try {
@@ -19,6 +20,9 @@ router.post("/contacts/new", checkUserAuth, async (req, res, next) => {
     name : req.body.name,
     email : req.body.email
   }
+
+  if ( !newContact.name || !newContact.email ) { return res.status(403).json({ msg: "Name and email are required" }); }
+  if ( !validateEmail(newContact.email) ) { return res.status(403).json({ msg: "Email is not valid" }); }
 
   contactModel
     .create(newContact)

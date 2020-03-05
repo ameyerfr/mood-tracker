@@ -6,18 +6,22 @@ const ChartsNav = ({ clbk }) => {
     setActiveClass(val);
   };
   return (
-    <div className="buttons">
+    <div className="buttons is-centered">
       <div
-        className={activeClass === "moodscore" ? "button is-info" : "button"}
+        className={
+          activeClass === "moodscore" ? "button is-info" : "button is-basic"
+        }
         onClick={() => {
           clbk("moodscore");
           clicked("moodscore");
         }}
       >
-        Mood
+        Calendar
       </div>
       <div
-        className={activeClass === "keyword" ? "button is-info" : "button"}
+        className={
+          activeClass === "keyword" ? "button is-info" : "button is-basic"
+        }
         onClick={() => {
           clbk("keyword");
           clicked("keyword");

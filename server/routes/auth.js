@@ -26,7 +26,7 @@ router.post("/auth/signup", (req, res, next) => {
   }
 
   if ( !validateEmail(email) ) {
-    return res.status(403).json({ msg: "Email in not valid" });
+    return res.status(403).json({ msg: "Email is not valid" });
   }
 
   if (password.length < minPasswordLength) {
