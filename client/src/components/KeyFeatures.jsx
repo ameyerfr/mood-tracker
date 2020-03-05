@@ -18,7 +18,7 @@ const KeyFeatures = () => {
     <Accordion allowZeroExpanded="true">
       <AccordionItem>
         <AccordionItemHeading>
-            <AccordionItemButton className="btn-key">Key Features </AccordionItemButton>
+            <AccordionItemButton className="shadow-btns btn-splash btn-key">Key Features </AccordionItemButton>
         </AccordionItemHeading>
         <AccordionItemPanel>
           <div className="features-wrapper">
@@ -35,7 +35,7 @@ const KeyFeatures = () => {
               </p>
               <img
                 className="splash-egg wiggle"
-                src="/images/splash_page/egg.png"
+                src="/images/splash_page/egg.gif"
               />
             </div>
             <div className="flex-center-row features-box">

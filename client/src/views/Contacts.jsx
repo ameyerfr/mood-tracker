@@ -40,9 +40,9 @@ const Contacts = () => {
     <div className="page contacts-page flex-center-column">
 
       <div className="content-wrapper">
-        <h1>Manage your buddies</h1>
+        <h1>Manage Buddies</h1>
 
-        <p>Add a list of buddies so that tamaMOODchi remind them to cheer you up if needed !</p>
+        <p>Who do you want to talk to when you're feeling down? Who can cheer you up? Add them here! </p>
 
         <AddContact clbk={onContactAdd} />
 
