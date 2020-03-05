@@ -16,6 +16,7 @@ const PetModule = () => {
   const [requestingMsg, setRequestingMsg] = useState("Fetching pet...");
   const [isRequesting, setIsRequesting] = useState(true);
   const [isStoreOpen, setIsStoreOpen] = useState(false);
+  const [notEnoughCredits, setNotEnoughCredits] = useState(false);
   const [isTalking, setIsTalking] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [petStage, setPetStage] = useState(0);
@@ -138,9 +139,9 @@ const PetModule = () => {
 
   const onItemClick = (e, itemCost) => {
     if ( itemCost > petData.ownerCredits ) {
-      alert('No enough credits !')
+      setNotEnoughCredits(true);
       return;
-    }
+    } else { setNotEnoughCredits(false) }
 
     let itemName = e.target.id.split("-")[1];
 
@@ -232,7 +233,8 @@ const PetModule = () => {
           <div className="pet-store">
             <div className="store-header">
               <span className="store-back" onClick={closeStore}>&lt; BACK</span>
-              <div className="flex-center-row">Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
+
+              <div className="flex-center-row">{notEnoughCredits && "NOT Enough " }Credits <span className="smallCoin"></span> x {petData.ownerCredits}</div>
             </div>
             <div className="items">
 
@@ -270,7 +272,7 @@ const PetModule = () => {
                 </div>
               </div>
               )}
-              
+
             </div>
           </div>
 
