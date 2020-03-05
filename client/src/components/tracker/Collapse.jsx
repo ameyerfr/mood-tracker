@@ -42,7 +42,7 @@ export default function Collapse({ clbk, tagsData, dataSaved }) {
             <Keywords
                 title="positive"
                 clbk={updatePositiveTags}
-                tagsData={tagsData.positive}
+                defaultTags={tagsData.positive}
                 dataSaved={dataSaved}
             />
           </AccordionItemPanel>
@@ -57,7 +57,7 @@ export default function Collapse({ clbk, tagsData, dataSaved }) {
             <Keywords
                 title="negative"
                 clbk={updateNegativeTags}
-                tagsData={tagsData.negative}
+                defaultTags={tagsData.negative}
                 dataSaved={dataSaved}
             />
           </AccordionItemPanel>

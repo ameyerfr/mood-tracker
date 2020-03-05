@@ -2,24 +2,26 @@ import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const Keywords = ({ title, clbk, tagsData, dataSaved }) => {
+const Keywords = ({ title, clbk, defaultTags, dataSaved }) => {
   const [tags, setTags] = useState([]);
   const inputRef = useRef(null);
+
+  useEffect(()=>{
+    setTags(defaultTags)
+  }, [defaultTags])
 
   const removeTag = i => {
     const newTags = [...tags];
     newTags.splice(i, 1);
     setTags(newTags);
+    clbk(newTags);
   };
 
-  useEffect(()=>{
-    console.log("tags : ",tagsData)
-    setTags(tagsData)
-  }, [])
-
-  useEffect(()=>{
-    clbk(tags)
-  }, [tags])
+  const addTag = (tag) => {
+    const newTags = [...tags, tag];
+    setTags(newTags);
+    clbk(newTags);
+  }
 
   const handleClick = e => {
     const val = inputRef.current.value;
@@ -27,7 +29,7 @@ const Keywords = ({ title, clbk, tagsData, dataSaved }) => {
     if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
       return;
     }
-    setTags([...tags, val.toLowerCase()]);
+    addTag(val.toLowerCase())
     inputRef.current.value = "";
   };
 
@@ -38,8 +40,8 @@ const Keywords = ({ title, clbk, tagsData, dataSaved }) => {
         if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
           return;
         }
-        setTags([...tags, val.toLowerCase()]);
-        inputRef.current.value = "";
+        addTag(val.toLowerCase())
+        e.target.value = "";
     } else if (e.key === "Backspace" && !val) {
       removeTag(tags.length - 1);
     }
@@ -47,6 +49,8 @@ const Keywords = ({ title, clbk, tagsData, dataSaved }) => {
 
   return (
       <div className="tags">
+
+            {!dataSaved && (
             <span className="input-btn">
                 <input
                 type="text"
@@ -63,20 +67,23 @@ const Keywords = ({ title, clbk, tagsData, dataSaved }) => {
                 <FontAwesomeIcon icon={faPlus} />
                 </button>
             </span>
-            
+            )}
+
             <div className="tags-container">
             <ul className="ul-tags">
                 {tags.map((tag, i) => (
                 <li className={title} key={tag}>
                     {tag}
-                    <button
-                    type="button"
-                    onClick={() => {
-                        removeTag(i);
-                    }}
-                    >
-                    +
-                    </button>
+                    {!dataSaved && (
+                      <button
+                      type="button"
+                      onClick={() => {
+                          removeTag(i);
+                      }}
+                      >
+                      +
+                      </button>
+                    )}
                 </li>
                 ))}
             </ul>

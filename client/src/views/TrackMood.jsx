@@ -12,10 +12,12 @@ import APIHandler from "../api/APIHandler";
 const TrackMood = ({ history }) => {
   const [sliderValue, setSliderValue] = useState(5);
   const [colorValue, setColorValue] = useState("");
-  const [tags, setTags] = useState({});
+  const [tags, setTags] = useState({
+    positive : [],
+    negative : []
+  });
   const [btnClicked, setClicked] = useState(false);
   const [dataSaved, setDataSaved] = useState(false);
-  const [{mood, k_good, k_bad}, setData] = useState({mood:"", k_good:[], k_bad:[]});
 
   const updateTags = (val) => {
     setTags(val)
@@ -24,15 +26,16 @@ const TrackMood = ({ history }) => {
   useEffect(() => {
     APIHandler.get("/daymood")
     .then(res => {
-      if (res.data.length == 0) return;
-      const { mood, k_good, k_bad } = res.data[0];
-      setTags({
-        positive : ["beer"],
-        negative: ["lalala"]
-      })
-      console.log(tags)
-      setSliderValue(Number(mood))
+      let existingMood = res.data[0];
+
+      // If no previous data, do nothing
+      if (!existingMood) return;
+
+      // Otherwise, set current day mood
+      setSliderValue(Number(existingMood.mood))
+      setTags({ positive : existingMood.k_good, negative: existingMood.k_bad })
       setDataSaved(true)
+
     })
     .catch(err => console.error(err))
 
@@ -75,6 +78,7 @@ const TrackMood = ({ history }) => {
       )}
         <form className="form" onSubmit={handleSubmit}>
           <img className="emoji" src={moodScale[sliderValue].moodState} alt="mood"/>
+          {!dataSaved && (
           <div className="slidecontainer">
             <input
               type="range"
@@ -85,7 +89,8 @@ const TrackMood = ({ history }) => {
               className="slider"
             />
           </div>
-          <Collapse 
+          )}
+          <Collapse
             clbk={updateTags}
             tagsData={tags}
             dataSaved={dataSaved}
