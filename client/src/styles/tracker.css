@@ -178,7 +178,6 @@ ul.ul-tags li button {
 img.emoji {
     width: 100px;
     margin-bottom: 30px;
-    filter: grayscale(50%);
     opacity: .8
     /* position: absolute; */
 }
