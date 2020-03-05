@@ -18,7 +18,7 @@ const KeyFeatures = () => {
     <Accordion allowZeroExpanded="true">
       <AccordionItem>
         <AccordionItemHeading>
-            <AccordionItemButton className="btn-splash btn-key">Key Features </AccordionItemButton>
+            <AccordionItemButton className="shadow-btns btn-splash btn-key">Key Features </AccordionItemButton>
         </AccordionItemHeading>
         <AccordionItemPanel>
           <div className="features-wrapper">

@@ -24,10 +24,10 @@ const Splash = () => {
         </div>
         <div className="btn-wrapper flex-center-column">
           <Link to="/register">
-            <button className="btn-splash btn-reg">Register</button>
+            <button className="btn-splash shadow-btns btn-reg">Register</button>
           </Link>
           <Link to="/login">
-            <button className="btn-splash btn-login">Login</button>
+            <button className="btn-splash shadow-btns btn-login">Login</button>
           </Link>
           <KeyFeatures />
         </div>
