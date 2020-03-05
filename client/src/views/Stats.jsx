@@ -17,11 +17,11 @@ const Stats = () => {
   // filter by date (default : this week)
   const [filterByDate, setFilterByDate] = useState("last7");
 
-  // filter by date (default : this week)
   const [filterByType, setFilterByType] = useState("t_both");
 
-  // filter by date (default : this week)
   const [filterByMood, setFilterByMood] = useState(5);
+
+  const [eggPosition, setEggPosition] = useState("46%");
 
   const [allMood, setAllmood] = useState(true);
 
@@ -48,10 +48,15 @@ const Stats = () => {
   const toggleFilter = () => {
     setIsChecked(!isChecked);
   };
+  const handleEggPosition = position => {
+    console.log(position);
+    setEggPosition(position);
+  };
   useEffect(() => {
-    if (filterByDate === "alldate") {
+    /* if (filterByDate === "alldate") {
       startDate = format(subDays(new Date(), 20000), "yyyyMMdd");
-    } else if (filterByDate === "last365") {
+    } else  */
+    if (filterByDate === "last365") {
       startDate = format(subDays(new Date(), 365), "yyyyMMdd");
     } else if (filterByDate === "last30") {
       startDate = format(subDays(new Date(), 30), "yyyyMMdd");
@@ -63,6 +68,7 @@ const Stats = () => {
 
   return (
     <section className="section">
+      {console.log(eggPosition)}
       {/*       <h1 className="title has-text-centered">
         <img
           className="gif-egg"
@@ -96,6 +102,8 @@ const Stats = () => {
             <ChartsByMood
               clbk={handleFilterByMood}
               filterByMood={filterByMood}
+              handleEggPosition={handleEggPosition}
+              eggPosition={eggPosition}
               clbkCheck={handleCheck}
               allMood={allMood}
               toggleFilter={toggleFilter}
