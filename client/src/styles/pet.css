@@ -4,7 +4,7 @@
   image-rendering:pixelated;
   height: 100%;
   border:1px solid #d8d8d8;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .petContainer .pet-loader {
@@ -166,22 +166,14 @@
 
 /* PET STORE */
 .store-header {
-  background-color: #58497933;
+  background-color: #f9d7ae;
+  border-radius: 9px 9px 0 0;
   display:flex;
   justify-content: space-between;
   align-items: center;
   font-size:1rem;
   height:20%;
   padding:20px;
-}
-
-.store-header .store-back {
-  display: block;
-  background-image:url("/images/pet/back_arrow.png");
-  background-position: -1px 0;
-  background-size: 35px;
-  width: 35px;
-  height:20px;
 }
 
 .store-header .store-back:hover { cursor:pointer; }
@@ -194,9 +186,10 @@
 
 .pet-store .line-w {
   border:1px solid #d8d8d8;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
-  margin:10px 0;
+  margin:5px 0;
   padding:5px 0;
 }
 
@@ -257,4 +250,14 @@
   height:62px;
   background-position-x:calc(-129px*2);
   background-position-y:calc(-33px*2);
+}
+
+.item.bunny {
+  background-image:url("/images/pet/bunny.png");
+  background-position-x:0;
+  background-position-y:0;
+  background-size: calc(38px*1.5);
+  width:57px;
+  height:57px;
+
 }

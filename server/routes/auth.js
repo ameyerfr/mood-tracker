@@ -13,7 +13,9 @@ const minPasswordLength = 4;
 // Date handling
 const dateFns = require("date-fns");
 const mongoose = require("mongoose");
-var DateOnly = require("mongoose-dateonly")(mongoose);
+const DateOnly = require("mongoose-dateonly")(mongoose);
+
+const validateEmail = require("../middlewares/validateEmail");
 
 router.post("/auth/signup", (req, res, next) => {
   const { email, password, lastname, firstname } = req.body;
@@ -21,6 +23,10 @@ router.post("/auth/signup", (req, res, next) => {
   // @todo : best if email validation here or check with a regex in the User model
   if (!password || !email) {
     return res.status(403).json({ msg: "Email and password are required" });
+  }
+
+  if ( !validateEmail(email) ) {
+    return res.status(403).json({ msg: "Email is not valid" });
   }
 
   if (password.length < minPasswordLength) {
@@ -31,7 +37,7 @@ router.post("/auth/signup", (req, res, next) => {
 
   userModel
     .find({ email: email })
-    .then(results => {
+    .then(async (results) => {
       if (results.length > 0) {
         return res
           .status(403)
@@ -40,16 +46,14 @@ router.post("/auth/signup", (req, res, next) => {
 
       const salt = bcrypt.genSaltSync(10);
       const hashPass = bcrypt.hashSync(password, salt);
-      const newUser = { lastname, firstname, email, password: hashPass };
-      userModel
-        .create(newUser)
-        .then(newUserFromDB => {
-          res.status(200).json({ msg: "signup ok" });
-        })
-        .catch(err => {
-          console.log("signup error", err);
-          next(err);
-        });
+      let newUser = { lastname, firstname, email, password: hashPass };
+
+      // Create User and Pet
+      newUser = await userModel.create(newUser)
+      await petModel.create({ owner:newUser._id })
+
+      res.status(200).json({ msg: "signup ok" });
+
     })
     .catch(next);
 });

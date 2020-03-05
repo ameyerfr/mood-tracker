@@ -11,6 +11,7 @@ import ContactList from "../components/contacts/ContactList";
 const Contacts = () => {
 
   const [contacts, setContacts] = useState([]);
+  const [errorMsg, setErrorMessage] = useState("");
 
   // First load
   useEffect(() => {
@@ -18,13 +19,19 @@ const Contacts = () => {
     .then(apiRes => {
       setContacts(apiRes.data)
     }).catch(err => console.log(err))
+    return () => {};
   }, [])
 
   const onContactAdd = (contact) => {
     APIHandler.post("/contacts/new", contact)
     .then(apiRes => {
       setContacts([...contacts, apiRes.data])
-    }).catch(err => console.log(err))
+    }).catch((error) => {
+      if ( error.response.data.msg ) {
+        setErrorMessage(error.response.data.msg)
+        setTimeout(() => { setErrorMessage('') }, 2000)
+      }
+    })
   }
 
   const onContactDelete = (contactIndex) => {
@@ -40,14 +47,16 @@ const Contacts = () => {
     <div className="page contacts-page flex-center-column">
 
       <div className="content-wrapper">
-        <h1>Manage your buddies</h1>
+        {errorMsg && <div className="notification is-danger">{errorMsg}</div>}
 
-        <p>Add a list of buddies so that tamaMOODchi remind them to cheer you up if needed !</p>
+        <h1>Manage Buddies</h1>
+
+        <p>Who do you want to talk to when you're feeling down? Who can cheer you up? Add them here! </p>
 
         <AddContact clbk={onContactAdd} />
 
         {contacts.length === 0 ? (
-          <div className="contacts-loader">Fetching contacts...</div>
+          <div className="contacts-loader">No contacts...</div>
         ) : (
           <ContactList contacts={contacts} clbk={onContactDelete} />
         )}
