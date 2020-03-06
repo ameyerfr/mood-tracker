@@ -43,6 +43,12 @@ async function seedTheMFDB() {
     const mood = await dayMoodModel.create([
       {
         owner: user._id,
+        day: 20200105,
+        mood: 10,
+        k_good: ["beer", "holidays", "nap", "board games", "friends", "mojito"]
+      },
+      {
+        owner: user._id,
         day: 20200106,
         mood: 3,
         k_good: ["beer", "sunny", "nap"],
@@ -59,7 +65,8 @@ async function seedTheMFDB() {
         owner: user._id,
         day: 20200108,
         mood: 1,
-        k_bad: ["work", "tired", "kids", "rain", "hangover"]
+        k_bad: ["work", "tired", "kids", "rain", "hangover"],
+        k_good: ["cat"]
       },
       {
         owner: user._id,
@@ -78,7 +85,9 @@ async function seedTheMFDB() {
       {
         owner: user._id,
         day: 20200112,
-        mood: 5
+        mood: 5,
+        k_good: ["cat", "cheese"],
+        k_bad: ["noise", "pollution", "subway"]
       },
       {
         owner: user._id,
@@ -104,7 +113,19 @@ async function seedTheMFDB() {
         owner: user._id,
         day: 20200117,
         mood: 1,
-        k_bad: ["work", "tired", "kids", "rain", "hangover"]
+        k_bad: ["tired", "kids", "rain", "hangover"]
+      },
+      {
+        owner: user._id,
+        day: 20200118,
+        mood: 10,
+        k_good: ["beer", "holidays", "nap", "board games", "friends", "mojito"]
+      },
+      {
+        owner: user._id,
+        day: 20200120,
+        mood: 10,
+        k_good: ["beer", "holidays", "nap", "board games", "friends", "mojito"]
       },
       {
         owner: user._id,
@@ -112,6 +133,13 @@ async function seedTheMFDB() {
         mood: 6,
         k_good: ["beer", "wine", "pizza"],
         k_bad: ["rain"]
+      },
+      {
+        owner: user._id,
+        day: 20200122,
+        mood: 5,
+        k_good: ["holidays", "nap"],
+        k_bad: ["rain", "coronavirus", "subway"]
       },
       {
         owner: user._id,
@@ -123,7 +151,9 @@ async function seedTheMFDB() {
       {
         owner: user._id,
         day: 20200125,
-        mood: 5
+        mood: 5,
+        k_good: ["cat", "cheese"],
+        k_bad: ["noise", "pollution", "subway"]
       },
       {
         owner: user._id,
@@ -136,7 +166,13 @@ async function seedTheMFDB() {
         day: 20200128,
         mood: 3,
         k_good: ["beer", "sunny", "nap"],
-        k_bad: ["work", "tired", "kids"]
+        k_bad: ["work", "tired"]
+      },
+      {
+        owner: user._id,
+        day: 20200129,
+        mood: 10,
+        k_good: ["beer", "holidays", "nap", "board games", "friends", "mojito"]
       },
       {
         owner: user._id,
@@ -168,7 +204,9 @@ async function seedTheMFDB() {
       {
         owner: user._id,
         day: 20200206,
-        mood: 5
+        mood: 5,
+        k_good: ["cat", "cheese"],
+        k_bad: ["noise", "pollution", "subway"]
       },
       {
         owner: user._id,
@@ -213,7 +251,9 @@ async function seedTheMFDB() {
       {
         owner: user._id,
         day: 20200214,
-        mood: 5
+        mood: 7,
+        k_good: ["cat", "cheese"],
+        k_bad: ["noise", "pollution", "subway"]
       },
       {
         owner: user._id,
@@ -230,9 +270,16 @@ async function seedTheMFDB() {
       },
       {
         owner: user._id,
+        day: 20200122,
+        mood: 5,
+        k_good: ["holidays", "nap"],
+        k_bad: ["rain", "coronavirus", "subway"]
+      },
+      {
+        owner: user._id,
         day: 20200220,
         mood: 8,
-        k_good: ["beer", "sunny", "nap", "wine", "food"],
+        k_good: ["sunny", "nap", "wine", "food"],
         k_bad: ["rain"]
       },
       {
@@ -243,40 +290,49 @@ async function seedTheMFDB() {
       },
       {
         owner: user._id,
+        day: 20200222,
+        mood: 10,
+        k_good: ["beer", "holidays", "nap", "board games", "friends", "mojito"]
+      },
+      {
+        owner: user._id,
         day: 20200224,
-        mood: 6,
-        k_good: ["beer", "wine", "pizza"],
-        k_bad: ["rain"]
+        mood: 4,
+        k_good: ["beer", "wine", "pizza", "cheese"],
+        k_bad: ["rain", "mother in law"]
       },
       {
         owner: user._id,
         day: 20200225,
         mood: 3,
-        k_good: ["beer"],
-        k_bad: ["boss", "hangover", "rain", "lazy"]
+        k_good: ["beer", "cat"],
+        k_bad: ["boss", "hangover", "rain", "lazy", "pollution"]
       },
       {
         owner: user._id,
         day: 20200226,
-        mood: 5
+        mood: 5,
+        k_good: ["cat", "cheese"],
+        k_bad: ["noise", "pollution", "subway"]
       },
       {
         owner: user._id,
         day: 20200227,
         mood: 9,
-        k_good: ["beer", "holidays", "nap", "pizza"]
+        k_good: ["beer", "holidays", "nap", "pizza"],
+        k_bad: ["coronavirus"]
       },
       {
         owner: user._id,
         day: 20200228,
         mood: 3,
         k_good: ["beer", "sunny", "nap"],
-        k_bad: ["work", "tired", "kids"]
+        k_bad: ["work", "tired", "kids", "coronavirus"]
       },
       {
         owner: user._id,
         day: 20200229,
-        mood: 8,
+        mood: 7,
         k_good: ["beer", "sunny", "nap", "wine", "food"],
         k_bad: ["rain"]
       },
@@ -284,7 +340,7 @@ async function seedTheMFDB() {
         owner: user._id,
         day: 20200301,
         mood: 1,
-        k_bad: ["work", "tired", "kids", "rain", "hangover"]
+        k_bad: ["work", "kids", "rain", "hangover"]
       },
       {
         owner: user._id,
@@ -298,18 +354,21 @@ async function seedTheMFDB() {
         day: 20200303,
         mood: 3,
         k_good: ["beer"],
-        k_bad: ["boss", "hangover", "rain", "lazy"]
+        k_bad: ["boss", "rain", "lazy"]
       },
       {
         owner: user._id,
         day: 20200304,
-        mood: 5
+        mood: 5,
+        k_good: ["cat", "cheese"],
+        k_bad: ["noise", "pollution", "subway"]
       },
       {
         owner: user._id,
         day: 20200305,
-        mood: 9,
-        k_good: ["beer", "holidays", "nap", "pizza"]
+        mood: 10,
+        k_good: ["beer", "holidays", "nap", "pizza"],
+        k_bad: ["coronavirus"]
       }
     ]);
 
