@@ -8,6 +8,7 @@ const dayMoodModel = require("./../models/DayMood.model.js");
 
 async function seedTheMFDB() {
   try {
+
     const user = await userModel.create({
       _id: "5e56a25c4587de245dc968a4",
       firstname: "John",
@@ -16,15 +17,27 @@ async function seedTheMFDB() {
       password: "$2a$10$gobeonJwL5k36rwZGaG46e953vf9meaxeYex9ULz3lojOgp3HHyWa" // toto
     });
 
-    const contact = await contactModel.create({
+    await contactModel.create({
       owner: user._id,
-      name: "LovelyFriend",
-      email: "mylovelyfriend@friend.com"
+      name: "Alex",
+      email: "alexandre.meyer78@gmail.com"
+    });
+
+    await contactModel.create({
+      owner: user._id,
+      name: "Kathleen",
+      email: "kathleensdomingo@gmail.com"
+    });
+
+    await contactModel.create({
+      owner: user._id,
+      name: "Yannick",
+      email: "yannick.bourenane@gmail.com"
     });
 
     const pet = await petModel.create({
       owner: user._id,
-      ownerCredits: 100
+      ownerCredits: 50000
     });
 
     const mood = await dayMoodModel.create([
