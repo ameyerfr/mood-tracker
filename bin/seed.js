@@ -163,6 +163,13 @@ async function seedTheMFDB() {
       },
       {
         owner: user._id,
+        day: 20200130,
+        mood: 2,
+        k_good: ["mojito"],
+        k_bad: ["subway", "pollution", "rain"]
+      },
+      {
+        owner: user._id,
         day: 20200201,
         mood: 8,
         k_good: ["beer", "sunny", "nap", "wine", "food"],
@@ -187,6 +194,13 @@ async function seedTheMFDB() {
         mood: 3,
         k_good: ["beer"],
         k_bad: ["boss", "hangover", "rain", "lazy"]
+      },
+      {
+        owner: user._id,
+        day: 20200205,
+        mood: 2,
+        k_good: ["beer"],
+        k_bad: ["hangover", "rain", "lazy"]
       },
       {
         owner: user._id,
@@ -257,9 +271,9 @@ async function seedTheMFDB() {
       },
       {
         owner: user._id,
-        day: 20200122,
-        mood: 5,
-        k_good: ["holidays", "nap"],
+        day: 20200218,
+        mood: 2,
+        k_good: ["nap"],
         k_bad: ["rain", "coronavirus", "subway"]
       },
       {
@@ -346,16 +360,16 @@ async function seedTheMFDB() {
       {
         owner: user._id,
         day: 20200304,
-        mood: 5,
+        mood: 4,
         k_good: ["cat", "cheese"],
         k_bad: ["noise", "pollution", "subway"]
       },
       {
         owner: user._id,
         day: 20200305,
-        mood: 10,
-        k_good: ["beer", "holidays", "nap", "pizza"],
-        k_bad: ["coronavirus"]
+        mood: 2,
+        k_good: ["pizza"],
+        k_bad: ["coronavirus", "rain", "tired", "pollution"]
       }
     ]);
 
