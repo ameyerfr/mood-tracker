@@ -1,9 +1,9 @@
 const express = require("express");
 const router = new express.Router();
 
-if ( process.env.GMAIL_ADDRESS ) {
-  const mailer = require("../config/nodemailer");
-}
+// if ( process.env.GMAIL_ADDRESS ) {
+//   const mailer = require("../config/nodemailer");
+// }
 
 const contactModel = require("../models/Contact.model");
 const userModel = require("../models/User.model");
@@ -230,6 +230,8 @@ router.get(
 const sendMailsToContacts = (user, moodAverage) => {
   try {
 
+    const mailer = require("../config/nodemailer");
+
     contactModel.find({ owner : user._id })
     .then(contacts => {
       contacts.forEach((contact, i ) => {
@@ -242,14 +244,14 @@ const sendMailsToContacts = (user, moodAverage) => {
 
           I am an automatic email from <a href="#">TAMAMOODCHI</a>, a mood-tracking application that encourages friends to take care of each other.<br><br>
 
-          You are receiving this email because you are listed as one of ${user.firstname} ${user.lastname}'s friends. 
+          You are receiving this email because you are listed as one of ${user.firstname} ${user.lastname}'s friends.
           He/she has been feeling low lately and it would be nice if you check in with him/her ASAP.<br><br>
 
           Let you friend know that you are there for him/her:<br>
           Call. Send a message. Send memes or funny videos. Have lunch together. Just hang out and laugh. <br><br>
 
           Also, check out TAMAMOODCHI! Track your mood and take care of a virtual pet today! <br><br>
-          
+
           ***<br><br>
 
           Info for demo purposes:<br><br>
