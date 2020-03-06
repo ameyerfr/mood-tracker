@@ -1,10 +1,6 @@
 const express = require("express");
 const router = new express.Router();
 
-// if ( process.env.GMAIL_ADDRESS ) {
-//   const mailer = require("../config/nodemailer");
-// }
-
 const contactModel = require("../models/Contact.model");
 const userModel = require("../models/User.model");
 const dayMoodModel = require("../models/DayMood.model");
