@@ -387,7 +387,7 @@ async function seedTheMFDB() {
     ]);
 
     console.log("Database was seeded with this data :");
-    console.log(user, contact, pet, mood);
+    console.log(user, pet);
   } catch (err) {
     console.error(err);
   }
